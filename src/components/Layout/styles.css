@@ -1,8 +1,8 @@
-.cnLayoutRoot{
-    min-height: 100vh;
-    background-color: #fafafa;
+.cnLayoutRoot {
+  min-height: 100vh;
+  background-color: #fafafa;
 }
-.cnLayoutBody{
-    max-width: 1080px;
-    margin: auto;
+.cnLayoutBody {
+  max-width: 1080px;
+  margin: auto;
 }
