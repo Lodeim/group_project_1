@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+
 const UserPage = () => {
   return (
     <Layout nickName="Test User" id="1">
