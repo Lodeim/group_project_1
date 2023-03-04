@@ -16,8 +16,19 @@ const DetailedCard = ({
   className,
   onLikeClick,
   id,
+  onCommentSendClick,
+  mutateLoading,
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
+  const [comment, setComment] = useState('');
+
+  const handleSendCommentClick = () => {
+    if (comment) {
+      onCommentSendClick(id, comment);
+      setComment('');
+    }
+
+  }
 
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
@@ -29,9 +40,8 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать еще ${
-            comments.length - commentsForRender.length
-          } комментариев`}</span>
+          >{`Показать еще ${comments.length - commentsForRender.length
+            } комментариев`}</span>
           {commentsForRender.map((comment) => (
             <Comment {...comment} key={nanoid()} />
           ))}
@@ -51,15 +61,21 @@ const DetailedCard = ({
       <div className="cnDetailedCardButtons">
         <i
           onClick={() => onLikeClick(id)}
-          className={`${
-            isLikedByYou ? "fas" : "far"
-          } fa-heart cnDetailedCardLikeIcon`}
+          className={`${isLikedByYou ? "fas" : "far"
+            } fa-heart cnDetailedCardLikeIcon`}
         />
         <i className="fas fa-comment cnDetailedCardLikeComment" />
       </div>
       <div className="cnDetailedCardLikes">{`оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
-      <textarea className="cnDetailedCardTextArea" />
+      <div className="cnDetailedCardTextWrapper">
+        <textarea
+          value={comment} onChange={e => setComment(e.target.value)}
+          className="cnDetailedCardTextArea"
+          placeholder="Введите комментарий" />
+        <button disabled={mutateLoading} className="cnDetailedCardSendButton" onClick={handleSendCommentClick}>Отправить</button>
+      </div>
+
     </div>
   );
 };
