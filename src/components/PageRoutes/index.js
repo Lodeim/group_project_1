@@ -15,7 +15,7 @@ const authorizedRoutes = [
 
 const PageRoutes = () => {
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
-  const isLoading = useSelector((state) => state.users.isUserLoading);
+  const isLoading = useSelector((state) => state.users.isAuthorizedUserLoading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAuthorizedUser());

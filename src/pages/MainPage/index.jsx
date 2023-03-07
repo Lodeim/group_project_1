@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import DetailedCard from "../../components/DetailedCard/Index";
 import Layout from "../../components/Layout";
-import { getPhotos, mutatePhoto } from "../../redux/actions/photos";
+import { getPhotos, sendComment, toggleLike } from "../../redux/actions/photos";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./styles.css";
@@ -9,9 +9,10 @@ import { Bars } from "react-loader-spinner";
 
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
-  const loading = useSelector((state) => state.photos.isPhotosLoading);
+  // const loading = useSelector((state) => state.photos.isPhotosLoading);
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const total = useSelector((state) => state.photos.totalPhotos);
+  const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -26,20 +27,20 @@ const MainPage = () => {
   };
 
   const onLikeClick = (photoId) => {
-    dispatch(mutatePhoto(authorizedUser.id, photoId));
+    dispatch(toggleLike(authorizedUser.id, photoId));
   };
+
+  const onCommentSendClick = (photoId, comment) => {
+    dispatch(sendComment(authorizedUser.nickname, photoId, comment))
+  }
   return (
     <Layout
-      nickName={authorizedUser.nickname}
+      userName={authorizedUser.nickname}
       id={authorizedUser.id}
       avatarUrl={authorizedUser.avatarUrl}
     >
       <div className="cnMainPageRoot">
-        {loading ? (
-          <div className="cnMainPageLoaderContainer">
-            <Bars color="#000BFF" height={80} width={80} />
-          </div>
-        ) : (
+        
           <InfiniteScroll
             dataLength={photos.length}
             next={nextHandler}
@@ -64,10 +65,11 @@ const MainPage = () => {
                 comments={comments}
                 className="cnMainPageCard"
                 onLikeClick={onLikeClick}
+                onCommentSendClick={onCommentSendClick}
+                mutateLoading={mutateLoading}
               />
             ))}
           </InfiniteScroll>
-        )}
       </div>
     </Layout>
   );
