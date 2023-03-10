@@ -2,9 +2,10 @@ import cn from "classnames";
 import { useState } from "react";
 import './styles.css'
 import PhotoModal from "../PhotoModal";
+import ImageWithLoader from "../ImageWithLoader";
 
 const Card = ({
-    imgUrl, 
+    imgUrl,
     className,
     likes,
     comments,
@@ -15,16 +16,17 @@ const Card = ({
     userData,
     isMutateLoading,
 }) => {
-    const [isModalVisible, setModalVisible] = useState(false)
-    const [comment, setComment] = useState('')
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [comment, setComment] = useState('');
+
     return (
         <div className={cn('cnCardRoot', className)}>
-            <img src={imgUrl} alt={imgUrl} className="cnCardImage"/>
-            <div className="cnCardHover"/>
+            <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl} />
+            <div className="cnCardHover" />
             <div className="cnCardIcons">
-                <i className={cn(`${isLikedByYou ? 'fas' : 'far'} fa-heart`, 'cnCardIcon')} onClick={onLikeClick}/>
+                <i className={cn(`${isLikedByYou ? 'fas' : 'far'} fa-heart`, 'cnCardIcon')} onClick={onLikeClick} />
                 <span className="cnCardNumber cnCardLikes">{likes}</span>
-                <i className={cn("far fa-comment", 'cnCardIcon')} onClick={() => setModalVisible(true)}/>
+                <i className={cn("far fa-comment", 'cnCardIcon')} onClick={() => setModalVisible(true)} />
                 <span className="cnCardNumber">{comments.length}</span>
             </div>
             <PhotoModal
@@ -39,7 +41,7 @@ const Card = ({
                 imgUrl={imgUrl}
                 isLikedByYou={isLikedByYou}
                 onLikeClick={() => onLikeClick(id)}
-                />  
+            />
         </div>
     )
 }

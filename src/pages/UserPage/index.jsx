@@ -18,16 +18,18 @@ const UserPage = () => {
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.postsByUser.posts);
+  const isPostError = useSelector((state) => state.postsByUser.isPostsError);
   const isPostsLoading = useSelector(
     (state) => state.postsByUser.isPostsLoading
   );
   const isUserLoading = useSelector((state) => state.users.isUserLoading);
+  const isUserError = useSelector((state) => state.users.isUserError);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
   const { id } = useParams();
   const [postsForRender, setPostsForRender] = useState([]);
   const [page, setPage] = useState(0);
-  
+
 
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const UserPage = () => {
         </div>
       ) : (
         <div className="cnUserPageRoot">
-          <UserBio
+          {!isUserError && <UserBio
             avatarUrl={user.avatarUrl}
             nickname={user.nickname}
             subscribed={user.subscribed.length}
@@ -80,7 +82,7 @@ const UserPage = () => {
             url={user.url}
             isMyPage={id == authorizedUser.id}
             isSubscribed={user.subscribers.includes(authorizedUser.id)}
-          />
+          />}
           <div className="cnUserPageRootContent">
             {postsForRender.length ? (
               <InfiniteScroll
@@ -107,9 +109,9 @@ const UserPage = () => {
                     isLikedByYou={likes.includes(authorizedUser.id)}
                     onLikeClick={() => onLikeClick(id)}
                     userData={{
-                       userName: user.nickname,
-                        avatarUrl: user.avatarUrl,
-                        userId: user.id,
+                      userName: user.nickname,
+                      avatarUrl: user.avatarUrl,
+                      userId: user.id,
                     }}
 
                     onCommentSubmit={(comment) => onCommentSendClick(id, comment)}
@@ -117,7 +119,7 @@ const UserPage = () => {
                   />
                 ))}
               </InfiniteScroll>
-            ) : (
+            ) : (!isPostError &&
               <p className="cnUserPageNoPosts">No Posts Yet!</p>
             )}
           </div>

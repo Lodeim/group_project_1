@@ -5,6 +5,7 @@
   border: 1px solid #dbdbdb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .cnDetailedCardHeader {
   display: flex;
   align-items: center;
@@ -18,6 +19,8 @@
   height: 300px;
   width: 100%;
 }
+
+
 .cnDetailedCardButtons {
   display: flex;
   padding: 10px;
@@ -41,6 +44,7 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
 .cnDetailedCardLikeComment {
   cursor: pointer;
 }

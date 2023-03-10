@@ -9,7 +9,8 @@ import { Bars } from "react-loader-spinner";
 
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
-  // const loading = useSelector((state) => state.photos.isPhotosLoading);
+  const isLoading = useSelector((state) => state.photos.isPhotosLoading);
+  const isError = useSelector((state) => state.photos.isPhotosError);
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
@@ -40,36 +41,37 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatarUrl}
     >
       <div className="cnMainPageRoot">
-        
-          <InfiniteScroll
-            dataLength={photos.length}
-            next={nextHandler}
-            hasMore={photos.length < total}
-            loader={
-              <div className="cnMainPageLoaderContainer">
-                <Bars color="#000BFF" height={15} width={15} />
-              </div>
-            }
-            endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
-          >
-            {photos.map(({ author, imgUrl, id, likes, comments }) => (
-              <DetailedCard
-                key={id}
-                id={id}
-                userName={author.nickname}
-                avatarUrl={author.avatarUrl}
-                userId={author.id}
-                imgUrl={imgUrl}
-                likes={likes.length}
-                isLikedByYou={likes.includes(authorizedUser.id)}
-                comments={comments}
-                className="cnMainPageCard"
-                onLikeClick={onLikeClick}
-                onCommentSendClick={onCommentSendClick}
-                mutateLoading={mutateLoading}
-              />
-            ))}
-          </InfiniteScroll>
+        {isLoading && <Bars color="#000BFF" height={15} width={15} />}
+
+        {!isError && <InfiniteScroll
+          dataLength={photos.length}
+          next={nextHandler}
+          hasMore={photos.length < total}
+          loader={
+            <div className="cnMainPageLoaderContainer">
+              <Bars color="#000BFF" height={15} width={15} />
+            </div>
+          }
+          endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
+        >
+          {photos.map(({ author, imgUrl, id, likes, comments }) => (
+            <DetailedCard
+              key={id}
+              id={id}
+              userName={author.nickname}
+              avatarUrl={author.avatarUrl}
+              userId={author.id}
+              imgUrl={imgUrl}
+              likes={likes.length}
+              isLikedByYou={likes.includes(authorizedUser.id)}
+              comments={comments}
+              className="cnMainPageCard"
+              onLikeClick={onLikeClick}
+              onCommentSendClick={onCommentSendClick}
+              mutateLoading={mutateLoading}
+            />
+          ))}
+        </InfiniteScroll>}
       </div>
     </Layout>
   );
