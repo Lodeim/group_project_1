@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
-const UserBadge = ({ nickName, avatarUrl, id }) => {
+const UserBadge = ({ userName, avatarUrl, id }) => {
   const navigate = useNavigate();
   const onUserBadgeClick = () => {
     navigate(`/${id}`);
@@ -14,7 +14,7 @@ const UserBadge = ({ nickName, avatarUrl, id }) => {
         <div className="cnUserBadgePlaceholder" />
       )}
 
-      <span className="cnUserBadgeName">{nickName}</span>
+      <span className="cnUserBadgeName">{userName}</span>
     </div>
   );
 };

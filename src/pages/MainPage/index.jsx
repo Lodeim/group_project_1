@@ -9,10 +9,10 @@ import { Bars } from "react-loader-spinner";
 
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
-  const loading = useSelector((state) => state.photos.isPhotosLoading);
-  const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
+  // const loading = useSelector((state) => state.photos.isPhotosLoading);
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const total = useSelector((state) => state.photos.totalPhotos);
+  const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -31,20 +31,16 @@ const MainPage = () => {
   };
 
   const onCommentSendClick = (photoId, comment) => {
-    dispatch(sendComment(authorizedUser.nickname, photoId, comment));
+    dispatch(sendComment(authorizedUser.nickname, photoId, comment))
   }
   return (
     <Layout
-      nickName={authorizedUser.nickname}
+      userName={authorizedUser.nickname}
       id={authorizedUser.id}
       avatarUrl={authorizedUser.avatarUrl}
     >
       <div className="cnMainPageRoot">
-        {loading ? (
-          <div className="cnMainPageLoaderContainer">
-            <Bars color="#000BFF" height={80} width={80} />
-          </div>
-        ) : (
+        
           <InfiniteScroll
             dataLength={photos.length}
             next={nextHandler}
@@ -74,7 +70,6 @@ const MainPage = () => {
               />
             ))}
           </InfiniteScroll>
-        )}
       </div>
     </Layout>
   );

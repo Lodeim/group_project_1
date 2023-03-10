@@ -5,7 +5,6 @@
   border: 1px solid #dbdbdb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .cnDetailedCardHeader {
   display: flex;
   align-items: center;
@@ -19,7 +18,6 @@
   height: 300px;
   width: 100%;
 }
-
 .cnDetailedCardButtons {
   display: flex;
   padding: 10px;
@@ -37,20 +35,12 @@
   padding: 0 10px 10px 10px;
 }
 
-.cnDetailedCardTextArea {
-  border: none;
-  background-color: #fff;
-  padding: 10px;
-  outline: none;
-  resize: none;
-  width: 80%;
-}
+
 
 .cnDetailedCardLikeIcon {
   margin-right: 10px;
   cursor: pointer;
 }
-
 .cnDetailedCardLikeComment {
   cursor: pointer;
 }
@@ -59,29 +49,4 @@
   font-size: 14px;
   color: #dbdbdb;
   cursor: pointer;
-}
-
-.cnDetailedCardTextWrapper {
-  position: relative;
-  background: #fff;
-}
-
-.cnDetailedCardSendButton {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
-  background: #2196F3;
-  color: #fff;
-  cursor: pointer;
-}
-
-.cnDetailedCardSendButton:active {
-  background: #1976D2;
-}
-
-.cnDetailedCardSendButton:disabled {
-  background: #f3f2fd;
 }

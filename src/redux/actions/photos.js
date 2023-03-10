@@ -1,8 +1,5 @@
 import { api } from "../../api";
-import { getPhotoFromState } from "../../utils"
-import { getUpdatedPhotoForState } from "../../utils"
-
-
+import { getUpdatedPhotoForState, getPhotoFromState } from "../../utils";
 import {
   getPhotosFailed,
   getPhotosStarted,
@@ -41,9 +38,10 @@ export const getPhotos = (page = 1) => {
 
 export const toggleLike = (userId, photoId) => {
   return async (dispatch, getState) => {
+    
     const state = getState();
-    const newPhoto = getPhotoFromState(state.photos.photos, photoId);
-
+    
+    const newPhoto = getPhotoFromState(state.photos.photos, photoId)
     if (newPhoto.likes.includes(userId)) {
       newPhoto.likes = newPhoto.likes.filter((like) => like !== userId);
     } else {
@@ -54,9 +52,7 @@ export const toggleLike = (userId, photoId) => {
         data: newPhoto,
         url: `/${photoId}`,
       });
-
-      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data);
-
+      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data)
       dispatch(getPhotosSuccess(newPhotos));
 
     } catch (error) {
@@ -66,28 +62,22 @@ export const toggleLike = (userId, photoId) => {
 };
 
 export const sendComment = (nickname, photoId, text) => {
-  return async (dispatch, getState) => {
+  return async (dispatch, getState) =>{
     dispatch(mutatePhotoStarted());
-
     const state = getState();
     const newPhoto = getPhotoFromState(state.photos.photos, photoId);
-
     newPhoto.comments.push({ nickname, text });
-
     try {
       const response = await api.photos.mutatePhoto({
         data: newPhoto,
         url: `/${photoId}`,
       });
 
-      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data);
-
+      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data)
       dispatch(getPhotosSuccess(newPhotos));
       dispatch(mutatePhotoSuccess());
-
     } catch (error) {
-
       dispatch(mutatePhotoFailed(error));
     }
-  };
-};
+  }
+}

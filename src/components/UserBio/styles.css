@@ -1,42 +1,32 @@
-.cnUserBioRoot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cnUserBioRoot{
+display: flex;
+justify-content: center;
+align-items: center;
 }
-
-.cnUserBioAvatar {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    margin-right: 35px;
+.cnUserBioAvatar{
+height: 150px;
+width: 150px;
+border-radius: 50%;
+margin-right: 35px;
 }
-
-.cnUserBioInfo {
+.cnUserBioInfo{
     display: flex;
     flex-direction: column;
-}
 
-.cnUserBioRow {
+}
+.cnUserBioRow{
     display: flex;
     align-items: center;
     margin-bottom: 5px;
 }
-
-.cnUserBioButtonRow {
-    display: flex;
-    align-items: flex-start;
-}
-
-.cnUserBioNickname {
+.cnUserBioNickname{
     font-weight: 600;
     font-size: 27px;
     margin-right: 10px;
 }
-
-.cnUserBioCounter {
+.cnUserBioCounter{
     margin-right: 10px;
 }
-
-.cnUserBioName {
+.cnUserBioName{
     font-weight: 600;
 }

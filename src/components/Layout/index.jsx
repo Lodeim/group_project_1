@@ -1,10 +1,10 @@
 import Navbar from "../Navbar";
 import "./styles.css";
 
-const Layout = ({ nickName, avatarUrl, id, children }) => {
+const Layout = ({ userName, avatarUrl, id, children }) => {
   return (
     <div className="cnLayoutRoot">
-      <Navbar nickName={nickName} avatarUrl={avatarUrl} id={id} />
+      <Navbar userName={userName} avatarUrl={avatarUrl} id={id} />
       <div className="cnLayoutBody">{children}</div>
     </div>
   );

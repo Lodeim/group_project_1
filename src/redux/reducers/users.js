@@ -3,12 +3,15 @@ import {
   GET_USER_STARTED,
   GET_USER_SUCCESS,
   GET_AUTHORIZED_USER_SUCCESS,
+  GET_AUTHORIZED_USER_STARTED,
+  GET_AUTHORIZED_USER_FAILED,
 } from "../actionCreators/users";
 
 const initialState = {
   user: {},
-  isUserLoading: false,
+  isUserLoading: true,
   authorizedUser: undefined,
+  isAuthorizedUserLoading: true,
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -33,8 +36,18 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         authorizedUser: action.payload,
-        isUserLoading: false,
+        isAuthorizedUserLoading: false,
       };
+      case GET_AUTHORIZED_USER_STARTED:
+        return {
+          ...state,
+          isAuthorizedUserLoading: true,
+        };
+      case GET_AUTHORIZED_USER_FAILED:
+        return {
+          ...state,
+          isAuthorizedUserLoading: false,
+        };
     default:
       return {
         ...state,

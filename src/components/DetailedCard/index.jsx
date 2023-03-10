@@ -4,6 +4,8 @@ import "./styles.css";
 import UserBadge from "../UserBadge";
 import Comment from "../Comment";
 import cn from "classnames";
+import PhotoModal from "../PhotoModal";
+import TextArea from "../TextArea";
 
 const DetailedCard = ({
   userName,
@@ -20,16 +22,14 @@ const DetailedCard = ({
   mutateLoading,
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
-  const [comment, setComment] = useState('');
-
+  const [comment, setComment] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const handleSendCommentClick = () => {
-    if (comment) {
+    if(comment){
       onCommentSendClick(id, comment);
-      setComment('');
+      setComment('')
     }
-
   }
-
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
       const commentsCopy = [...comments];
@@ -40,8 +40,9 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать еще ${comments.length - commentsForRender.length
-            } комментариев`}</span>
+          >{`Показать еще ${
+            comments.length - commentsForRender.length
+          } комментариев`}</span>
           {commentsForRender.map((comment) => (
             <Comment {...comment} key={nanoid()} />
           ))}
@@ -50,10 +51,19 @@ const DetailedCard = ({
     }
     return comments.map((comment) => <Comment {...comment} key={nanoid()} />);
   };
+
+const onCloseModal = () => {
+  setIsModalVisible(false)
+  setComment('')
+}
+const onOpenModal = () => {
+  setIsModalVisible(true)
+  setComment('')
+}
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
-        <UserBadge nickName={userName} avatarUrl={avatarUrl} id={userId} />
+        <UserBadge userName={userName} avatarUrl={avatarUrl} id={userId} />
       </div>
       <div>
         <img src={imgUrl} alt="img" className="cnDetailedCardImg" />
@@ -61,21 +71,40 @@ const DetailedCard = ({
       <div className="cnDetailedCardButtons">
         <i
           onClick={() => onLikeClick(id)}
-          className={`${isLikedByYou ? "fas" : "far"
-            } fa-heart cnDetailedCardLikeIcon`}
+          className={`${
+            isLikedByYou ? "fas" : "far"
+          } fa-heart cnDetailedCardLikeIcon`}
         />
-        <i className="fas fa-comment cnDetailedCardLikeComment" />
+        <i className="fas fa-comment cnDetailedCardLikeComment" onClick={onOpenModal}/>
       </div>
       <div className="cnDetailedCardLikes">{`оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
-      <div className="cnDetailedCardTextWrapper">
-        <textarea
-          value={comment} onChange={e => setComment(e.target.value)}
-          className="cnDetailedCardTextArea"
-          placeholder="Введите комментарий" />
-        <button disabled={mutateLoading} className="cnDetailedCardSendButton" onClick={handleSendCommentClick}>Отправить</button>
-      </div>
+      <div className="cnDetailedCardTextAreaWrapper">
+        <TextArea           
+          placeholder="Введите комментарий"
+          value={comment}
+          onChange={setComment}
+          isLoading={mutateLoading}
+          onSubmit={handleSendCommentClick}
+          buttonText='Отправить'
+          />
 
+                <PhotoModal
+                userName={userName}
+                avatarUrl={avatarUrl}
+                userId={userId}
+                isOpen={isModalVisible}
+                onClose={onCloseModal}
+                comments={comments}
+                commentValue={comment}
+                setCommentValue={setComment}
+                onCommentSubmit={handleSendCommentClick}
+                isCommentLoading={mutateLoading}
+                imgUrl={imgUrl}
+                isLikedByYou={isLikedByYou}
+                onLikeClick={() => onLikeClick(id)}
+                />  
+      </div>
     </div>
   );
 };
