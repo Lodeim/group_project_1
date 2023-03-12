@@ -6,6 +6,7 @@ import MainPage from "../../pages/MainPage";
 import NoAccessPage from "../../pages/NoAccessPage/Index";
 import UserPage from "../../pages/UserPage";
 import { getAuthorizedUser } from "../../redux/actions/users";
+
 import "./styles.css";
 
 const authorizedRoutes = [
@@ -36,7 +37,7 @@ const PageRoutes = () => {
         {authorizedUser ? (
           authorizedRoutes.map((route) => <Route {...route} key={route.path} />)
         ) : (
-          <Route path="/" element={<NoAccessPage />} exact />
+          <Route path="*" element={<NoAccessPage />} exact />
         )}
       </Routes>
     </BrowserRouter>

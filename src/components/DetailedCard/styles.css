@@ -8,7 +8,7 @@
 .cnDetailedCardHeader {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   height: 60px;
   padding-left: 20px;
   background-color: #fff;
@@ -18,6 +18,7 @@
   height: 300px;
   width: 100%;
 }
+
 .cnDetailedCardButtons {
   display: flex;
   padding: 10px;
@@ -34,8 +35,6 @@
   flex-direction: column;
   padding: 0 10px 10px 10px;
 }
-
-
 
 .cnDetailedCardLikeIcon {
   margin-right: 10px;

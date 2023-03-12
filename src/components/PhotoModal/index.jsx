@@ -1,12 +1,12 @@
-
 import { useEffect } from "react";
 import Modal from "react-modal";
 import Comment from "../Comment";
 import UserBadge from "../UserBadge";
-import "./styles.css";
 import TextArea from "../TextArea";
 import { nanoid } from "nanoid";
+import ImageWithLoader from "../ImageWithLoader";
 
+import "./styles.css";
 
 const PhotoModal = ({
   isOpen,
@@ -35,39 +35,48 @@ const PhotoModal = ({
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className='cnModal'
+      className="cnModal"
       overlayClassName="cnModalOverlay"
       ariaHideApp={false}
     >
       <div className="cnModalRoot">
         <div className="cnModalImgWrapper">
-          <img src={imgUrl} alt={imgUrl} className="cnModalImg" />
+          <ImageWithLoader src={imgUrl} alt={imgUrl} className="cnModalImg" />
         </div>
         <div className="cnModalCommentsBlock">
-            <div>
+          <div>
             <div className="cnModalHeader">
-                <UserBadge userName={userName} avatarUrl={avatarUrl} id={userId} />
+              <UserBadge
+                userName={userName}
+                avatarUrl={avatarUrl}
+                id={userId}
+              />
             </div>
-          <div className="cnModalComments">
-          {comments.map((comment) => (<Comment key={nanoid()} {...comment}/>))}
-        </div>
-        </div>
-        <div>
+            <div className="cnModalComments">
+              {comments.map((comment) => (
+                <Comment key={nanoid()} {...comment} />
+              ))}
+            </div>
+          </div>
+          <div>
             <div className="cnModalIcons">
-          <i onClick={onLikeClick} className={`${isLikedByYou ? 'fa' : 'far'} fa-heart cnModalLikeIcon`} />
+              <i
+                onClick={onLikeClick}
+                className={`${
+                  isLikedByYou ? "fa" : "far"
+                } fa-heart cnModalLikeIcon`}
+              />
+            </div>
+            <TextArea
+              placeholder="Введите комментарий"
+              value={commentValue}
+              onChange={setCommentValue}
+              buttonText="Отправить"
+              onSubmit={onCommentSubmit}
+              isLoading={isCommentLoading}
+            />
+          </div>
         </div>
-        <TextArea           
-          placeholder="Введите комментарий"
-          value={commentValue}
-          onChange={setCommentValue}
-          buttonText='Отправить'
-          onSubmit={onCommentSubmit}
-          isLoading={isCommentLoading}
-          />
-        </div>
-        
-        </div>
-       
       </div>
     </Modal>
   );

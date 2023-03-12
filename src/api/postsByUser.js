@@ -1,19 +1,19 @@
-import { makeRequest } from "./makeRequest"
+import { makeRequest } from "./makeRequest";
 
-const URL = '/postsByUser'
+const URL = "/postsByUser";
 
 export const getPostsByUser = (config) => {
-    config.url = `${URL}${config.url}`
-    return makeRequest({
-        method: 'GET',
-        ...config,
-    })
-}
+  config.url = `${URL}${config.url}`;
+  return makeRequest({
+    method: "GET",
+    ...config,
+  });
+};
 
 export const mutatePosts = (config) => {
-    config.url = `${URL}${config.url}`
-    return makeRequest({
-        method: 'PUT',
-        ...config,
-    })
-}
+  config.url = `${URL}${config.url}`;
+  return makeRequest({
+    method: "PUT",
+    ...config,
+  });
+};
