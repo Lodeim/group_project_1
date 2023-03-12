@@ -38,10 +38,9 @@ export const getPhotos = (page = 1) => {
 
 export const toggleLike = (userId, photoId) => {
   return async (dispatch, getState) => {
-
     const state = getState();
 
-    const newPhoto = getPhotoFromState(state.photos.photos, photoId)
+    const newPhoto = getPhotoFromState(state.photos.photos, photoId);
     if (newPhoto.likes.includes(userId)) {
       newPhoto.likes = newPhoto.likes.filter((like) => like !== userId);
     } else {
@@ -52,9 +51,12 @@ export const toggleLike = (userId, photoId) => {
         data: newPhoto,
         url: `/${photoId}`,
       });
-      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data)
+      const newPhotos = getUpdatedPhotoForState(
+        state.photos.photos,
+        photoId,
+        response.data
+      );
       dispatch(getPhotosSuccess(newPhotos));
-
     } catch (error) {
       dispatch(mutatePhotoFailed(error));
     }
@@ -73,11 +75,15 @@ export const sendComment = (nickname, photoId, text) => {
         url: `/${photoId}`,
       });
 
-      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data)
+      const newPhotos = getUpdatedPhotoForState(
+        state.photos.photos,
+        photoId,
+        response.data
+      );
       dispatch(getPhotosSuccess(newPhotos));
       dispatch(mutatePhotoSuccess());
     } catch (error) {
       dispatch(mutatePhotoFailed(error));
     }
-  }
-}
+  };
+};
