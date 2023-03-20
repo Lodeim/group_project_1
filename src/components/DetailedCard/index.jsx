@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import "./styles.css";
 import UserBadge from "../UserBadge";
 import Comment from "../Comment";
 import cn from "classnames";
 import PhotoModal from "../PhotoModal";
 import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
+
+import "./styles.css";
 
 const DetailedCard = ({
   userName,
@@ -25,13 +26,12 @@ const DetailedCard = ({
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const handleSendCommentClick = () => {
     if (comment) {
       onCommentSendClick(id, comment);
-      setComment('')
+      setComment("");
     }
-  }
+  };
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
       const commentsCopy = [...comments];
@@ -42,8 +42,9 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать еще ${comments.length - commentsForRender.length
-            } комментариев`}</span>
+          >{`Показать еще ${
+            comments.length - commentsForRender.length
+          } комментариев`}</span>
           {commentsForRender.map((comment) => (
             <Comment {...comment} key={nanoid()} />
           ))}
@@ -54,28 +55,32 @@ const DetailedCard = ({
   };
 
   const onCloseModal = () => {
-    setIsModalVisible(false)
-    setComment('')
-  }
+    setIsModalVisible(false);
+    setComment("");
+  };
   const onOpenModal = () => {
-    setIsModalVisible(true)
-    setComment('')
-  }
+    setIsModalVisible(true);
+    setComment("");
+  };
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
         <UserBadge userName={userName} avatarUrl={avatarUrl} id={userId} />
       </div>
-      <div className="cnDetailedCardImageWrapper">
+      <div className="cnDetailedCardImgWrapper">
         <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" />
       </div>
       <div className="cnDetailedCardButtons">
         <i
           onClick={() => onLikeClick(id)}
-          className={`${isLikedByYou ? "fas" : "far"
-            } fa-heart cnDetailedCardLikeIcon`}
+          className={`${
+            isLikedByYou ? "fas" : "far"
+          } fa-heart cnDetailedCardLikeIcon`}
         />
-        <i className="fas fa-comment cnDetailedCardLikeComment" onClick={onOpenModal} />
+        <i
+          className="fas fa-comment cnDetailedCardLikeComment"
+          onClick={onOpenModal}
+        />
       </div>
       <div className="cnDetailedCardLikes">{`оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
@@ -86,7 +91,7 @@ const DetailedCard = ({
           onChange={setComment}
           isLoading={mutateLoading}
           onSubmit={handleSendCommentClick}
-          buttonText='Отправить'
+          buttonText="Отправить"
         />
 
         <PhotoModal
