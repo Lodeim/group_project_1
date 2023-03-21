@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import DetailedCard from "../../components/DetailedCard/Index";
+import DetailedCard from "../../components/DetailedCard/index";
 import Layout from "../../components/Layout";
 import { getPhotos, sendComment, toggleLike } from "../../redux/actions/photos";
 import { useEffect, useState } from "react";
@@ -16,8 +16,52 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-
+  
   const [page, setPage] = useState(1);
+
+  const [renderedPhotos, setRenderedPhotos] = useState(photos)
+  const [sort, setSort] = useState('')
+
+  const onUpClick = () => {setSort('up')}
+  const onDownClick = () => {setSort('down')}
+  // useEffect(() => {
+  //   const photosCopy = [...photos]
+  //   const sortedPhotos = photosCopy.sort((a,b) => {
+  //     if (sort === "up") {
+  //       return b.id - a.id
+  //     } else if (sort === "down"){
+  //       return a.id - b.id
+  //     }
+  //   })
+  //   setRenderedPhotos(sortedPhotos)
+  //   console.log(sortedPhotos)
+  // },[photos, sort])
+
+
+  useEffect(() => {
+    const photosCopy = [...photos]
+    const sortedPhotos = photosCopy.sort((a,b) => {
+      if (sort === "up") {
+        if (a.author.nickname < b.author.nickname) {
+          return -1;
+        }
+        if (a.author.nickname > b.author.nickname) {
+          return 1;
+        }
+        return 0;
+      } else if (sort === "down"){
+        if (a.author.nickname > b.author.nickname) {
+          return -1;
+        }
+        if (a.author.nickname < b.author.nickname) {
+          return 1;
+        }
+        return 0;
+      }
+    })
+    setRenderedPhotos(sortedPhotos)
+    console.log(sortedPhotos)
+  },[photos, sort])
 
   useEffect(() => {
     dispatch(getPhotos(page));
@@ -42,12 +86,13 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatarUrl}
     >
       <div className="cnMainPageRoot">
+        <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
         {isLoading && <Bars color="#000BFF" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
-            dataLength={photos.length}
+            dataLength={renderedPhotos.length}
             next={nextHandler}
-            hasMore={photos.length < total}
+            hasMore={renderedPhotos.length < total}
             loader={
               <div className="cnMainPageLoaderContainer">
                 <Bars color="#000BFF" height={15} width={15} />
@@ -55,7 +100,7 @@ const MainPage = () => {
             }
             endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
           >
-            {photos.map(({ author, imgUrl, id, likes, comments }) => (
+            {renderedPhotos.map(({ author, imgUrl, id, likes, comments }) => (
               <DetailedCard
                 key={id}
                 id={id}

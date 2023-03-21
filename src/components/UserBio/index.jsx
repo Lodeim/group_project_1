@@ -5,6 +5,7 @@ import Input from "../Input";
 import FormTextArea from "../FormTextArea";
 
 import "./styles.css";
+import { UserAddPost } from "../UserAddPost";
 
 const requiredText = "Поле обязательное";
 const validateText = (text, cb) => {
@@ -52,6 +53,17 @@ const UserBio = ({
     onClick: () => false,
     children: "Подписаться",
   });
+
+  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
+  const onCloseAddPost = (e) => {
+    e.stopPropagation()
+    setIsAddPostVisible(false);
+
+  };
+  const onOpenAddPost = () => {
+    setIsAddPostVisible(true);
+   
+  };
   const [isEditMode, setIsEditMode] = useState(false);
   const [formUserName, setFormUserName] = useState(nickname);
   const [formFirstName, setFormFirstName] = useState(firstname);
@@ -112,6 +124,13 @@ const UserBio = ({
       setBtnProps({ onClick: () => false, children: "Подписаться" });
     }
   }, [isMyPage, isSubscribed, isEditMode, formLoading, onSaveEditForm]);
+
+
+
+
+
+
+
 
   const fields = useMemo(() => {
     if (isEditMode) {
@@ -197,6 +216,11 @@ const UserBio = ({
         <div className={fields.firstButtonClassName}>
           {fields.userName}
           <Button {...btnProps} />
+          <Button onClick={onOpenAddPost}>Добавить пост</Button>
+          <UserAddPost
+            isOpen={isAddPostVisible}
+            onClose={onCloseAddPost}
+            />
         </div>
         <div className="cnUserBioRow">
           <UserCounter
