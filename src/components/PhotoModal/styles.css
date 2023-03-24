@@ -30,12 +30,18 @@
   justify-content: center;
   align-items: center;
   background: #000;
-  min-height: 1024px;
+  min-height: 800px;
   min-width: 500px;
 }
 .cnModalImg {
   max-width: 1024px;
   max-height: 1024px;
+}
+
+.cnModalCreatidTime {
+  font-size: 12px;
+  font-style: italic;
+  color: grey;
 }
 
 .cnModalCommentsBlock {
@@ -46,7 +52,8 @@
 }
 .cnModalHeader {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   border-bottom: 1px solid #dbdbdb;
   padding: 10px;
   height: 30px;
