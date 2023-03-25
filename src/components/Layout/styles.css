@@ -1,8 +1,29 @@
 .cnLayoutRoot {
   min-height: 100vh;
-  background-color: #fafafa;
+  background-color: rgb(174, 216, 218);
+  background-image: url(./img/abstract_op.png);
 }
+
 .cnLayoutBody {
   max-width: 1080px;
   margin: auto;
+
+}
+
+@media (min-width: 1400px) {
+  .cnLayoutBody {
+    max-width: 1280px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cnLayoutBody {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 780px) {
+  .cnLayoutBody {
+    max-width: 720px;
+  }
 }

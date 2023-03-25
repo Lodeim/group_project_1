@@ -7,6 +7,8 @@
   height: auto;
   outline: none;
   background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 10px;
 }
 
 .cnModalOverlay {
@@ -24,26 +26,27 @@
 
 .cnModalRoot {
   display: flex;
+  border: 1px solid transparent;
+  border-radius: 10px;
+
 }
+
 .cnModalImgWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   background: #000;
-  min-height: 1024px;
-  min-width: 500px;
+  /* min-height: 960px;
+  min-width: 400px; */
+  border: 1px solid transparent;
+  border-radius: 10px;
 }
+
 .cnModalImg {
   max-width: 1024px;
   max-height: 1024px;
 }
 
-.cnModalCommentsBlock {
-  display: flex;
-  width: 400px;
-  flex-direction: column;
-  justify-content: space-between;
-}
 .cnModalHeader {
   display: flex;
   align-items: center;
@@ -51,14 +54,70 @@
   padding: 10px;
   height: 30px;
 }
-.cnModalComments {
-  max-height: 1024px;
+
+.cnInfo-post-wrapper {
+  max-height: 800px;
+  background: #fff;
+  overflow-y: scroll;
+}
+
+/* discription Post and title hardcode */
+
+.cnTimePost {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.cnTitlePost {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
   padding: 10px;
 }
+
+.cnDiscriptionPost {
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.cnModalCommentsBlock {
+  display: flex;
+  width: 600px;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.cnModalComments {
+  height: 960px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.cnCommentTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .cnModalIcons {
   padding: 10px;
 }
 
 .cnModalLikeIcon {
   cursor: pointer;
+}
+
+
+
+@media (max-width: 990px) {
+  /* .cnModalRoot {} */
+
+
+  @media (min-width: 1400px) {}
 }

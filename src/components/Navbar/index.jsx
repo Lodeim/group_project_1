@@ -1,4 +1,8 @@
+import React from 'react';
 import UserBadge from "../UserBadge";
+
+
+
 
 import "./styles.css";
 
@@ -7,7 +11,7 @@ const Navbar = ({ userName, avatarUrl, id }) => {
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
         <a href="/" className="cnNavbarLink">
-          Rugram
+          Photo & Post
         </a>
         <UserBadge userName={userName} avatarUrl={avatarUrl} id={id} />
       </div>
@@ -15,3 +19,5 @@ const Navbar = ({ userName, avatarUrl, id }) => {
   );
 };
 export default Navbar;
+
+

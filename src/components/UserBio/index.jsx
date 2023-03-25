@@ -195,7 +195,6 @@ const UserBio = ({
       </div>
       <div className="cnUserBioInfo">
         <div className={fields.firstButtonClassName}>
-          {fields.userName}
           <Button {...btnProps} />
         </div>
         <div className="cnUserBioRow">
@@ -204,14 +203,8 @@ const UserBio = ({
             text="Публикаций"
             className="cnUserBioCounter"
           />
-          <UserCounter
-            count={subscribers}
-            text="Подписчиков"
-            className="cnUserBioCounter"
-          />
-          <UserCounter count={subscribed} text="Подписок" />
         </div>
-        <div className="cnUserBioRow">{fields.name}</div>
+        <div className="cnUserBioRow">{fields.userName}</div>
         <div className="cnUserBioRow">{fields.description}</div>
         {fields.url}
       </div>

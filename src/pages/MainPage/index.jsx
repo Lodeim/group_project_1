@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import DetailedCard from "../../components/DetailedCard/Index";
+import DetailedCard from "../../components/DetailedCard/Index.jsx";
 import Layout from "../../components/Layout";
 import { getPhotos, sendComment, toggleLike } from "../../redux/actions/photos";
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ const MainPage = () => {
                 <Bars color="#000BFF" height={15} width={15} />
               </div>
             }
-            endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
+            endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}
           >
             {photos.map(({ author, imgUrl, id, likes, comments }) => (
               <DetailedCard

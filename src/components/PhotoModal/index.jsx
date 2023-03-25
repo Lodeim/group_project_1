@@ -52,19 +52,29 @@ const PhotoModal = ({
                 id={userId}
               />
             </div>
-            <div className="cnModalComments">
-              {comments.map((comment) => (
-                <Comment key={nanoid()} {...comment} />
-              ))}
+            {/* discription Post and title hardcode  */}
+            <div className="cnInfo-post-wrapper">
+              <div className="cnTimePost">20 марта 2023</div>
+              <h2 className="cnTitlePost">
+                Title post
+              </h2>
+              <div className="cnDiscriptionPost">
+                <p>Nulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal</p>
+              </div>
+              <div className="cnModalComments">
+                <div className="cnCommentTitle">Комментарии</div>
+                {comments.map((comment) => (
+                  <Comment key={nanoid()} {...comment} />
+                ))}
+              </div>
             </div>
           </div>
           <div>
             <div className="cnModalIcons">
               <i
                 onClick={onLikeClick}
-                className={`${
-                  isLikedByYou ? "fa" : "far"
-                } fa-heart cnModalLikeIcon`}
+                className={`${isLikedByYou ? "fa" : "far"
+                  } fa-heart cnModalLikeIcon`}
               />
             </div>
             <TextArea
@@ -76,6 +86,7 @@ const PhotoModal = ({
               isLoading={isCommentLoading}
             />
           </div>
+
         </div>
       </div>
     </Modal>

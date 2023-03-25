@@ -1,19 +1,54 @@
-.cnTextArea {
-  box-sizing: border-box;
-  border: none;
-  background-color: #fff;
-  padding: 10px;
-  outline: none;
-  resize: none;
-  width: 80%;
-}
-
 .cnTextAreaWrapper {
   position: relative;
-  background: #fff;
+  background: #ffffff0f;
+
 }
+
+.cnTextArea {
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 5px;
+  outline: none;
+  resize: none;
+  width: 70%;
+  min-height: 70px;
+  border: 1px solid cadetblue;
+  border-radius: 10px;
+}
+
+
 .cnSendButton {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 10px;
+  right: 10px;
+}
+
+
+
+@media (max-width: 780px) {
+  .cnTextAreaWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cnTextArea {
+    box-sizing: border-box;
+    background-color: #fafafa;
+    outline: none;
+    resize: none;
+    width: 90%;
+  }
+
+  .cnDetailedCardTextAreaWrapper {
+    max-width: 360px;
+  }
+
+  .cnSendButton {
+    position: static;
+
+  }
 }

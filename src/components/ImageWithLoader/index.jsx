@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bars } from "react-loader-spinner";
 import cn from "classnames";
 
+
 import "./styles.css";
 
 const ImageWithLoader = ({ src, alt, className }) => {
@@ -20,7 +21,7 @@ const ImageWithLoader = ({ src, alt, className }) => {
           {isImageErr ? (
             "err"
           ) : (
-            <Bars color="#000BFF" width={15} height={15} />
+            <Bars color="#5F9EA0" width={15} height={15} />
           )}{" "}
         </div>
       )}

@@ -84,10 +84,7 @@ const UserPage = () => {
               nickname={user.nickname}
               subscribed={user.subscribed.length}
               subscribers={user.subscribers.length}
-              firstname={user.firstName}
-              lastname={user.lastName}
               description={user.description}
-              url={user.url}
               // сравнение id == authorizedUser.id без приведения
               // eslint-disable-next-line
               isMyPage={id == authorizedUser.id}
@@ -108,7 +105,7 @@ const UserPage = () => {
                   </div>
                 }
                 endMessage={
-                  <p className="cnMainPageLoaderContainer">Thats All!</p>
+                  <p className="cnMainPageLoaderContainer">Это все посты</p>
                 }
                 className="cnUserPageScroll"
               >
@@ -135,7 +132,7 @@ const UserPage = () => {
               </InfiniteScroll>
             ) : (
               !isPostsError && (
-                <p className="cnUserPageNoPosts">No Posts Yet!</p>
+                <p className="cnUserPageNoPosts">Постов еще нет!</p>
               )
             )}
           </div>
