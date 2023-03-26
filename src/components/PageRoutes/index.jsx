@@ -6,12 +6,11 @@ import MainPage from "../../pages/MainPage";
 import NoAccessPage from "../../pages/NoAccessPage/Index";
 import UserPage from "../../pages/UserPage";
 import { getAuthorizedUser } from "../../redux/actions/users";
-
 import "./styles.css";
 
 const authorizedRoutes = [
   { path: "/", element: <MainPage />, exact: true },
-  { path: "/:id", element: <UserPage /> },
+  { path: "/:_id", element: <UserPage /> },
 ];
 
 const PageRoutes = () => {

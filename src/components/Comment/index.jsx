@@ -1,9 +1,13 @@
 import "./styles.css";
 
-const Comment = ({ nickname, text }) => {
+const Comment = ({
+  author, 
+  text,
+}) => {
+
   return (
     <div className="cnCommentRoot">
-      <span className="cnCommentName">{nickname}:</span>
+      <span className="cnCommentName">{author}:</span>
       <span>{text}</span>
     </div>
   );

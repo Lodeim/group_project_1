@@ -10,7 +10,7 @@ import "./styles.css";
 
 const authorizedRoutes = [
   { path: "/", element: <MainPage />, exact: true },
-  { path: "/:id", element: <UserPage /> },
+  { path: "/:_id", element: <UserPage /> },
 ];
 
 const PageRoutes = () => {

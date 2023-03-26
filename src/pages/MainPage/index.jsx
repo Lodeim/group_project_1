@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import DetailedCard from "../../components/DetailedCard/Index";
+import DetailedCard from "../../components/DetailedCard/index";
 import Layout from "../../components/Layout";
 import { getPhotos, sendComment, toggleLike } from "../../redux/actions/photos";
 import { useEffect, useState } from "react";
@@ -29,17 +29,20 @@ const MainPage = () => {
   };
 
   const onLikeClick = (photoId) => {
-    dispatch(toggleLike(authorizedUser.id, photoId));
+    dispatch(toggleLike(authorizedUser._id, photoId, photos));
   };
 
   const onCommentSendClick = (photoId, comment) => {
-    dispatch(sendComment(authorizedUser.nickname, photoId, comment));
+    dispatch(sendComment(authorizedUser._id, photoId, comment));
+   
   };
+
+
   return (
     <Layout
-      userName={authorizedUser.nickname}
-      id={authorizedUser.id}
-      avatarUrl={authorizedUser.avatarUrl}
+      userName={authorizedUser.name}
+      _id={authorizedUser._id}
+      avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
         {isLoading && <Bars color="#000BFF" height={15} width={15} />}
@@ -55,17 +58,22 @@ const MainPage = () => {
             }
             endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
           >
-            {photos.map(({ author, imgUrl, id, likes, comments }) => (
+            {photos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
               <DetailedCard
-                key={id}
-                id={id}
-                userName={author.nickname}
-                avatarUrl={author.avatarUrl}
-                userId={author.id}
-                imgUrl={imgUrl}
+                key={_id}
+                _id={_id}
+                userName={author.name}
+                avatarUrl={author.avatar}
+                aboutUser={author.about}
+                userId={author._id}
+                imgUrl={image}
+                text={text}
+                tags={tags}
                 likes={likes.length}
-                isLikedByYou={likes.includes(authorizedUser.id)}
+                isLikedByYou={likes.includes(authorizedUser._id)}
                 comments={comments}
+                title={title}
+                createdPost={created_at}
                 className="cnMainPageCard"
                 onLikeClick={onLikeClick}
                 onCommentSendClick={onCommentSendClick}

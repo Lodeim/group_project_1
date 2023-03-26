@@ -10,6 +10,7 @@ import {
   setPhotosTotal,
 } from "../actionCreators/photos";
 
+
 export const getPhotos = (page = 1) => {
   return async (dispatch, getState) => {
     try {
@@ -36,26 +37,25 @@ export const getPhotos = (page = 1) => {
   };
 };
 
-export const toggleLike = (userId, photoId) => {
+export const toggleLike = (authorizedUser, photoId) => {
   return async (dispatch, getState) => {
     const state = getState();
 
     const newPhoto = getPhotoFromState(state.photos.photos, photoId);
-    if (newPhoto.likes.includes(userId)) {
-      newPhoto.likes = newPhoto.likes.filter((like) => like !== userId);
+    if (newPhoto.likes.includes(authorizedUser)) {
+      newPhoto.likes = newPhoto.likes.filter((like) => like !== authorizedUser);
     } else {
-      newPhoto.likes.push(userId);
+      newPhoto.likes.push(authorizedUser);
     }
     try {
+      const isLikedByYou = newPhoto.likes.includes(authorizedUser);
       const response = await api.photos.mutatePhoto({
         data: newPhoto,
-        url: `/${photoId}`,
+        method: isLikedByYou ? "PUT" : "DELETE",
+        url: `/likes/${photoId}`,
       });
-      const newPhotos = getUpdatedPhotoForState(
-        state.photos.photos,
-        photoId,
-        response.data
-      );
+
+      const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data);
       dispatch(getPhotosSuccess(newPhotos));
     } catch (error) {
       dispatch(mutatePhotoFailed(error));
@@ -63,16 +63,19 @@ export const toggleLike = (userId, photoId) => {
   };
 };
 
-export const sendComment = (nickname, photoId, text) => {
+export const sendComment = (author, photoId, text) => {
   return async (dispatch, getState) => {
     dispatch(mutatePhotoStarted());
     const state = getState();
+   
     const newPhoto = getPhotoFromState(state.photos.photos, photoId);
-    newPhoto.comments.push({ nickname, text });
+      newPhoto.comments.push({author, text});
+  
     try {
       const response = await api.photos.mutatePhoto({
         data: newPhoto,
-        url: `/${photoId}`,
+        method: "POST",
+        url: `/comments/${photoId}`,
       });
 
       const newPhotos = getUpdatedPhotoForState(
@@ -80,6 +83,7 @@ export const sendComment = (nickname, photoId, text) => {
         photoId,
         response.data
       );
+      
       dispatch(getPhotosSuccess(newPhotos));
       dispatch(mutatePhotoSuccess());
     } catch (error) {

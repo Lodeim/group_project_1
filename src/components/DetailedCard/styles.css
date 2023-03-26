@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+.cnDetailedCardText {
+  padding: 15px;
+}
+
 .cnDetailedCardButtons {
   display: flex;
   padding: 10px;
@@ -48,4 +52,24 @@
   font-size: 14px;
   color: #dbdbdb;
   cursor: pointer;
+}
+
+.cnDetailedCardTitle {
+  padding-top: 15px;
+  padding-left: 15px;
+  font-weight: 600;
+}
+
+.cnDetailedCardTags {
+  font-weight: 600;
+  color: rgb(3, 3, 75);
+  
+}
+
+.cnDetailedCreatidTime {
+  padding-left: 15px;
+  padding-top: 5px;
+  font-size: 14px;
+  font-style: italic;
+  color: gray;
 }

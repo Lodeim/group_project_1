@@ -19,16 +19,23 @@ const DetailedCard = ({
   comments,
   className,
   onLikeClick,
-  id,
   onCommentSendClick,
   mutateLoading,
+  aboutUser,
+  text,
+  tags,
+  title,
+  createdPost,
+  _id,
+  author
+  
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleSendCommentClick = () => {
     if (comment) {
-      onCommentSendClick(id, comment);
+      onCommentSendClick(_id, comment);
       setComment("");
     }
   };
@@ -51,8 +58,31 @@ const DetailedCard = ({
         </>
       );
     }
-    return comments.map((comment) => <Comment {...comment} key={nanoid()} />);
+    return comments.map(({ author, text,  created_at, _id, post, update_at}) => (
+    <Comment 
+        key = {nanoid()}
+        author = {author}
+        text = {text}
+        createdAt = {created_at}
+        updateAt = {update_at}
+        id = {_id}
+        post = {post}
+    />
+    
+    ));
   };
+
+ 
+
+  const timeConverter = () => {
+    const a = new Date(createdPost);
+    let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля','августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    let year = a.getFullYear();
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    let time = date + ' ' + month + ' ' + year;
+    return time;
+  }
 
   const onCloseModal = () => {
     setIsModalVisible(false);
@@ -62,17 +92,22 @@ const DetailedCard = ({
     setIsModalVisible(true);
     setComment("");
   };
+
+
+  
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
-        <UserBadge userName={userName} avatarUrl={avatarUrl} id={userId} />
+        <UserBadge userName={userName} avatarUrl={avatarUrl} _id={userId} aboutUser={aboutUser} />
       </div>
       <div className="cnDetailedCardImgWrapper">
         <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" />
       </div>
+      <span className="cnDetailedCardTitle">{title}</span>
+      <span className="cnDetailedCreatidTime">{timeConverter()}</span>
       <div className="cnDetailedCardButtons">
         <i
-          onClick={() => onLikeClick(id)}
+          onClick={() => onLikeClick(_id)}
           className={`${
             isLikedByYou ? "fas" : "far"
           } fa-heart cnDetailedCardLikeIcon`}
@@ -82,8 +117,10 @@ const DetailedCard = ({
           onClick={onOpenModal}
         />
       </div>
-      <div className="cnDetailedCardLikes">{`оценили ${likes} человек`}</div>
+      <div className="cnDetailedCardLikes">{`Оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
+      <div className="cnDetailedCardText">{text}</div>
+      <div className="cnDetailedCardTags">{tags.join(" ")}</div>
       <div className="cnDetailedCardTextAreaWrapper">
         <TextArea
           placeholder="Введите комментарий"
@@ -97,7 +134,9 @@ const DetailedCard = ({
         <PhotoModal
           userName={userName}
           avatarUrl={avatarUrl}
+          aboutUser={aboutUser} 
           userId={userId}
+          timeConverter={timeConverter()}
           isOpen={isModalVisible}
           onClose={onCloseModal}
           comments={comments}
@@ -107,7 +146,7 @@ const DetailedCard = ({
           isCommentLoading={mutateLoading}
           imgUrl={imgUrl}
           isLikedByYou={isLikedByYou}
-          onLikeClick={() => onLikeClick(id)}
+          onLikeClick={() => onLikeClick(_id)}
         />
       </div>
     </div>
