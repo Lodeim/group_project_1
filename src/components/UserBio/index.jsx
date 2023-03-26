@@ -150,7 +150,6 @@ const UserBio = ({
       </div>
       <div className="cnUserBioInfo">
         <div className={fields.firstButtonClassName}>
-          {fields.userName}
           <Button {...btnProps} />
 
           <Button onClick={onOpenAddPost}>Добавить пост</Button>
@@ -166,8 +165,8 @@ const UserBio = ({
             className="cnUserBioCounter"
           />
         </div>
-        <div className="cnUserBioRow">{fields.name}</div>
-        <div className="cnUserBioRow">{fields.description}</div>
+        <div className="cnUserBioRow"><label><div>Имя пользователя</div> {fields.userName}</label></div>
+        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.description}</label></div>
         {fields.url}
       </div>
     </div>

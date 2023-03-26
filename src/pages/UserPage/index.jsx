@@ -103,7 +103,7 @@ const UserPage = () => {
                   </div>
                 }
                 endMessage={
-                  <p className="cnMainPageLoaderContainer">Thats All!</p>
+                  <p className="cnMainPageLoaderContainer">Это все посты</p>
                 }
                 className="cnUserPageScroll"
               >
@@ -130,7 +130,7 @@ const UserPage = () => {
               </InfiniteScroll>
             ) : (
               !isPostsError && (
-                <p className="cnUserPageNoPosts">No Posts Yet!</p>
+                <p className="cnUserPageNoPosts">Постов еще нет!</p>
               )
             )}
           </div>

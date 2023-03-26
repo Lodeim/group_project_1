@@ -6,6 +6,7 @@ const Comment = ({
 }) => {
 
   return (
+   
     <div className="cnCommentRoot">
       <span className="cnCommentName">{author}:</span>
       <span>{text}</span>

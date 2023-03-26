@@ -1,4 +1,6 @@
+import React from 'react';
 import UserBadge from "../UserBadge";
+import AddPostModal from "../AddModal/index";
 
 import "./styles.css";
 
@@ -7,11 +9,14 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
         <a href="/" className="cnNavbarLink">
-          Rugram
+          Photo & Post
         </a>
+        <AddPostModal />
         <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
       </div>
-    </div>
+    </div >
   );
 };
 export default Navbar;
+
+

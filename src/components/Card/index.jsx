@@ -23,7 +23,6 @@ const Card = ({
   return (
     <div className={cn("cnCardRoot", className)}>
       <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl} />
-
       <div className="cnCardHover" />
       <div className="cnCardIcons">
         <i

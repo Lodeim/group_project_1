@@ -8,6 +8,7 @@ import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 
 import "./styles.css";
+import "../PhotoModal/styles.css";
 
 const DetailedCard = ({
   userName,
@@ -49,9 +50,8 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать еще ${
-            comments.length - commentsForRender.length
-          } комментариев`}</span>
+          >{`Показать еще ${comments.length - commentsForRender.length
+            } комментариев`}</span>
           {commentsForRender.map((comment) => (
             <Comment {...comment} key={nanoid()} />
           ))}
@@ -102,15 +102,50 @@ const DetailedCard = ({
       </div>
       <div className="cnDetailedCardImgWrapper">
         <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" />
+        <div className="cnTimePost">20 марта 2023</div>
+        <h2 className="cnTitlePost">
+          Title post
+        </h2>
+        <div className="cnDiscriptionPost">
+          Nulla tortor, nec mattis pellentesque in nec orci, orci,
+          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
+          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
+          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
+          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
+          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
+          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet
+          ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis,
+          amet, sapien mal.Nulla tortor, nec mattis pellentesque in nec orci, orci,
+          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
+          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
+          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
+          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
+          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
+          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
+          Nulla tortor, nec mattis pellentesque in nec orci, orci,
+          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
+          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
+          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
+          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
+          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
+          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
+          Nulla tortor, nec mattis pellentesque in nec orci, orci,
+          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
+          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
+          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
+          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
+          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
+          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
+        </div>
+        <div className="cnTags"><span>Good</span><span>Good</span><span>Good</span></div>
       </div>
       <span className="cnDetailedCardTitle">{title}</span>
       <span className="cnDetailedCreatidTime">{timeConverter()}</span>
       <div className="cnDetailedCardButtons">
         <i
-          onClick={() => onLikeClick(_id)}
-          className={`${
-            isLikedByYou ? "fas" : "far"
-          } fa-heart cnDetailedCardLikeIcon`}
+          onClick={() => onLikeClick(id)}
+          className={`${isLikedByYou ? "fas" : "far"
+            } fa-heart cnDetailedCardLikeIcon`}
         />
         <i
           className="fas fa-comment cnDetailedCardLikeComment"
