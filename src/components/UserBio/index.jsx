@@ -5,6 +5,7 @@ import Input from "../Input";
 import FormTextArea from "../FormTextArea";
 
 import "./styles.css";
+import { UserAddPost } from "../UserAddPost";
 
 const requiredText = "Поле обязательное";
 const validateText = (text, cb) => {
@@ -37,40 +38,29 @@ const validateUrl = (text, cb) => {
 const UserBio = ({
   avatarUrl,
   nickname,
-  subscribed,
-  subscribers,
-  firstname,
-  lastname,
   description,
   url,
-  isMyPage,
-  isSubscribed,
   onEdit,
   formLoading,
 }) => {
   const [btnProps, setBtnProps] = useState({
     onClick: () => false,
-    children: "Подписаться",
+    children: "Редактировать",
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [formUserName, setFormUserName] = useState(nickname);
-  const [formFirstName, setFormFirstName] = useState(firstname);
-  const [formLastName, setFormLastName] = useState(lastname);
+ 
   const [formDescription, setFormDescription] = useState(description);
   const [formUrl, setFormUrl] = useState(url);
   const [userNameError, setUserNameError] = useState("");
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [urlError, setUrlError] = useState("");
 
   const onSaveEditForm = useCallback(async () => {
     const isUserNameError = validateText(formUserName, setUserNameError);
-    const isFirstNameError = validateText(formFirstName, setFirstNameError);
-    const isLastNameError = validateText(formLastName, setLastNameError);
     const isUrlError = validateUrl(formUrl, setUrlError);
     let isErrors =
-      isUserNameError || isFirstNameError || isLastNameError || isUrlError;
+      isUserNameError ||  isUrlError;
 
     if (!formDescription) {
       isErrors = true;
@@ -80,8 +70,6 @@ const UserBio = ({
       return;
     }
     await onEdit({
-      firstname: formFirstName,
-      lastname: formLastName,
       nickname: formUserName,
       description: formDescription,
       url: formUrl,
@@ -89,10 +77,10 @@ const UserBio = ({
 
     setIsEditMode(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formUserName, formFirstName, formLastName, formUrl, formDescription]);
+  }, [formUserName, formUrl, formDescription]);
 
   useEffect(() => {
-    if (isMyPage) {
+    
       if (isEditMode) {
         setBtnProps({
           onClick: () => onSaveEditForm(),
@@ -106,12 +94,7 @@ const UserBio = ({
           children: "Редактировать",
         });
       }
-    } else if (isSubscribed) {
-      setBtnProps({ onClick: () => false, children: "Отписаться" });
-    } else {
-      setBtnProps({ onClick: () => false, children: "Подписаться" });
-    }
-  }, [isMyPage, isSubscribed, isEditMode, formLoading, onSaveEditForm]);
+  }, [isEditMode, formLoading, onSaveEditForm]);
 
   const fields = useMemo(() => {
     if (isEditMode) {
@@ -123,22 +106,6 @@ const UserBio = ({
             errorText={userNameError}
             className="cnInput"
           />
-        ),
-        name: (
-          <>
-            <Input
-              value={formFirstName}
-              onChange={({ target: { value } }) => setFormFirstName(value)}
-              className="cnInput"
-              errorText={firstNameError}
-            />
-            <Input
-              value={formLastName}
-              onChange={({ target: { value } }) => setFormLastName(value)}
-              className="cnInput"
-              errorText={lastNameError}
-            />
-          </>
         ),
         description: (
           <FormTextArea
@@ -160,12 +127,6 @@ const UserBio = ({
     }
     return {
       userName: <span className="cnUserBioNickname">{nickname}</span>,
-      name: (
-        <span className="cnUserBioName">
-          {firstname}
-          {lastname}
-        </span>
-      ),
       description: <span>{description}</span>,
       url: <a href={url}>{url}</a>,
       firstButtonClassName: "cnUserBioRow",
@@ -173,18 +134,12 @@ const UserBio = ({
   }, [
     isEditMode,
     nickname,
-    firstname,
-    lastname,
     description,
     url,
     formUserName,
-    formFirstName,
-    formLastName,
     formDescription,
     formUrl,
     userNameError,
-    firstNameError,
-    lastNameError,
     urlError,
     descriptionError,
   ]);
@@ -196,6 +151,12 @@ const UserBio = ({
       <div className="cnUserBioInfo">
         <div className={fields.firstButtonClassName}>
           <Button {...btnProps} />
+
+          <Button onClick={onOpenAddPost}>Добавить пост</Button>
+          <UserAddPost
+            isOpen={isAddPostVisible}
+            onClose={onCloseAddPost}
+            />
         </div>
         <div className="cnUserBioRow">
           <UserCounter

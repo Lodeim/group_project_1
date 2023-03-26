@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
-const UserBadge = ({ userName, avatarUrl, id }) => {
+const UserBadge = ({ userName, avatarUrl, _id, aboutUser }) => {
   const navigate = useNavigate();
   const onUserBadgeClick = () => {
-    navigate(`/${id}`);
+    navigate(`/${_id}`);
   };
   return (
     <div className="cnUserBadgeRoot" onClick={onUserBadgeClick}>
@@ -14,8 +14,10 @@ const UserBadge = ({ userName, avatarUrl, id }) => {
       ) : (
         <div className="cnUserBadgePlaceholder" />
       )}
-
-      <span className="cnUserBadgeName">{userName}</span>
+      <div className="cnUserInfoAbout">
+        <span className="cnUserBadgeName">{userName}</span>
+        <span className="cnAboutUser">{aboutUser}</span>
+      </div>
     </div>
   );
 };

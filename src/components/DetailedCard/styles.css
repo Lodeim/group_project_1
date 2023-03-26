@@ -33,6 +33,10 @@
 
 }
 
+.cnDetailedCardText {
+  padding: 15px;
+}
+
 .cnDetailedCardButtons {
   display: flex;
   margin-top: 10px;
@@ -69,7 +73,6 @@
   cursor: pointer;
 }
 
-
 @media (min-width: 1400px) {
   .cnDetailedCardRoot {
     width: 600px;
@@ -84,4 +87,24 @@
   .cnDetailedCardTextAreaWrapper {
     max-width: 360px;
   }
+}
+=======
+.cnDetailedCardTitle {
+  padding-top: 15px;
+  padding-left: 15px;
+  font-weight: 600;
+}
+
+.cnDetailedCardTags {
+  font-weight: 600;
+  color: rgb(3, 3, 75);
+  
+}
+
+.cnDetailedCreatidTime {
+  padding-left: 15px;
+  padding-top: 5px;
+  font-size: 14px;
+  font-style: italic;
+  color: gray;
 }

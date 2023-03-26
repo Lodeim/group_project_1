@@ -10,11 +10,11 @@ import {
   mutateUserSuccess,
 } from "../actionCreators/users";
 
-export const getUser = (id) => {
+export const getUser = () => {
   return async (dispatch) => {
     try {
       dispatch(getUserStarted());
-      const response = await api.users.getUser(id);
+      const response = await api.users.getUser();
       dispatch(getUserSuccess(response.data));
     } catch (error) {
       dispatch(getUserFailed(error));
@@ -26,7 +26,7 @@ export const getAuthorizedUser = () => {
   return async (dispatch) => {
     try {
       dispatch(getAuthorizedUserStarted());
-      const response = await api.users.getUser(1);
+      const response = await api.users.getUser();
       dispatch(getAuthorizedUserSucces(response.data));
     } catch (error) {
       dispatch(getAuthorizedUserFailed(error));

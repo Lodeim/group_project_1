@@ -22,6 +22,7 @@ const PhotoModal = ({
   isCommentLoading,
   isLikedByYou,
   onLikeClick,
+  timeConverter,
 }) => {
   useEffect(() => {
     const body = document.querySelector("body");
@@ -49,8 +50,9 @@ const PhotoModal = ({
               <UserBadge
                 userName={userName}
                 avatarUrl={avatarUrl}
-                id={userId}
+                _id={userId}
               />
+              <span className="cnModalCreatidTime">{timeConverter}</span>
             </div>
             {/* discription Post and title hardcode  */}
             <div className="cnInfo-post-wrapper">

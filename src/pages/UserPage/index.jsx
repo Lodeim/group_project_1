@@ -30,7 +30,7 @@ const UserPage = () => {
   const isUserError = useSelector((state) => state.users.isUserError);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { _id } = useParams();
   const [postsForRender, setPostsForRender] = useState([]);
   const [page, setPage] = useState(0);
 
@@ -42,17 +42,17 @@ const UserPage = () => {
   }, [posts]);
 
   useEffect(() => {
-    dispatch(getPostsByUser(id));
-    dispatch(getUser(id));
-  }, [id, dispatch]);
+    dispatch(getPostsByUser(_id));
+    dispatch(getUser(_id));
+  }, [_id, dispatch]);
 
   const onLikeClick = (photoId) => {
-    dispatch(toggleLikeOnPost(authorizedUser.id, photoId, id));
+    dispatch(toggleLikeOnPost(authorizedUser._id, photoId, _id));
   };
 
   const onCommentSendClick = (photoId, comment) => {
     dispatch(
-      sendCommentOnUserPage(authorizedUser.nickname, photoId, user.id, comment)
+      sendCommentOnUserPage(authorizedUser.name, photoId, user._id, comment)
     );
   };
 
@@ -64,13 +64,13 @@ const UserPage = () => {
   };
 
   const onEdit = async (data) => {
-    await dispatch(mutateUser(data, user.id));
+    await dispatch(mutateUser(data, user._id));
   };
   return (
     <Layout
-      userName={authorizedUser.nickname}
-      id={authorizedUser.id}
-      avatarUrl={authorizedUser.avatarUrl}
+      userName={authorizedUser.name}
+      _id={authorizedUser._id}
+      avatarUrl={authorizedUser.avatar}
     >
       {isPostsLoading || isUserLoading ? (
         <div className="cnMainPageLoaderContainer">
@@ -80,15 +80,13 @@ const UserPage = () => {
         <div className="cnUserPageRoot">
           {!isUserError && (
             <UserBio
-              avatarUrl={user.avatarUrl}
-              nickname={user.nickname}
-              subscribed={user.subscribed.length}
-              subscribers={user.subscribers.length}
-              description={user.description}
+              avatarUrl={user.avatar}
+              nickname={user.name}
+              description={user.about}
+              url={user.url}
               // сравнение id == authorizedUser.id без приведения
               // eslint-disable-next-line
-              isMyPage={id == authorizedUser.id}
-              isSubscribed={user.subscribers.includes(authorizedUser.id)}
+              isMyPage={_id == authorizedUser._id}
               onEdit={onEdit}
               formLoading={isUserMutateLoading}
             />
@@ -109,22 +107,22 @@ const UserPage = () => {
                 }
                 className="cnUserPageScroll"
               >
-                {postsForRender.map(({ comments, likes, imgUrl, id }) => (
+                {postsForRender.map(({ comments, likes, imgUrl, _id }) => (
                   <Card
-                    key={id}
+                    key={_id}
                     imgUrl={imgUrl}
                     className="cnUserPageCard"
                     likes={likes.length}
                     comments={comments}
-                    isLikedByYou={likes.includes(authorizedUser.id)}
-                    onLikeClick={() => onLikeClick(id)}
+                    isLikedByYou={likes.includes(authorizedUser._id)}
+                    onLikeClick={() => onLikeClick(_id)}
                     userData={{
-                      userName: user.nickname,
-                      avatarUrl: user.avatarUrl,
-                      userId: user.id,
+                      userName: user.name,
+                      avatarUrl: user.avatar,
+                      userId: user._id,
                     }}
                     onCommentSubmit={(comment) =>
-                      onCommentSendClick(id, comment)
+                      onCommentSendClick(_id, comment)
                     }
                     isMutateLoading={mutateLoading}
                   />
