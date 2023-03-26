@@ -2,9 +2,10 @@
   padding: 7px;
   outline: none;
   border-radius: 5px;
-  border: 1px solid lightblue;
+  border: 1px solid cadetblue;
   resize: none;
 }
+
 .cnFormTextAreaWithError {
   border: 1px solid tomato;
 }

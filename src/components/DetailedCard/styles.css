@@ -2,21 +2,35 @@
   display: flex;
   flex-direction: column;
   width: 600px;
-  border: 1px solid #dbdbdb;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(61, 61, 61, 0.219);
+  border-radius: 10px;
+  padding: 10px;
 }
+
 .cnDetailedCardHeader {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   height: 60px;
   padding-left: 20px;
-  background-color: #fff;
+  background-color: #fafafa;
+
 }
 
 .cnDetailedCardImg {
-  height: 300px;
+  height: 100%;
   width: 100%;
+  background-color: #fafafa;
+}
+
+.cnTags span {
+  margin: 10px;
+  background-color: palevioletred;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 400;
+
 }
 
 .cnDetailedCardText {
@@ -25,7 +39,9 @@
 
 .cnDetailedCardButtons {
   display: flex;
+  margin-top: 10px;
   padding: 10px;
+
 }
 
 .cnDetailedCardLikes {
@@ -43,17 +59,36 @@
 .cnDetailedCardLikeIcon {
   margin-right: 10px;
   cursor: pointer;
+  font-size: 20px;
 }
+
 .cnDetailedCardLikeComment {
   cursor: pointer;
+  font-size: 20px;
 }
 
 .cnDetailedCardCommentTitle {
   font-size: 14px;
-  color: #dbdbdb;
+  color: #d1cfcf;
   cursor: pointer;
 }
 
+@media (min-width: 1400px) {
+  .cnDetailedCardRoot {
+    width: 600px;
+  }
+}
+
+@media (max-width: 780px) {
+  .cnDetailedCardRoot {
+    max-width: 360px;
+  }
+
+  .cnDetailedCardTextAreaWrapper {
+    max-width: 360px;
+  }
+}
+=======
 .cnDetailedCardTitle {
   padding-top: 15px;
   padding-left: 15px;

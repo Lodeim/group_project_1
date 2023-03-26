@@ -1,0 +1,29 @@
+.cnFooterRoot {
+    height: 80px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: cadetblue;
+
+}
+
+.cnFooterWrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1080px;
+    margin: auto;
+
+}
+
+.cnFooterLink {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+
+}
+
+.cnFooterLink:hover {
+    color: orange;
+
+}
