@@ -61,6 +61,7 @@ const PhotoModal = ({
               <div className="cnDiscriptionPost">
                 <p>Nulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal</p>
               </div>
+              <div className="cnTags"><span>Good</span><span>Good</span><span>Good</span></div>
               <div className="cnModalComments">
                 <div className="cnCommentTitle">Комментарии</div>
                 {comments.map((comment) => (

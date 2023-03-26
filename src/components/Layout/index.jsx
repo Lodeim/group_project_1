@@ -8,7 +8,7 @@ const Layout = ({ userName, avatarUrl, id, children }) => {
     <div className="cnLayoutRoot">
       <Navbar userName={userName} avatarUrl={avatarUrl} id={id} />
       <div className="cnLayoutBody">{children}</div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

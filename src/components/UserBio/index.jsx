@@ -204,8 +204,8 @@ const UserBio = ({
             className="cnUserBioCounter"
           />
         </div>
-        <div className="cnUserBioRow">{fields.userName}</div>
-        <div className="cnUserBioRow">{fields.description}</div>
+        <div className="cnUserBioRow"><label><div>Имя пользователя</div> {fields.userName}</label></div>
+        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.description}</label></div>
         {fields.url}
       </div>
     </div>

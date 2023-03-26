@@ -104,6 +104,7 @@ const DetailedCard = ({
           imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
           ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
         </div>
+        <div className="cnTags"><span>Good</span><span>Good</span><span>Good</span></div>
       </div>
       <div className="cnDetailedCardButtons">
         <i

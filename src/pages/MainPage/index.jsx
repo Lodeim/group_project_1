@@ -42,7 +42,7 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatarUrl}
     >
       <div className="cnMainPageRoot">
-        {isLoading && <Bars color="#000BFF" height={15} width={15} />}
+        {isLoading && <Bars color="#5F9EA0" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
             dataLength={photos.length}
@@ -50,7 +50,7 @@ const MainPage = () => {
             hasMore={photos.length < total}
             loader={
               <div className="cnMainPageLoaderContainer">
-                <Bars color="#000BFF" height={15} width={15} />
+                <Bars color="#5F9EA0" height={15} width={15} />
               </div>
             }
             endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}

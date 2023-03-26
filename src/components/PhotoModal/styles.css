@@ -83,6 +83,16 @@
   padding: 10px;
 }
 
+.cnTags span {
+  margin: 10px;
+  background-color: palevioletred;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 400;
+
+}
+
 .cnModalCommentsBlock {
   display: flex;
   width: 600px;
@@ -111,13 +121,5 @@
 
 .cnModalLikeIcon {
   cursor: pointer;
-}
-
-
-
-@media (max-width: 990px) {
-  /* .cnModalRoot {} */
-
-
-  @media (min-width: 1400px) {}
+  font-size: 20px;
 }
