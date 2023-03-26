@@ -26,7 +26,7 @@ export const getPostsByUser = (userId) => {
   };
 };
 
-export const toggleLikeOnPost = (userId, postId, postAuthorId) => {
+export const toggleLikeOnPost = (userId, postId) => {
   return async (dispatch, getState) => {
     try {
       const posts = getState().postsByUser.posts;
@@ -39,9 +39,9 @@ export const toggleLikeOnPost = (userId, postId, postAuthorId) => {
       }
 
       await api.postsByUser.mutatePosts({
-        url: `/${postAuthorId}`,
+        url: `/${postId}`,
         data: {
-          id: postAuthorId,
+          _id: postId,
           posts: newPosts,
         },
       });

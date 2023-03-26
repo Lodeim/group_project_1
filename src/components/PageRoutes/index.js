@@ -6,7 +6,6 @@ import MainPage from "../../pages/MainPage";
 import NoAccessPage from "../../pages/NoAccessPage/Index";
 import UserPage from "../../pages/UserPage";
 import { getAuthorizedUser } from "../../redux/actions/users";
-
 import "./styles.css";
 
 const authorizedRoutes = [

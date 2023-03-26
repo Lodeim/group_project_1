@@ -13,7 +13,7 @@ const Card = ({
   isLikedByYou,
   onLikeClick,
   onCommentSubmit,
-  id,
+  _id,
   userData,
   isMutateLoading,
 }) => {
@@ -51,7 +51,7 @@ const Card = ({
         isCommentLoading={isMutateLoading}
         imgUrl={imgUrl}
         isLikedByYou={isLikedByYou}
-        onLikeClick={() => onLikeClick(id)}
+        onLikeClick={() => onLikeClick(_id)}
       />
     </div>
   );

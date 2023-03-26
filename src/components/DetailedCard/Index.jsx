@@ -28,6 +28,7 @@ const DetailedCard = ({
   createdPost,
   _id,
   author
+  
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
@@ -82,6 +83,7 @@ const DetailedCard = ({
     let time = date + ' ' + month + ' ' + year;
     return time;
   }
+
   const onCloseModal = () => {
     setIsModalVisible(false);
     setComment("");

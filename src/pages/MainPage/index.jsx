@@ -24,19 +24,6 @@ const MainPage = () => {
 
   const onUpClick = () => {setSort('up')}
   const onDownClick = () => {setSort('down')}
-  // useEffect(() => {
-  //   const photosCopy = [...photos]
-  //   const sortedPhotos = photosCopy.sort((a,b) => {
-  //     if (sort === "up") {
-  //       return b.id - a.id
-  //     } else if (sort === "down"){
-  //       return a.id - b.id
-  //     }
-  //   })
-  //   setRenderedPhotos(sortedPhotos)
-  //   console.log(sortedPhotos)
-  // },[photos, sort])
-
 
   useEffect(() => {
     const photosCopy = [...photos]
@@ -73,26 +60,28 @@ const MainPage = () => {
   };
 
   const onLikeClick = (photoId) => {
-    dispatch(toggleLike(authorizedUser.id, photoId));
+    dispatch(toggleLike(authorizedUser._id, photoId, photos));
   };
 
   const onCommentSendClick = (photoId, comment) => {
-    dispatch(sendComment(authorizedUser.nickname, photoId, comment));
+    dispatch(sendComment(authorizedUser._id, photoId, comment));
+   
   };
+
+
   return (
     <Layout
-      userName={authorizedUser.nickname}
-      id={authorizedUser.id}
-      avatarUrl={authorizedUser.avatarUrl}
+      userName={authorizedUser.name}
+      _id={authorizedUser._id}
+      avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
-        <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
         {isLoading && <Bars color="#000BFF" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
-            dataLength={renderedPhotos.length}
+            dataLength={photos.length}
             next={nextHandler}
-            hasMore={renderedPhotos.length < total}
+            hasMore={photos.length < total}
             loader={
               <div className="cnMainPageLoaderContainer">
                 <Bars color="#000BFF" height={15} width={15} />
@@ -100,17 +89,22 @@ const MainPage = () => {
             }
             endMessage={<p className="cnMainPageLoaderContainer">Thats All!</p>}
           >
-            {renderedPhotos.map(({ author, imgUrl, id, likes, comments }) => (
+            {photos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
               <DetailedCard
-                key={id}
-                id={id}
-                userName={author.nickname}
-                avatarUrl={author.avatarUrl}
-                userId={author.id}
-                imgUrl={imgUrl}
+                key={_id}
+                _id={_id}
+                userName={author.name}
+                avatarUrl={author.avatar}
+                aboutUser={author.about}
+                userId={author._id}
+                imgUrl={image}
+                text={text}
+                tags={tags}
                 likes={likes.length}
-                isLikedByYou={likes.includes(authorizedUser.id)}
+                isLikedByYou={likes.includes(authorizedUser._id)}
                 comments={comments}
+                title={title}
+                createdPost={created_at}
                 className="cnMainPageCard"
                 onLikeClick={onLikeClick}
                 onCommentSendClick={onCommentSendClick}

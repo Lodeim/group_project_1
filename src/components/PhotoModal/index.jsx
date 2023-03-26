@@ -22,6 +22,7 @@ const PhotoModal = ({
   isCommentLoading,
   isLikedByYou,
   onLikeClick,
+  timeConverter,
 }) => {
   useEffect(() => {
     const body = document.querySelector("body");
@@ -49,12 +50,13 @@ const PhotoModal = ({
               <UserBadge
                 userName={userName}
                 avatarUrl={avatarUrl}
-                id={userId}
+                _id={userId}
               />
+              <span className="cnModalCreatidTime">{timeConverter}</span>
             </div>
             <div className="cnModalComments">
               {comments.map((comment) => (
-                <Comment key={nanoid()} {...comment} />
+                <Comment {...comment} key={nanoid()}  />
               ))}
             </div>
           </div>
