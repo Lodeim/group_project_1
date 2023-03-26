@@ -16,7 +16,6 @@ const Card = ({
   _id,
   userData,
   isMutateLoading,
-  
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [comment, setComment] = useState("");

@@ -16,8 +16,39 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-
+  
   const [page, setPage] = useState(1);
+
+  const [renderedPhotos, setRenderedPhotos] = useState(photos)
+  const [sort, setSort] = useState('')
+
+  const onUpClick = () => {setSort('up')}
+  const onDownClick = () => {setSort('down')}
+
+  useEffect(() => {
+    const photosCopy = [...photos]
+    const sortedPhotos = photosCopy.sort((a,b) => {
+      if (sort === "up") {
+        if (a.author.nickname < b.author.nickname) {
+          return -1;
+        }
+        if (a.author.nickname > b.author.nickname) {
+          return 1;
+        }
+        return 0;
+      } else if (sort === "down"){
+        if (a.author.nickname > b.author.nickname) {
+          return -1;
+        }
+        if (a.author.nickname < b.author.nickname) {
+          return 1;
+        }
+        return 0;
+      }
+    })
+    setRenderedPhotos(sortedPhotos)
+    console.log(sortedPhotos)
+  },[photos, sort])
 
   useEffect(() => {
     dispatch(getPhotos(page));

@@ -17,6 +17,7 @@ export const getPhotos = (config) =>
 export const mutatePhoto = (config) => {
   config.url = `${URL}${config.url}`;
   return makeRequest({
+    method: "PUT",
     headers: {
       "Content-type": "application/json",
       "Authorization": `Bearer ${token}`,

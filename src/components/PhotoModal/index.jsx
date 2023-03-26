@@ -57,7 +57,6 @@ const PhotoModal = ({
             <div className="cnModalComments">
               {comments.map((comment) => (
                 <Comment {...comment} key={nanoid()}  />
-      
               ))}
             </div>
           </div>

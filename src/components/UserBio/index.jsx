@@ -5,6 +5,7 @@ import Input from "../Input";
 import FormTextArea from "../FormTextArea";
 
 import "./styles.css";
+import { UserAddPost } from "../UserAddPost";
 
 const requiredText = "Поле обязательное";
 const validateText = (text, cb) => {
@@ -52,13 +53,11 @@ const UserBio = ({
   const [formDescription, setFormDescription] = useState(description);
   const [formUrl, setFormUrl] = useState(url);
   const [userNameError, setUserNameError] = useState("");
-  
   const [descriptionError, setDescriptionError] = useState("");
   const [urlError, setUrlError] = useState("");
 
   const onSaveEditForm = useCallback(async () => {
     const isUserNameError = validateText(formUserName, setUserNameError);
-    
     const isUrlError = validateUrl(formUrl, setUrlError);
     let isErrors =
       isUserNameError ||  isUrlError;
@@ -153,6 +152,12 @@ const UserBio = ({
         <div className={fields.firstButtonClassName}>
           {fields.userName}
           <Button {...btnProps} />
+
+          <Button onClick={onOpenAddPost}>Добавить пост</Button>
+          <UserAddPost
+            isOpen={isAddPostVisible}
+            onClose={onCloseAddPost}
+            />
         </div>
         <div className="cnUserBioRow">
           <UserCounter

@@ -10,7 +10,6 @@ import {
   setPhotosTotal,
 } from "../actionCreators/photos";
 
-
 export const getPhotos = (page = 1) => {
   return async (dispatch, getState) => {
     try {
@@ -83,7 +82,6 @@ export const sendComment = (author, photoId, text) => {
         photoId,
         response.data
       );
-      
       dispatch(getPhotosSuccess(newPhotos));
       dispatch(mutatePhotoSuccess());
     } catch (error) {

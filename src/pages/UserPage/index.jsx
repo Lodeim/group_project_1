@@ -53,7 +53,6 @@ const UserPage = () => {
   const onCommentSendClick = (photoId, comment) => {
     dispatch(
       sendCommentOnUserPage(authorizedUser.name, photoId, user._id, comment)
-      
     );
   };
 
