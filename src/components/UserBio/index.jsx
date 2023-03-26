@@ -96,6 +96,17 @@ const UserBio = ({
       }
   }, [isEditMode, formLoading, onSaveEditForm]);
 
+  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
+  const onCloseAddPost = (e) => {
+    e.stopPropagation()
+    setIsAddPostVisible(false);
+
+  };
+  const onOpenAddPost = () => {
+    setIsAddPostVisible(true);
+   
+  };
+
   const fields = useMemo(() => {
     if (isEditMode) {
       return {

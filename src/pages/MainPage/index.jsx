@@ -29,18 +29,18 @@ const MainPage = () => {
     const photosCopy = [...photos]
     const sortedPhotos = photosCopy.sort((a,b) => {
       if (sort === "up") {
-        if (a.author.nickname < b.author.nickname) {
+        if (a.title < b.title) {
           return -1;
         }
-        if (a.author.nickname > b.author.nickname) {
+        if (a.title > b.title) {
           return 1;
         }
         return 0;
       } else if (sort === "down"){
-        if (a.author.nickname > b.author.nickname) {
+        if (a.title > b.title) {
           return -1;
         }
-        if (a.author.nickname < b.author.nickname) {
+        if (a.title < b.title) {
           return 1;
         }
         return 0;
@@ -76,7 +76,8 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
-        {isLoading && <Bars color="#5F9EA0" height={15} width={15} />}
+      <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
+        {isLoading && <Bars color="#000BFF" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
             dataLength={photos.length}
@@ -89,7 +90,7 @@ const MainPage = () => {
             }
             endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}
           >
-            {photos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
+            {renderedPhotos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
               <DetailedCard
                 key={_id}
                 _id={_id}
