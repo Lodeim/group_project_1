@@ -18,17 +18,13 @@ export const getPhotos = (page = 1) => {
         dispatch(getPhotosStarted);
       }
       const response = await api.photos.getPhotos({
-        params: {
-          _page: page,
-          _limit: 5,
-        },
+        url: `/paginate?page=${page}&limit=5`
       });
-
       if (page === 1) {
-        dispatch(setPhotosTotal(response.headers["x-total-count"]));
-        dispatch(getPhotosSuccess([...response.data]));
+        dispatch(setPhotosTotal(response.data.total));
+        dispatch(getPhotosSuccess([...response.data.posts]));
       } else {
-        dispatch(getPhotosSuccess([...store.photos.photos, ...response.data]));
+        dispatch(getPhotosSuccess([...store.photos.photos, ...response.data.posts]));
       }
     } catch (error) {
       dispatch(getPhotosFailed(error));
@@ -53,7 +49,6 @@ export const toggleLike = (authorizedUser, photoId) => {
         method: isLikedByYou ? "PUT" : "DELETE",
         url: `/likes/${photoId}`,
       });
-
       const newPhotos = getUpdatedPhotoForState(state.photos.photos, photoId, response.data);
       dispatch(getPhotosSuccess(newPhotos));
     } catch (error) {
@@ -72,7 +67,7 @@ export const sendComment = (author, photoId, text) => {
   
     try {
       const response = await api.photos.mutatePhoto({
-        data: newPhoto,
+        data: {'text': text},
         method: "POST",
         url: `/comments/${photoId}`,
       });
@@ -89,3 +84,4 @@ export const sendComment = (author, photoId, text) => {
     }
   };
 };
+

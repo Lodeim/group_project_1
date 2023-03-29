@@ -56,35 +56,33 @@
   height: 30px;
 }
 
-.cnInfo-post-wrapper {
+.cnModalInfoWrapper {
   max-height: 800px;
   background: #fff;
   overflow-y: scroll;
 }
 
-/* discription Post and title hardcode */
-
-.cnTimePost {
+.cnModalTime {
   margin-top: 10px;
   margin-left: 10px;
   font-size: 14px;
   font-style: italic;
 }
 
-.cnTitlePost {
+.cnModalTitle {
   margin-top: 20px;
   font-size: 18px;
   font-weight: 600;
   padding: 10px;
 }
 
-.cnDiscriptionPost {
+.cnModalDescription {
   font-size: 14px;
   margin-bottom: 15px;
   padding: 10px;
 }
 
-.cnTags span {
+.cnModalTags span {
   margin: 10px;
   background-color: palevioletred;
   padding: 5px;
@@ -109,7 +107,7 @@
   border-radius: 10px;
 }
 
-.cnCommentTitle {
+.cnModalCommentsTitle {
   font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
