@@ -6,9 +6,9 @@ import cn from "classnames";
 import PhotoModal from "../PhotoModal";
 import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
+import { timeConverter } from "../../utils";
 
 import "./styles.css";
-import "../PhotoModal/styles.css";
 
 const DetailedCard = ({
   userName,
@@ -73,15 +73,7 @@ const DetailedCard = ({
 
  
 
-  const timeConverter = () => {
-    const a = new Date(createdPost);
-    let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля','августа', 'сентября', 'октября', 'ноября', 'декабря'];
-    let year = a.getFullYear();
-    let month = months[a.getMonth()];
-    let date = a.getDate();
-    let time = date + ' ' + month + ' ' + year;
-    return time;
-  }
+
   const onCloseModal = () => {
     setIsModalVisible(false);
     setComment("");
@@ -100,48 +92,19 @@ const DetailedCard = ({
       </div>
       <div className="cnDetailedCardImgWrapper">
         <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" />
-        <div className="cnTimePost">20 марта 2023</div>
-        <h2 className="cnTitlePost">
-          Title post
+        <div className="cnDetailedCardTime">{timeConverter(createdPost)}</div>
+        <h2 className="cnDetailedCardTitle">
+          {title}
         </h2>
-        <div className="cnDiscriptionPost">
-          Nulla tortor, nec mattis pellentesque in nec orci, orci,
-          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
-          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
-          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
-          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
-          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
-          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet
-          ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis,
-          amet, sapien mal.Nulla tortor, nec mattis pellentesque in nec orci, orci,
-          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
-          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
-          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
-          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
-          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
-          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
-          Nulla tortor, nec mattis pellentesque in nec orci, orci,
-          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
-          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
-          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
-          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
-          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
-          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
-          Nulla tortor, nec mattis pellentesque in nec orci, orci,
-          eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi
-          hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet,
-          sapien malNulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In
-          amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi
-          imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien malNulla tortor, n
-          ec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal.
+        <div className="cnDetailedCardDescription">
+        {text}
         </div>
-        <div className="cnTags"><span>Good</span><span>Good</span><span>Good</span></div>
+        <div className="cnDetailedCardTags">{tags.map(e => {
+        return (<span>{`${e}`}</span>)})}</div>
       </div>
-      <span className="cnDetailedCardTitle">{title}</span>
-      <span className="cnDetailedCreatidTime">{timeConverter()}</span>
       <div className="cnDetailedCardButtons">
         <i
-          onClick={() => onLikeClick(id)}
+          onClick={() => onLikeClick(_id)}
           className={`${isLikedByYou ? "fas" : "far"
             } fa-heart cnDetailedCardLikeIcon`}
         />
@@ -152,8 +115,6 @@ const DetailedCard = ({
       </div>
       <div className="cnDetailedCardLikes">{`Оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
-      <div className="cnDetailedCardText">{text}</div>
-      <div className="cnDetailedCardTags">{tags.join(" ")}</div>
       <div className="cnDetailedCardTextAreaWrapper">
         <TextArea
           placeholder="Введите комментарий"
@@ -169,7 +130,7 @@ const DetailedCard = ({
           avatarUrl={avatarUrl}
           aboutUser={aboutUser} 
           userId={userId}
-          timeConverter={timeConverter()}
+          timeConverter={timeConverter}
           isOpen={isModalVisible}
           onClose={onCloseModal}
           comments={comments}
@@ -180,6 +141,12 @@ const DetailedCard = ({
           imgUrl={imgUrl}
           isLikedByYou={isLikedByYou}
           onLikeClick={() => onLikeClick(_id)}
+          text={text}
+          tags={tags}
+          title={title}
+          createdPost={createdPost}
+          _id={_id}
+          author
         />
       </div>
     </div>
