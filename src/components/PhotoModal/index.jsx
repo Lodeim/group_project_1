@@ -22,7 +22,14 @@ const PhotoModal = ({
   isCommentLoading,
   isLikedByYou,
   onLikeClick,
-  timeConverter,
+  aboutUser,
+  text,
+  tags,
+  title,
+  createdPost,
+  _id,
+  author,
+  timeConverter
 }) => {
   useEffect(() => {
     const body = document.querySelector("body");
@@ -51,21 +58,21 @@ const PhotoModal = ({
                 userName={userName}
                 avatarUrl={avatarUrl}
                 _id={userId}
+                aboutUser={aboutUser}
               />
-              <span className="cnModalCreatidTime">{timeConverter}</span>
             </div>
-            {/* discription Post and title hardcode  */}
-            <div className="cnInfo-post-wrapper">
-              <div className="cnTimePost">20 марта 2023</div>
-              <h2 className="cnTitlePost">
-                Title post
+            <div className="cnModalInfoWrapper">
+              <div className="cnModalTime">{timeConverter(createdPost)}</div>
+              <h2 className="cnModalTitle">
+                {title}
               </h2>
-              <div className="cnDiscriptionPost">
-                <p>Nulla tortor, nec mattis pellentesque in nec orci, orci, eget faucibus. In amet nisi consectetur amet ornare dui nec efficitur morbi hac quis, nulla nisi imperdiet luctus tempus et nunc pulvinar in quis, amet, sapien mal</p>
+              <div className="cnModalDescription">
+                <p>{text}</p>
               </div>
-              <div className="cnTags"><span>Good</span><span>Good</span><span>Good</span></div>
+              <div className="cnModalTags">{tags.map(e => {
+        return (<span>{`${e}`}</span>)})}</div>
               <div className="cnModalComments">
-                <div className="cnCommentTitle">Комментарии</div>
+                <div className="cnModalCommentsTitle">Комментарии</div>
                 {comments.map((comment) => (
                   <Comment key={nanoid()} {...comment} />
                 ))}

@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { getUserById } from './api/users';
 
 
 export const getPhotoFromState = (photos, photoId) => {
@@ -28,3 +29,18 @@ export const getUserPagePostData = (posts, postId) => {
 export const getError = ({response: {status, statusText}}) =>{
     toast.error(`${status}: ${statusText}`)
 }
+
+export const timeConverter = (post) => {
+    const a = new Date(post);
+    let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля','августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    let year = a.getFullYear();
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    let time = date + ' ' + month + ' ' + year;
+    return time;
+  }
+
+  export const getNaming = async function (author) {
+    let user = await getUserById(author).then(res => res.data.name)
+    return user
+    }

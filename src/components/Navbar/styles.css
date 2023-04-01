@@ -26,3 +26,8 @@
   font-size: 36px;
   color: cadetblue;
 }
+
+.cnNavbarControlsWrapper{
+  display: flex;
+  align-items: center;
+}
