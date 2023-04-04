@@ -21,3 +21,10 @@ export const getUserById = (id) =>
     method: "GET",
     url: `${URL}/${id}`
   })
+
+export const getUsersInfo = (config) =>
+  makeRequest({
+    method: "GET",
+    url: `${URL}`,
+    ...config,
+  }); 

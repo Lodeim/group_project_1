@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import MainPage from "../../pages/MainPage";
 import NoAccessPage from "../../pages/NoAccessPage/Index";
 import UserPage from "../../pages/UserPage";
+import UsersCards from "../../pages/UsersCards";
 import { getAuthorizedUser } from "../../redux/actions/users";
 
 import "./styles.css";
@@ -12,6 +13,7 @@ import "./styles.css";
 const authorizedRoutes = [
   { path: "/", element: <MainPage />, exact: true },
   { path: "/:_id", element: <UserPage /> },
+  { path: "/users", element: <UsersCards />},
 ];
 
 const PageRoutes = () => {

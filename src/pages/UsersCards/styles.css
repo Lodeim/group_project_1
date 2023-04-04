@@ -1,0 +1,55 @@
+.cnUsersCardsRoot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    background-color: #fafafa;
+    margin-bottom: 20px;
+  }
+  
+  .cnUsersCardsRootContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    padding-left: 10px;
+    width: 930px;
+    margin: inherit;
+  
+  }
+
+  .cnUsersCardsScroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cnNoUsersCards {
+    margin: auto;
+    font-weight: 600;
+    font-size: 30px;
+  }
+  
+  .cnInput {
+    margin-bottom: 21px;
+  }
+  
+  @media (max-width: 360px) {
+    .cnUsersCardsScroll {
+      padding-top: 100px;
+      padding-left: 10px;
+      max-width: 300px;
+  
+    }
+  }
+  
+  @media (max-width: 780px) {
+    .cnUsersCardsScroll {
+      padding-top: 100px;
+      padding-left: 10px;
+      max-width: 600px;
+  
+    }
+  }
+
+ 
