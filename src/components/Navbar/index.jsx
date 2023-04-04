@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Button from '../Button';
 
 const Navbar = ({ userName, avatarUrl, _id }) => {
-  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
+  const [isAddPostVisible, setIsAddPostVisible] = useState(false)
   const onCloseAddPost = (e) => {
     e.stopPropagation()
     setIsAddPostVisible(false);
@@ -15,8 +15,9 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
   };
   const onOpenAddPost = () => {
     setIsAddPostVisible(true);
-   
+
   };
+
   return (
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
@@ -24,15 +25,15 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
           Photo & Post
         </a>
         <div className='cnNavbarControlsWrapper'>
-        <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
-        <Button onClick={onOpenAddPost}>Добавить пост</Button>
-        <UserAddPost
+          <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
+          <Button onClick={onOpenAddPost}>Добавить пост</Button>
+          <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
-            />
+          />
         </div>
-      
-      
+
+
       </div>
     </div >
   );

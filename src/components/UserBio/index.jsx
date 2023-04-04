@@ -49,7 +49,7 @@ const UserBio = ({
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [formUserName, setFormUserName] = useState(nickname);
- 
+
   const [formDescription, setFormDescription] = useState(description);
   const [formUrl, setFormUrl] = useState(url);
   const [userNameError, setUserNameError] = useState("");
@@ -60,7 +60,7 @@ const UserBio = ({
     const isUserNameError = validateText(formUserName, setUserNameError);
     const isUrlError = validateUrl(formUrl, setUrlError);
     let isErrors =
-      isUserNameError ||  isUrlError;
+      isUserNameError || isUrlError;
 
     if (!formDescription) {
       isErrors = true;
@@ -80,23 +80,23 @@ const UserBio = ({
   }, [formUserName, formUrl, formDescription]);
 
   useEffect(() => {
-    
-      if (isEditMode) {
-        setBtnProps({
-          onClick: () => onSaveEditForm(),
-          children: "Сохранить",
-          className: "cnUserEditButton",
-          disabled: formLoading,
-        });
-      } else {
-        setBtnProps({
-          onClick: () => setIsEditMode(true),
-          children: "Редактировать",
-        });
-      }
+
+    if (isEditMode) {
+      setBtnProps({
+        onClick: () => onSaveEditForm(),
+        children: "Сохранить",
+        className: "cnUserEditButton",
+        disabled: formLoading,
+      });
+    } else {
+      setBtnProps({
+        onClick: () => setIsEditMode(true),
+        children: "Редактировать",
+      });
+    }
   }, [isEditMode, formLoading, onSaveEditForm]);
 
-  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
+  const [isAddPostVisible, setIsAddPostVisible] = useState(false)
   const onCloseAddPost = (e) => {
     e.stopPropagation()
     setIsAddPostVisible(false);
@@ -104,7 +104,7 @@ const UserBio = ({
   };
   const onOpenAddPost = () => {
     setIsAddPostVisible(true);
-   
+
   };
 
   const fields = useMemo(() => {
@@ -167,7 +167,7 @@ const UserBio = ({
           <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
-            />
+          />
         </div>
         <div className="cnUserBioRow">
           <UserCounter

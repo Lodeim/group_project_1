@@ -5,6 +5,7 @@
   border: 1px solid rgba(61, 61, 61, 0.219);
   border-radius: 10px;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .cnDetailedCardHeader {
@@ -12,7 +13,6 @@
   align-items: center;
   justify-content: flex-start;
   height: 60px;
-  padding-left: 20px;
   background-color: #fafafa;
 
 }
@@ -23,37 +23,61 @@
   background-color: #fafafa;
 }
 
-.cnTags span {
-  margin: 10px;
-  background-color: palevioletred;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  font-weight: 400;
-
+.cnDetailedCardTime {
+  margin-top: 15px;
+  font-size: 14px;
+  font-style: italic;
 }
 
-.cnDetailedCardText {
-  padding: 15px;
+.cnDetailedCardTitle {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cnDetailedCardTags {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cnDetailedCardTags span {
+  box-sizing: border-box;
+  font-size: 12px;
+  padding: 3px 10px;
+  font-weight: 600;
+  background-color: #eb769d;
+  border-radius: 5px;
+  color: white;
+  width: auto;
+  max-width: 100%;
+  word-wrap: break-word;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.cnDetailedCardDescription {
+  font-size: 14px;
 }
 
 .cnDetailedCardButtons {
   display: flex;
   margin-top: 10px;
-  padding: 10px;
+}
+
+.cnDetailedCardButtons i {
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
 
 }
 
 .cnDetailedCardLikes {
-  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 15px;
   font-weight: 600;
-  padding: 10px;
-}
-
-.cnDetailedCardComments {
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px 10px 10px;
+  font-size: 14px;
 }
 
 .cnDetailedCardLikeIcon {
@@ -62,14 +86,21 @@
   font-size: 20px;
 }
 
+.cnDetailedCardComments {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
 .cnDetailedCardLikeComment {
+  margin-right: 10px;
   cursor: pointer;
   font-size: 20px;
 }
 
 .cnDetailedCardCommentTitle {
   font-size: 14px;
-  color: #d1cfcf;
+  color: #b3b2b2;
   cursor: pointer;
 }
 
@@ -91,50 +122,4 @@
 
 .cnDetailedCardTitle {
   padding-top: 15px;
-  padding-left: 15px;
-  font-weight: 600;
-}
-
-.cnDetailedCardTags {
-  font-weight: 600;
-  color: rgb(3, 3, 75);
-  
-}
-
-.cnDetailedCardTags span {
-  margin: 10px;
-  background-color: palevioletred;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  font-weight: 400;
-
-}
-
-.cnDetailedCreatidTime {
-  padding-left: 15px;
-  padding-top: 5px;
-  font-size: 14px;
-  font-style: italic;
-  color: gray;
-}
-
-.cnDetailedCardTime {
-  margin-top: 10px;
-  margin-left: 10px;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.cnDetailedCardTitle {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 10px;
-}
-
-.cnDetailedCardDescription {
-  font-size: 14px;
-  margin-bottom: 15px;
-  padding: 10px;
 }

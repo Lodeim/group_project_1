@@ -26,7 +26,7 @@ const PageRoutes = () => {
   if (isLoading) {
     return (
       <div className="cnPageRoutesLoader">
-        <Bars color="#000BFF" width={80} height={80} />
+        <Bars color="#5f9ea0" width={80} height={80} />
       </div>
     );
   }

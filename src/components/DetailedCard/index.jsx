@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import UserBadge from "../UserBadge";
 import Comment from "../Comment";
@@ -7,6 +8,7 @@ import PhotoModal from "../PhotoModal";
 import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
+import api from "../../api/sberAddRequest"
 
 import "./styles.css";
 
@@ -49,30 +51,53 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать еще ${comments.length - commentsForRender.length
-            } комментариев`}</span>
+          >{`Показать скрытые комментарии ${comments.length - commentsForRender.length
+            }`}</span>
           {commentsForRender.map((comment) => (
             <Comment {...comment} key={nanoid()} />
           ))}
         </>
       );
     }
-    return comments.map(({ author, text,  created_at, _id, post, update_at}) => (
-    <Comment 
-        key = {nanoid()}
-        author = {author}
-        text = {text}
-        createdAt = {created_at}
-        updateAt = {update_at}
-        id = {_id}
-        post = {post}
-    />
-    
+    return comments.map(({ author, text, created_at, _id, post, update_at }) => (
+      <Comment
+        key={nanoid()}
+        author={author}
+        text={text}
+        createdAt={created_at}
+        updateAt={update_at}
+        id={_id}
+        post={post}
+      />
     ));
   };
 
- 
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
 
+  const deleteBtn = () => {
+    if (authorizedUser._id === userId) {
+      return (
+        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={() => onHandleDeleteClick({ userName, userId })}></i>
+      );
+    }
+  }
+
+  const onHandleDeleteClick = () => {
+    console.log({ userName, userId });
+    const result = window.confirm('Удалить пост?');
+    if (result === true && authorizedUser._id === userId) {
+      console.log(userId);
+      api
+        .deletePost(_id)
+        .then((data) => {
+          console.log(data);
+          alert('Пост удален!');
+        })
+        .catch((err) => alert(err));
+    } else {
+      console.log('Удаление отменено или невозможно!');
+    }
+  }
 
   const onCloseModal = () => {
     setIsModalVisible(false);
@@ -83,8 +108,6 @@ const DetailedCard = ({
     setComment("");
   };
 
-
-  
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
@@ -97,10 +120,11 @@ const DetailedCard = ({
           {title}
         </h2>
         <div className="cnDetailedCardDescription">
-        {text}
+          {text}
         </div>
         <div className="cnDetailedCardTags">{tags.map(e => {
-        return (<span>{`${e}`}</span>)})}</div>
+          return (<span>{`${e}`}</span>)
+        })}</div>
       </div>
       <div className="cnDetailedCardButtons">
         <i
@@ -112,6 +136,7 @@ const DetailedCard = ({
           className="fas fa-comment cnDetailedCardLikeComment"
           onClick={onOpenModal}
         />
+        <>{deleteBtn()}</>
       </div>
       <div className="cnDetailedCardLikes">{`Оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
@@ -128,7 +153,7 @@ const DetailedCard = ({
         <PhotoModal
           userName={userName}
           avatarUrl={avatarUrl}
-          aboutUser={aboutUser} 
+          aboutUser={aboutUser}
           userId={userId}
           timeConverter={timeConverter}
           isOpen={isModalVisible}

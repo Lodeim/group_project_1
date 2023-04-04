@@ -4,7 +4,7 @@ const URL = "/posts";
 
 export const getPhotos = (config) => {
   config.url = `${URL}${config.url}`;
- return makeRequest({
+  return makeRequest({
     method: "GET",
     ...config,
   })
