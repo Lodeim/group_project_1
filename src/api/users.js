@@ -23,6 +23,14 @@ export const getUserById = (id) =>
     url: `${URL}/${id}`
   })
 
+
+export const getUsersInfo = (config) =>
+  makeRequest({
+    method: "GET",
+    url: `${URL}`,
+    ...config,
+  }); 
+
 export const signupUser = (data) =>
 makeUserRequest({
       method: 'POST',

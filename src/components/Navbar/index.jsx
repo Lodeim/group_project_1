@@ -6,8 +6,11 @@ import "./styles.css";
 import { useState } from 'react';
 import Button from '../Button';
 import { UserActionModal } from '../UserActionModal';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ userName, avatarUrl, _id }) => {
+  const navigateUsers = useNavigate();
+
 
 
   const [isUserActionModalVisible, setIsUserActionModalVisible] = useState(false);
@@ -19,6 +22,10 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
     setIsUserActionModalVisible(true);
   };
 
+  const onUsersCardsClick = () => {
+    navigateUsers(`/users`);
+  };
+
 
   return (
     <div className="cnNavbarRoot">
@@ -28,6 +35,9 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         </a>
         <div className='cnNavbarControlsWrapper'>
         <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
+
+        <Button onClick={onUsersCardsClick}>Пользователи</Button> 
+
 
          <Button onClick={onOpenUserActionModal}>чтотосделать</Button>
         <UserActionModal
