@@ -13,7 +13,6 @@ import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
 
 import "./styles.css";
 
-
 const DetailedCard = ({
   userName,
   avatarUrl,

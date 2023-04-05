@@ -70,6 +70,7 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             {...register("tags", { required: true })}
             onChange={(event) => setTags(event.target.value)}
           />
+
           <Button type="submit" variant="contained">
             Добавить
           </Button>

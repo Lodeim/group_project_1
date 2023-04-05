@@ -1,3 +1,4 @@
+
 import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
@@ -8,7 +9,6 @@ export const theme = createTheme({
       dark: '#5f9ea0',
       contrastText: '#fff',
     },
-
     secondary: {
       light: '#ff7961',
       main: '#f44336',
