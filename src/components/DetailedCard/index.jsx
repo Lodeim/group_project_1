@@ -9,8 +9,10 @@ import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import api from "../../api/sberAddRequest"
+import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
 
 import "./styles.css";
+
 
 const DetailedCard = ({
   userName,
@@ -72,33 +74,6 @@ const DetailedCard = ({
     ));
   };
 
-  const authorizedUser = useSelector((state) => state.users.authorizedUser);
-
-  const deleteBtn = () => {
-    if (authorizedUser._id === userId) {
-      return (
-        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={() => onHandleDeleteClick({ userName, userId })}></i>
-      );
-    }
-  }
-
-  const onHandleDeleteClick = () => {
-    console.log({ userName, userId });
-    const result = window.confirm('Удалить пост?');
-    if (result === true && authorizedUser._id === userId) {
-      console.log(userId);
-      api
-        .deletePost(_id)
-        .then((data) => {
-          console.log(data);
-          alert('Пост удален!');
-        })
-        .catch((err) => alert(err));
-    } else {
-      console.log('Удаление отменено или невозможно!');
-    }
-  }
-
   const onCloseModal = () => {
     setIsModalVisible(false);
     setComment("");
@@ -108,6 +83,33 @@ const DetailedCard = ({
     setComment("");
   };
 
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
+
+  const deleteBtn = () => {
+    if (authorizedUser._id === userId) {
+      return (
+        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={onHandleDeleteClick}></i>
+      );
+    }
+  }
+
+  const onHandleDeleteClick = () => {
+    console.log({ userName, userId });
+    const result = window.confirm('Удалить пост?');
+    if (result === true) {
+      console.log(userId);
+      api
+        .deletePost(_id)
+        .then((data) => {
+          console.log(data);
+          alert('Пост удален!');
+          document.location.reload();
+        })
+        .catch((err) => alert(err));
+    } else {
+      console.log('Удаление отменено или невозможно!');
+    }
+  }
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
