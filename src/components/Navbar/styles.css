@@ -6,16 +6,18 @@
   border-bottom: 1px solid #dbdbdb;
   border-radius: 0 0 10px 10px;
   background-color: #fff;
-
 }
 
 .cnNavbarWrapper {
+  background: fixed;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1080px;
   margin: auto;
+  position: sticky;
+
 }
 
 .cnNavbarLink {
@@ -27,7 +29,7 @@
   color: cadetblue;
 }
 
-.cnNavbarControlsWrapper{
+.cnNavbarControlsWrapper {
   display: flex;
   align-items: center;
 }

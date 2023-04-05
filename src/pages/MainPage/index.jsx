@@ -17,7 +17,6 @@ const MainPage = () => {
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
  const userPhotos = photos.filter(e => e.author._id === authorizedUser._id)
- console.log(userPhotos);
   const [page, setPage] = useState(1);
 
   const [renderedPhotos, setRenderedPhotos] = useState(photos)
@@ -27,7 +26,7 @@ const MainPage = () => {
   const onDownClick = () => {setSort('down')}
   useEffect(() => {
     const photosCopy = [...photos]
-    const sortedPhotos = photosCopy.sort((a,b) => {
+    const sortedPhotos = photosCopy.sort((a, b) => {
       if (sort === "up") {
         if (a.title < b.title) {
           return -1;
@@ -64,7 +63,6 @@ const MainPage = () => {
 
   const onCommentSendClick = (photoId, comment) => {
     dispatch(sendComment(authorizedUser.name, photoId, comment));
-   
   };
 
 
@@ -75,8 +73,8 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
-      <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
-        {isLoading && <Bars color="#000BFF" height={15} width={15} />}
+        <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
+        {isLoading && <Bars color="#5f9ea0" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
             dataLength={photos.length}
@@ -84,7 +82,7 @@ const MainPage = () => {
             hasMore={photos.length < total}
             loader={
               <div className="cnMainPageLoaderContainer">
-                <Bars color="#5F9EA0" height={15} width={15} />
+                <Bars color="#5f9ea0" height={15} width={15} />
               </div>
             }
             endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}

@@ -8,20 +8,26 @@ const onResponce = (res) => {
 }
 
 class Api {
-    constructor({baseUrl, headers}){
+    constructor({ baseUrl, headers }) {
         this._headers = headers;
-        this._baseUrl= baseUrl;
+        this._baseUrl = baseUrl;
     }
-addPost(body) {
-    return fetch (`${this._baseUrl}/group-10/posts`, {
-        method: 'POST',
-        headers: this._headers,
-        body: JSON.stringify(body)
-    }).then(onResponce)
+    addPost(body) {
+        return fetch(`${this._baseUrl}/group-10/posts`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify(body)
+        }).then(onResponce)
 
-}
+    }
 
+    deletePost(postId) {
+        return fetch(`${this._baseUrl}/group-10/posts/${postId}`, {
+            method: 'DELETE',
+            headers: this._headers,
+        }).then(onResponce)
 
+    }
 }
 
 const config = {

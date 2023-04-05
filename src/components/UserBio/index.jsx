@@ -40,7 +40,7 @@ const UserBio = ({
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [formUserName, setFormUserName] = useState(nickname);
- 
+
   const [formDescription, setFormDescription] = useState(description);
   const [userNameError, setUserNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
@@ -48,6 +48,7 @@ const UserBio = ({
   const onSaveEditForm = useCallback(async () => {
     const isUserNameError = validateText(formUserName, setUserNameError);
     let isErrors =
+
       isUserNameError;
 
     if (!formDescription) {
@@ -67,23 +68,23 @@ const UserBio = ({
   }, [formUserName, formDescription]);
 
   useEffect(() => {
-    
-      if (isEditMode) {
-        setBtnProps({
-          onClick: () => onSaveEditForm(),
-          children: "Сохранить",
-          className: "cnUserEditButton",
-          disabled: formLoading,
-        });
-      } else {
-        setBtnProps({
-          onClick: () => setIsEditMode(true),
-          children: "Редактировать",
-        });
-      }
+
+    if (isEditMode) {
+      setBtnProps({
+        onClick: () => onSaveEditForm(),
+        children: "Сохранить",
+        className: "cnUserEditButton",
+        disabled: formLoading,
+      });
+    } else {
+      setBtnProps({
+        onClick: () => setIsEditMode(true),
+        children: "Редактировать",
+      });
+    }
   }, [isEditMode, formLoading, onSaveEditForm]);
 
-  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
+  const [isAddPostVisible, setIsAddPostVisible] = useState(false)
   const onCloseAddPost = (e) => {
     e.stopPropagation()
     setIsAddPostVisible(false);
@@ -91,7 +92,6 @@ const UserBio = ({
   };
   const onOpenAddPost = () => {
     setIsAddPostVisible(true);
-   
   };
 
   const fields = useMemo(() => {
@@ -146,7 +146,7 @@ const UserBio = ({
           <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
-            />
+          />
         </div>
         <div className="cnUserBioRow">
           <UserCounter

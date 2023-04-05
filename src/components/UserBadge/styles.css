@@ -2,26 +2,29 @@
   display: flex;
   cursor: pointer;
 }
+
 .cnUserBadgeAvatar {
   width: 20px;
   height: 20px;
   margin-right: 10px;
   border-radius: 50%;
 }
+
 .cnUserBadgePlaceholder {
-  width: 20px;
-  height: 20px;
   margin-right: 10px;
   border-radius: 50%;
   background-color: #efefef;
 }
+
 .cnUserBadgeName {
   font-size: 14px;
   font-weight: 500;
   color: #000;
+  padding-right: 5px;
 }
+
 .cnAboutUser {
-  font-size: 12px;
+  font-size: 14px;
   color: gray;
 }
 
@@ -29,4 +32,3 @@
   display: flex;
   flex-direction: column;
 }
-

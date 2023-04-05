@@ -26,7 +26,6 @@
 
 .cnModalRoot {
   display: flex;
-  border: 1px solid transparent;
   border-radius: 10px;
 
 }
@@ -36,10 +35,8 @@
   justify-content: center;
   align-items: center;
   background: #000;
-  /* min-height: 960px;
-  min-width: 400px; */
-  border: 1px solid transparent;
   border-radius: 10px;
+  margin-right: 10px;
 }
 
 .cnModalImg {
@@ -64,7 +61,6 @@
 
 .cnModalTime {
   margin-top: 10px;
-  margin-left: 10px;
   font-size: 14px;
   font-style: italic;
 }
@@ -73,23 +69,32 @@
   margin-top: 20px;
   font-size: 18px;
   font-weight: 600;
-  padding: 10px;
 }
 
 .cnModalDescription {
   font-size: 14px;
-  margin-bottom: 15px;
-  padding: 10px;
+}
+
+.cnModalTags {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cnModalTags span {
-  margin: 10px;
+  box-sizing: border-box;
+  font-size: 12px;
+  padding: 3px 10px;
+  font-weight: 600;
   background-color: palevioletred;
-  padding: 5px;
   border-radius: 5px;
   color: white;
-  font-weight: 400;
-
+  width: auto;
+  max-width: 100%;
+  word-wrap: break-word;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
 .cnModalCommentsBlock {
@@ -97,13 +102,10 @@
   width: 600px;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 10px;
 }
 
 .cnModalComments {
-  height: 960px;
-  padding: 10px;
-  border: 1px solid transparent;
+  height: 500px;
   border-radius: 10px;
 }
 
@@ -115,10 +117,11 @@
 }
 
 .cnModalIcons {
-  padding: 10px;
+  display: flex;
 }
 
 .cnModalLikeIcon {
   cursor: pointer;
   font-size: 20px;
+  margin-bottom: 10px;
 }

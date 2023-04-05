@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import "./styles.css";
 
+
 export const UserAddPost = ({ isOpen, onClose }) => {
   // eslint-disable-next-line
   const [pictures, setPictures] = useState(null);
@@ -55,15 +56,13 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             error={text === ""}
             helperText="Обязательное поле"
           />
-
           <TextField
             label="Изображение"
             variant="outlined"
-            placeholder="Ссылка на изображение"
+            placeholder="Изображение"
             {...register("image")}
             onChange={(event) => setPictures(event.target.value)}
           />
-
           <TextField
             label="Теги"
             variant="outlined"

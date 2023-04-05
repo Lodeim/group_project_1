@@ -8,26 +8,27 @@
   box-sizing: border-box;
   background-color: #fff;
   margin-bottom: 10px;
-  margin-left: 10px;
   padding: 5px;
   outline: none;
   resize: none;
   width: 70%;
   min-height: 70px;
-  border: 1px solid cadetblue;
+  border: 1px solid #5f9ea0;
   border-radius: 10px;
 }
 
+.cnTextArea:focus {
+  border: 1px solid palevioletred;
+}
 
 .cnSendButton {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   right: 10px;
 }
 
-
-
 @media (max-width: 780px) {
+
   .cnTextAreaWrapper {
     display: flex;
     flex-direction: column;

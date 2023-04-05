@@ -26,7 +26,6 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
     navigateUsers(`/users`);
   };
 
-
   return (
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
@@ -47,8 +46,6 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
             />
           
         </div>
-      
-      
       </div>
     </div >
   );
