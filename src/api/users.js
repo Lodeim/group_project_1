@@ -1,4 +1,5 @@
-import { makeRequest } from "./makeRequest";
+import Cookies from "js-cookie";
+import { makeRequest, makeUserRequest } from "./makeRequest";
 
 const URL = "/users";
 export const getUser = (userId, config) =>
@@ -11,7 +12,7 @@ export const getUser = (userId, config) =>
 export const mutateUser = (config) => {
   config.url = `${URL}${config.url}`;
   return makeRequest({
-    method: "PUT",
+    method: "PATCH",
     ...config,
   });
 };
@@ -22,9 +23,28 @@ export const getUserById = (id) =>
     url: `${URL}/${id}`
   })
 
+
 export const getUsersInfo = (config) =>
   makeRequest({
     method: "GET",
     url: `${URL}`,
     ...config,
   }); 
+
+export const signupUser = (data) =>
+makeUserRequest({
+      method: 'POST',
+      data: JSON.stringify(data),
+      url: `/signup`
+    })
+
+export const authUser = (data) =>
+makeUserRequest({
+    method: 'POST',
+    data: JSON.stringify(data),
+    url: `/signin`
+}).then(res => {
+    res.data.token
+    ? Cookies.set('auth', `${res.data.token}`)
+    : console.log(res)
+})

@@ -16,7 +16,8 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
- 
+ const userPhotos = photos.filter(e => e.author._id === authorizedUser._id)
+ console.log(userPhotos);
   const [page, setPage] = useState(1);
 
   const [renderedPhotos, setRenderedPhotos] = useState(photos)

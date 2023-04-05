@@ -1,4 +1,5 @@
 import { api } from "../../api";
+import { getUserById } from "../../api/users";
 import {
   getAuthorizedUserFailed,
   getAuthorizedUserStarted,
@@ -10,11 +11,11 @@ import {
   mutateUserSuccess,
 } from "../actionCreators/users";
 
-export const getUser = () => {
+export const getUser = (id) => {
   return async (dispatch) => {
     try {
       dispatch(getUserStarted());
-      const response = await api.users.getUser();
+      const response = await getUserById(id);
       dispatch(getUserSuccess(response.data));
     } catch (error) {
       dispatch(getUserFailed(error));
@@ -34,15 +35,14 @@ export const getAuthorizedUser = () => {
   };
 };
 
-export const mutateUser = (data, userId) => {
+export const mutateUser = (data) => {
   return async (dispatch, getState) => {
     dispatch(mutateUserStarted());
-    const state = getState();
-    const newUser = { ...state.users.user, ...data };
+    const newUser = { ...data };
     try {
       const response = await api.users.mutateUser({
         data: newUser,
-        url: `/${userId}`,
+        url: `/me`,
       });
 
       dispatch(getUserSuccess(response.data));

@@ -5,6 +5,7 @@ import UserBadge from "../UserBadge";
 import TextArea from "../TextArea";
 import { nanoid } from "nanoid";
 import ImageWithLoader from "../ImageWithLoader";
+import { timeConverter } from "../../utils";
 
 import "./styles.css";
 
@@ -29,7 +30,6 @@ const PhotoModal = ({
   createdPost,
   _id,
   author,
-  timeConverter
 }) => {
   useEffect(() => {
     const body = document.querySelector("body");

@@ -23,17 +23,6 @@ const validateText = (text, cb) => {
   }
   return false;
 };
-const validateUrl = (text, cb) => {
-  if (!text) {
-    cb(requiredText);
-    return true;
-  }
-  if (!/^(ftp|http|https):\/\/[^ "]+$/.test(text)) {
-    cb("Невалидная ссылка");
-    return true;
-  }
-  return false;
-};
 
 const UserBio = ({
   avatarUrl,
@@ -42,6 +31,8 @@ const UserBio = ({
   url,
   onEdit,
   formLoading,
+  isMyPage,
+  count
 }) => {
   const [btnProps, setBtnProps] = useState({
     onClick: () => false,
@@ -51,16 +42,13 @@ const UserBio = ({
   const [formUserName, setFormUserName] = useState(nickname);
  
   const [formDescription, setFormDescription] = useState(description);
-  const [formUrl, setFormUrl] = useState(url);
   const [userNameError, setUserNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [urlError, setUrlError] = useState("");
 
   const onSaveEditForm = useCallback(async () => {
     const isUserNameError = validateText(formUserName, setUserNameError);
-    const isUrlError = validateUrl(formUrl, setUrlError);
     let isErrors =
-      isUserNameError ||  isUrlError;
+      isUserNameError;
 
     if (!formDescription) {
       isErrors = true;
@@ -70,14 +58,13 @@ const UserBio = ({
       return;
     }
     await onEdit({
-      nickname: formUserName,
-      description: formDescription,
-      url: formUrl,
+      name: formUserName,
+      about: formDescription
     });
 
     setIsEditMode(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formUserName, formUrl, formDescription]);
+      // eslint-disable-next-line
+  }, [formUserName, formDescription]);
 
   useEffect(() => {
     
@@ -110,7 +97,7 @@ const UserBio = ({
   const fields = useMemo(() => {
     if (isEditMode) {
       return {
-        userName: (
+        name: (
           <Input
             value={formUserName}
             onChange={({ target: { value } }) => setFormUserName(value)}
@@ -118,7 +105,7 @@ const UserBio = ({
             className="cnInput"
           />
         ),
-        description: (
+        about: (
           <FormTextArea
             value={formDescription}
             onChange={({ target: { value } }) => setFormDescription(value)}
@@ -126,32 +113,21 @@ const UserBio = ({
             errorText={descriptionError}
           />
         ),
-        url: (
-          <Input
-            value={formUrl}
-            onChange={({ target: { value } }) => setFormUrl(value)}
-            errorText={urlError}
-          />
-        ),
         firstButtonClassName: "cnUserBioButtonRow",
       };
     }
     return {
-      userName: <span className="cnUserBioNickname">{nickname}</span>,
-      description: <span>{description}</span>,
-      url: <a href={url}>{url}</a>,
+      name: <span className="cnUserBioNickname">{nickname}</span>,
+      about: <span>{description}</span>,
       firstButtonClassName: "cnUserBioRow",
     };
   }, [
     isEditMode,
     nickname,
     description,
-    url,
     formUserName,
     formDescription,
-    formUrl,
     userNameError,
-    urlError,
     descriptionError,
   ]);
   return (
@@ -161,9 +137,12 @@ const UserBio = ({
       </div>
       <div className="cnUserBioInfo">
         <div className={fields.firstButtonClassName}>
+          {(isMyPage)
+          ? <>
           <Button {...btnProps} />
-
           <Button onClick={onOpenAddPost}>Добавить пост</Button>
+          </>
+          : ''}
           <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
@@ -171,14 +150,13 @@ const UserBio = ({
         </div>
         <div className="cnUserBioRow">
           <UserCounter
-            count={5}
+            count={count}
             text="Публикаций"
             className="cnUserBioCounter"
           />
         </div>
-        <div className="cnUserBioRow"><label><div>Имя пользователя</div> {fields.userName}</label></div>
-        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.description}</label></div>
-        {fields.url}
+        <div className="cnUserBioRow"><label><div>Имя пользователя</div> {fields.name}</label></div>
+        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.about}</label></div>
       </div>
     </div>
   );
