@@ -63,27 +63,27 @@ const Card = ({
         <span className="cnCardNumber">{comments.length}</span>
       </div>
       <PhotoModal
-       userName={userName}
-       avatarUrl={avatarUrl}
-       aboutUser={aboutUser} 
-       userId={userId}
-       timeConverter={timeConverter}
-       isOpen={isModalVisible}
-       onClose={onCloseModal}
-       comments={comments}
-       commentValue={comment}
-       setCommentValue={setComment}
-       onCommentSubmit={handleSendCommentClick}
-       isCommentLoading={mutateLoading}
-       imgUrl={imgUrl}
-       isLikedByYou={isLikedByYou}
-       onLikeClick={() => onLikeClick(_id)}
-       text={text}
-       tags={tags}
-       title={title}
-       createdPost={createdPost}
-       _id={_id}
-       author
+        userName={userName}
+        avatarUrl={avatarUrl}
+        aboutUser={aboutUser}
+        userId={userId}
+        timeConverter={timeConverter}
+        isOpen={isModalVisible}
+        onClose={onCloseModal}
+        comments={comments}
+        commentValue={comment}
+        setCommentValue={setComment}
+        onCommentSubmit={handleSendCommentClick}
+        isCommentLoading={mutateLoading}
+        imgUrl={imgUrl}
+        isLikedByYou={isLikedByYou}
+        onLikeClick={() => onLikeClick(_id)}
+        text={text}
+        tags={tags}
+        title={title}
+        createdPost={createdPost}
+        _id={_id}
+        author
       />
     </div>
   );

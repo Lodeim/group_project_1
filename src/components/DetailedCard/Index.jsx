@@ -9,7 +9,8 @@ import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import api from "../../api/sberAddRequest"
-import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
+import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
+
 
 import "./styles.css";
 
@@ -36,6 +37,7 @@ const DetailedCard = ({
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
   const handleSendCommentClick = () => {
     if (comment) {
       onCommentSendClick(_id, comment);
@@ -82,31 +84,35 @@ const DetailedCard = ({
     setComment("");
   };
 
+  const onCloseModalDelete = () => {
+    setDeleteAlertModalActive(false);
+  };
+  const onOpenModalDelete = () => {
+    setDeleteAlertModalActive(true);
+  };
+
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
 
   const deleteBtn = () => {
     if (authorizedUser._id === userId) {
       return (
-        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={onHandleDeleteClick}></i>
+        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={onOpenModalDelete}></i>
       );
     }
   }
 
   const onHandleDeleteClick = () => {
-    console.log({ userName, userId });
-    const result = window.confirm('Удалить пост?');
-    if (result === true) {
-      console.log(userId);
+    if (authorizedUser._id === userId) {
       api
         .deletePost(_id)
         .then((data) => {
           console.log(data);
-          alert('Пост удален!');
+          console.log('Пост удален!');
           document.location.reload();
         })
         .catch((err) => alert(err));
     } else {
-      console.log('Удаление отменено или невозможно!');
+      console.log('Удаление чужих постов невозможно!');
     }
   }
   return (
@@ -173,6 +179,11 @@ const DetailedCard = ({
           createdPost={createdPost}
           _id={_id}
           author
+        />
+        <DeleteAlertModal
+          isOpen={deleteAlertModalActive}
+          onClose={onCloseModalDelete}
+          onHandleDelete={() => onHandleDeleteClick(_id)}
         />
       </div>
     </div>
