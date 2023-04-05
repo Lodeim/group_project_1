@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import {
   getPostsByUser,
   sendCommentOnUserPage,
-  toggleLikeOnPost,
+  togglePostLike,
 } from "../../redux/actions/postsByUser";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -16,9 +16,11 @@ import { getUser, mutateUser } from "../../redux/actions/users";
 import "./styles.css";
 
 const UserPage = () => {
+  
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.postsByUser.posts);
+  const userPosts = posts.filter(e => e.author._id === user._id)
   const isPostsError = useSelector((state) => state.postsByUser.isPostsError);
   const isPostsLoading = useSelector(
     (state) => state.postsByUser.isPostsLoading
@@ -33,21 +35,24 @@ const UserPage = () => {
   const { _id } = useParams();
   const [postsForRender, setPostsForRender] = useState([]);
   const [page, setPage] = useState(0);
+  console.log(_id);
+
 
   useEffect(() => {
-    const newPosts = [...posts];
+    const filteredPosts = posts.filter(e => e.author._id === user._id)
+    const newPosts = [...filteredPosts];
     if (newPosts.length) {
       setPostsForRender(newPosts.splice(0, 12));
     }
-  }, [posts]);
+  }, [posts, user._id]);
 
   useEffect(() => {
-    dispatch(getPostsByUser(_id));
+    dispatch(getPostsByUser());
     dispatch(getUser(_id));
   }, [_id, dispatch]);
 
   const onLikeClick = (photoId) => {
-    dispatch(toggleLikeOnPost(authorizedUser._id, photoId, _id));
+    dispatch(togglePostLike(authorizedUser._id, photoId, posts));
   };
 
   const onCommentSendClick = (photoId, comment) => {
@@ -57,14 +62,15 @@ const UserPage = () => {
   };
 
   const nextHandler = () => {
-    const newPosts = [...posts];
+    const filteredPosts = posts.filter(e => e.author._id === user._id)
+    const newPosts = [...filteredPosts];
     const offset = 12 * (page + 1);
-    setPostsForRender([...postsForRender, ...newPosts.splice(offset + 12)]);
+    setPostsForRender([...filteredPosts, ...newPosts.splice(offset + 12)]);
     setPage(page + 1);
   };
 
   const onEdit = async (data) => {
-    await dispatch(mutateUser(data, user._id));
+    await dispatch(mutateUser(data));
   };
   return (
     <Layout
@@ -86,9 +92,10 @@ const UserPage = () => {
               url={user.url}
               // сравнение id == authorizedUser.id без приведения
               // eslint-disable-next-line
-              isMyPage={_id == authorizedUser._id}
+              isMyPage={user._id == authorizedUser._id}
               onEdit={onEdit}
               formLoading={isUserMutateLoading}
+              count={userPosts.length}
             />
           )}
           <div className="cnUserPageRootContent">
@@ -96,7 +103,7 @@ const UserPage = () => {
               <InfiniteScroll
                 dataLength={postsForRender.length}
                 next={nextHandler}
-                hasMore={postsForRender.length < posts.length}
+                hasMore={postsForRender.length < userPosts.length}
                 loader={
                   <div className="cnMainPageLoaderContainer">
                     <Bars color="#000BFF" height={15} width={15} />
@@ -107,24 +114,26 @@ const UserPage = () => {
                 }
                 className="cnUserPageScroll"
               >
-                {postsForRender.map(({ comments, likes, imgUrl, _id }) => (
+                {postsForRender.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
                   <Card
-                    key={_id}
-                    imgUrl={imgUrl}
-                    className="cnUserPageCard"
-                    likes={likes.length}
-                    comments={comments}
-                    isLikedByYou={likes.includes(authorizedUser._id)}
-                    onLikeClick={() => onLikeClick(_id)}
-                    userData={{
-                      userName: user.name,
-                      avatarUrl: user.avatar,
-                      userId: user._id,
-                    }}
-                    onCommentSubmit={(comment) =>
-                      onCommentSendClick(_id, comment)
-                    }
-                    isMutateLoading={mutateLoading}
+                  key={_id}
+                  _id={_id}
+                  userName={author.name}
+                  avatarUrl={author.avatar}
+                  aboutUser={author.about}
+                  userId={author._id}
+                  imgUrl={image}
+                  text={text}
+                  tags={tags}
+                  likes={likes.length}
+                  isLikedByYou={likes.includes(authorizedUser._id)}
+                  comments={comments}
+                  title={title}
+                  createdPost={created_at}
+                  className="cnUserPageCard"
+                  onLikeClick={onLikeClick}
+                  onCommentSendClick={onCommentSendClick}
+                  mutateLoading={mutateLoading}
                   />
                 ))}
               </InfiniteScroll>

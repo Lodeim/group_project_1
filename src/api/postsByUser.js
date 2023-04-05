@@ -2,13 +2,12 @@ import { makeRequest } from "./makeRequest";
 
 const URL = "/posts";
 
-export const getPostsByUser = (config) => {
-  config.url = `${URL}${config.url}`;
-  return makeRequest({
+export const getPostsByUser = () => 
+ makeRequest({
     method: "GET",
-    ...config,
-  });
-};
+    url: URL
+  })
+
 
 export const mutatePosts = (config) => {
   config.url = `${URL}${config.url}`;

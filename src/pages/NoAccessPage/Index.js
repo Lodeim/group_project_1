@@ -1,5 +1,16 @@
+import Navbar from "../../components/Navbar";
+
+
 const NoAccessPage = () => {
-  return <div>No Access</div>;
+  return (
+    <>
+  <Navbar></Navbar>
+  <div>No Access</div>
+    
+    </>
+
+
+  )
 };
 
 export default NoAccessPage;
