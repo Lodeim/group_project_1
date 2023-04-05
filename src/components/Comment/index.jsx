@@ -8,7 +8,7 @@ const Comment = ({
   return (
    
     <div className="cnCommentRoot">
-      <span className="cnCommentName">{author.name}:</span>
+      <span className="cnCommentName">{author}:</span>
       <span>{text}</span>
     </div>
   );

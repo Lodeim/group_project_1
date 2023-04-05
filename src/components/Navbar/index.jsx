@@ -2,21 +2,24 @@ import React from 'react';
 import UserBadge from "../UserBadge";
 
 import "./styles.css";
-import { UserAddPost } from '../UserAddPost';
+// import { UserAddPost } from '../UserAddPost';
 import { useState } from 'react';
 import Button from '../Button';
+import { UserActionModal } from '../UserActionModal';
 
 const Navbar = ({ userName, avatarUrl, _id }) => {
-  const [isAddPostVisible, setIsAddPostVisible]= useState(false)
-  const onCloseAddPost = (e) => {
-    e.stopPropagation()
-    setIsAddPostVisible(false);
 
+
+  const [isUserActionModalVisible, setIsUserActionModalVisible] = useState(false);
+  const onCloseUserActionModal = (e) => {
+    e.stopPropagation();
+    setIsUserActionModalVisible(false);
   };
-  const onOpenAddPost = () => {
-    setIsAddPostVisible(true);
-   
+  const onOpenUserActionModal = () => {
+    setIsUserActionModalVisible(true);
   };
+
+
   return (
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
@@ -25,11 +28,14 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         </a>
         <div className='cnNavbarControlsWrapper'>
         <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
-        <Button onClick={onOpenAddPost}>Добавить пост</Button>
-        <UserAddPost
-            isOpen={isAddPostVisible}
-            onClose={onCloseAddPost}
+
+         <Button onClick={onOpenUserActionModal}>чтотосделать</Button>
+        <UserActionModal
+            isOpen={isUserActionModalVisible}
+            onClose={onCloseUserActionModal}
+            user={userName}
             />
+          
         </div>
       
       

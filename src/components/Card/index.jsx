@@ -2,22 +2,45 @@ import cn from "classnames";
 import { useState } from "react";
 import PhotoModal from "../PhotoModal";
 import ImageWithLoader from "../ImageWithLoader";
-
+import { timeConverter } from "../../utils";
 import "./styles.css";
 
 const Card = ({
+  userName,
+  avatarUrl,
+  userId,
   imgUrl,
-  className,
   likes,
-  comments,
   isLikedByYou,
+  comments,
+  className,
   onLikeClick,
-  onCommentSubmit,
+  onCommentSendClick,
+  mutateLoading,
+  aboutUser,
+  text,
+  tags,
+  title,
+  createdPost,
   _id,
-  userData,
-  isMutateLoading,
+  author
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleSendCommentClick = () => {
+    if (comment) {
+      onCommentSendClick(_id, comment);
+      setComment("");
+    }
+  };
+  const onCloseModal = () => {
+    setModalVisible(false);
+    setComment("");
+  };
+  const onOpenModal = () => {
+    setModalVisible(true);
+    setComment("");
+  };
   const [comment, setComment] = useState("");
 
   return (
@@ -30,27 +53,37 @@ const Card = ({
             `${isLikedByYou ? "fas" : "far"} fa-heart`,
             "cnCardIcon"
           )}
-          onClick={onLikeClick}
+          onClick={() => onLikeClick(_id)}
         />
         <span className="cnCardNumber cnCardLikes">{likes}</span>
         <i
           className={cn("far fa-comment", "cnCardIcon")}
-          onClick={() => setModalVisible(true)}
+          onClick={() => onOpenModal()}
         />
         <span className="cnCardNumber">{comments.length}</span>
       </div>
       <PhotoModal
-        {...userData}
-        isOpen={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        comments={comments}
-        commentValue={comment}
-        setCommentValue={setComment}
-        onCommentSubmit={() => onCommentSubmit(comment)}
-        isCommentLoading={isMutateLoading}
-        imgUrl={imgUrl}
-        isLikedByYou={isLikedByYou}
-        onLikeClick={() => onLikeClick(_id)}
+       userName={userName}
+       avatarUrl={avatarUrl}
+       aboutUser={aboutUser} 
+       userId={userId}
+       timeConverter={timeConverter}
+       isOpen={isModalVisible}
+       onClose={onCloseModal}
+       comments={comments}
+       commentValue={comment}
+       setCommentValue={setComment}
+       onCommentSubmit={handleSendCommentClick}
+       isCommentLoading={mutateLoading}
+       imgUrl={imgUrl}
+       isLikedByYou={isLikedByYou}
+       onLikeClick={() => onLikeClick(_id)}
+       text={text}
+       tags={tags}
+       title={title}
+       createdPost={createdPost}
+       _id={_id}
+       author
       />
     </div>
   );
