@@ -9,7 +9,7 @@ import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import api from "../../api/sberAddRequest"
-import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
+// import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
 
 import "./styles.css";
 

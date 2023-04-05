@@ -15,25 +15,22 @@ const UsersCards = () => {
     const authorizedUser = useSelector((state) => state.users.authorizedUser);
     const user = useSelector((state) => state.users.user);
     const dispatch = useDispatch();
-    const { id } = useParams();
     const isUserLoading = useSelector((state) => state.users.isUserLoading);
     const isUserMutateLoading = useSelector((state) => state.users.isMutateLoading);
 
     const onEdit = async (data) => {
-        await dispatch(mutateUser(data, user._id));
+        await dispatch(mutateUser(data, authorizedUser._id));
       };
       useEffect(() => {
-        dispatch(getUser(id));
-      }, [id, dispatch]);
+        dispatch(getUser(authorizedUser._id));
+      }, [authorizedUser._id, dispatch]);
 
       const [error, setError] = useState(null);
       const [isLoaded, setIsLoaded] = useState(true);
       const [items, setItems] = useState([]);
       const [usersCardForRender, setUsersCardRender] = useState([]);
       const [page, setPage] = useState(0);
-      
-     console.log()
-      
+ 
     
       
       useEffect(() => {
@@ -102,7 +99,7 @@ const UsersCards = () => {
               url={user.url}
               // сравнение id == authorizedUser.id без приведения
               // eslint-disable-next-line
-              isMyPage={id == authorizedUser._id}
+              isMyPage={authorizedUser._id? true : false}
               onEdit={onEdit}
               formLoading={isUserMutateLoading}
             />

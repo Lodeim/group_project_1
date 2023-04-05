@@ -20,7 +20,6 @@ export const AuthModal = ({
 }
 
 ) => {
-const authCookie = Cookies.get('auth')
     const { register, handleSubmit} = useForm();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

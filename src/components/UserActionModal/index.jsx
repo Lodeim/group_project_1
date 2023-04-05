@@ -40,7 +40,6 @@ export const UserActionModal = ({
     setIsSignupModalVisible(true);
   };
   const authCookie = Cookies.get('auth')
-console.log(authCookie);
   if (authCookie === undefined) {
     return (
       <Modal 

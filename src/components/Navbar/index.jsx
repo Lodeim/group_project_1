@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import { UserActionModal } from '../UserActionModal';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = ({ userName, avatarUrl, _id }) => {
   const navigateUsers = useNavigate();
@@ -14,6 +15,7 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
 
 
   const [isUserActionModalVisible, setIsUserActionModalVisible] = useState(false);
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
   const onCloseUserActionModal = (e) => {
     e.stopPropagation();
     setIsUserActionModalVisible(false);
@@ -25,7 +27,6 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
   const onUsersCardsClick = () => {
     navigateUsers(`/users`);
   };
-
   return (
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
@@ -33,7 +34,7 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
           Photo & Post
         </a>
         <div className='cnNavbarControlsWrapper'>
-        <UserBadge userName={userName} avatarUrl={avatarUrl} _id={_id} />
+        <UserBadge userName={authorizedUser? authorizedUser.name: 'Авторизуйтесь'} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
 
         <Button onClick={onUsersCardsClick}>Пользователи</Button> 
 

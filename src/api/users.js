@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { makeRequest, makeUserRequest } from "./makeRequest";
+import { makeAllUsersRequest, makeRequest, makeUserRequest } from "./makeRequest";
 
 const URL = "/users";
 export const getUser = (userId, config) =>
@@ -25,7 +25,7 @@ export const getUserById = (id) =>
 
 
 export const getUsersInfo = (config) =>
-  makeRequest({
+  makeAllUsersRequest({
     method: "GET",
     url: `${URL}`,
     ...config,
