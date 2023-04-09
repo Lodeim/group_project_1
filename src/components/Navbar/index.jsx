@@ -27,6 +27,7 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
   const onUsersCardsClick = () => {
     navigateUsers(`/users`);
   };
+
   return (
     <div className="cnNavbarRoot">
       <div className="cnNavbarWrapper">
