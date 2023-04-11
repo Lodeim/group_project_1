@@ -46,6 +46,8 @@ const DetailedCard = ({
       setComment("");
     }
   };
+
+  
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
       const commentsCopy = [...comments];

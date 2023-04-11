@@ -77,7 +77,7 @@ const UserPage = () => {
       avatarUrl={authorizedUser.avatar}
     >
       {isPostsLoading || isUserLoading ? (
-        <div className="cnMainPageLoaderContainer">
+        <div className="cnUserPageLoaderContainer">
           <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (

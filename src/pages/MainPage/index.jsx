@@ -7,6 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Bars } from "react-loader-spinner";
 
 import "./styles.css";
+import { getUsersInfo } from "../../redux/actions/usersInfo.js";
 
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
@@ -18,6 +19,10 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 
+  useEffect(() => {
+        dispatch(getUsersInfo());
+    }, [dispatch]);  
+    
   useEffect(() => {
     dispatch(getPhotos(page))
   }, [page, dispatch]);
