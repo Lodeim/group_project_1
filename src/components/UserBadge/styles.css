@@ -1,6 +1,7 @@
 .cnUserBadgeRoot {
   display: flex;
   cursor: pointer;
+  align-items: center;
 }
 
 .cnUserBadgeAvatar {
@@ -20,7 +21,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #000;
-  padding-right: 5px;
+  
 }
 
 .cnAboutUser {

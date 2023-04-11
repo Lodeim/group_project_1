@@ -16,38 +16,7 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-//  const userPhotos = photos.filter(e => e.author._id === authorizedUser._id)
   const [page, setPage] = useState(1);
-
-  const [renderedPhotos, setRenderedPhotos] = useState(photos)
-
-  const [sort, setSort] = useState('')
-  const onUpClick = () => {setSort('up')}
-  const onDownClick = () => {setSort('down')}
-  useEffect(() => {
-    const photosCopy = [...photos]
-    const sortedPhotos = photosCopy.sort((a, b) => {
-      if (sort === "up") {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
-      } else if (sort === "down"){
-        if (a.title > b.title) {
-          return -1;
-        }
-        if (a.title < b.title) {
-          return 1;
-        }
-        return 0;
-      }
-      return null
-    })
-    setRenderedPhotos(sortedPhotos)
-  },[photos, sort])
 
   useEffect(() => {
     dispatch(getPhotos(page))
@@ -87,7 +56,7 @@ const MainPage = () => {
             }
             endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}
           >
-            {renderedPhotos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
+            {photos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
               <DetailedCard
                 key={_id}
                 _id={_id}

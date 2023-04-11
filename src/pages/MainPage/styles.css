@@ -3,12 +3,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafafa;
+  
   min-height: 100vh;
 }
 
 .cnMainPageCard {
   margin-bottom: 20px;
+  background-color: #fafafa;
 }
 
 .cnMainPageLoaderContainer {

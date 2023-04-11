@@ -3,8 +3,11 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { signupUser } from '../../api/users';
 import './styles.css'
-import { Button, TextField } from '@mui/material';
+import { TextField, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
+import Button from '../Button';
+import { theme } from '../../theme';
+
 
 export const SignupModal = ({          
     isOpen,
@@ -19,7 +22,8 @@ export const SignupModal = ({
     const [groupNew, setGroupNew] = useState('group-10')
     const [passwordNew, setPasswordNew] = useState('')
     return (
-        <Modal
+      <ThemeProvider theme={theme}>
+ <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
         ariaHideApp={false}
@@ -63,5 +67,8 @@ export const SignupModal = ({
       <Button type='submit' variant="contained">Зарегистрироваться</Button>
     </form>
         </Modal>
+
+      </ThemeProvider>
+       
     )
 }

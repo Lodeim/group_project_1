@@ -4,7 +4,6 @@ import UserBadge from "../UserBadge";
 import "./styles.css";
 import { UserAddPost } from '../UserAddPost';
 import { useState } from 'react';
-import Button from '../Button';
 import { UserActionModal } from '../UserActionModal';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
@@ -76,12 +75,19 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         </a>
         <div className="cnAddPostBtnWrapper">{AddPostBtn()}</div>
         <div className='cnNavbarControlsWrapper'>
-        <UserBadge userName={authorizedUser? authorizedUser.name: 'Авторизуйтесь'} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
-  <>{userMenu()}</>
+        <UserBadge userName={authorizedUser? authorizedUser.name: ''} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
+        {authorizedUser
+        ?<>
+        <i className="fa-regular fa-pen-to-square" onClick={onOpenUserActionModal}></i>
+        <i className="fa-regular fa-address-card" onClick={onUsersCardsClick}></i>
+        <>{userMenu()}</>
         <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
             />
+        
+        </>
+        : null }
         <UserActionModal
             isOpen={isUserActionModalVisible}
             onClose={onCloseUserActionModal}

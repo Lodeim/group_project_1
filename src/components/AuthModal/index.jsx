@@ -1,17 +1,12 @@
 import Modal from 'react-modal';
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Button, TextField } from '@mui/material';
+import { TextField, ThemeProvider } from '@mui/material';
 import './styles.css'
 import { useState } from 'react';
 import { authUser } from '../../api/users';
-
-
-
-
-
-
-
+import Button from '../Button';
+import { theme } from '../../theme';
 
 
 export const AuthModal = ({          
@@ -32,7 +27,8 @@ export const AuthModal = ({
  
 
     return (
-        <Modal
+      <ThemeProvider theme={theme}>
+ <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
         ariaHideApp={false}
@@ -66,5 +62,8 @@ export const AuthModal = ({
 <Button type='submit' variant="contained">Войти</Button>
     </form>
         </Modal>
+
+      </ThemeProvider>
+       
     )
 }
