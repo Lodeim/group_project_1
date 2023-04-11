@@ -70,8 +70,13 @@ const PhotoModal = ({
                 <p>{text}</p>
               </div>
               <div className="cnModalTags">{tags.map(e => {
-                return (<span>{`${e}`}</span>)
-              })}</div>
+            if(e=== "" ){
+           return("");
+        } else {
+          return (<span>{`${e}`}</span>);
+         
+        }
+        })}</div>
               <div className="cnModalComments">
                 <div className="cnModalCommentsTitle">Комментарии</div>
                 {comments.map((comment) => (

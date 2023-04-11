@@ -3,7 +3,7 @@
     width: 100%;
     border-radius: 10px 10px 0 0;
     background-color: cadetblue;
-    margin-top: auto;
+    flex: 0 0 auto;
 
 }
 
@@ -13,18 +13,30 @@
     align-items: center;
     justify-content: center;
     max-width: 1080px;
-    margin: auto;
-
+    margin: 0 auto ;
 }
 
 .cnFooterLink {
     text-decoration: none;
     font-size: 18px;
     color: white;
-
+    padding: 10px;
 }
 
 .cnFooterLink:hover {
     color: orange;
-
 }
+
+@media (max-width: 960px) {
+    .cnFooterRoot {
+        max-width: 960px;
+    }
+  }
+
+  
+@media (max-width: 375px) {
+    .cnFooterRoot {
+        max-width: 375px;
+    }
+  }
+

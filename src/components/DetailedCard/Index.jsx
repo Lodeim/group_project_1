@@ -9,7 +9,7 @@ import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import api from "../../api/sberAddRequest"
-// import handleClickOpen from "../DeleteAlertModal/DeleteAlertModal"
+import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
 
 import "./styles.css";
 import { EditModal } from "../EditModal";
@@ -39,6 +39,7 @@ const DetailedCard = ({
   const [comment, setComment] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
   const handleSendCommentClick = () => {
     if (comment) {
       onCommentSendClick(_id, comment);
@@ -98,31 +99,35 @@ const DetailedCard = ({
     console.log(`click`);
   };
 
+  const onCloseModalDelete = () => {
+    setDeleteAlertModalActive(false);
+  };
+  const onOpenModalDelete = () => {
+    setDeleteAlertModalActive(true);
+  };
+
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
 
   const deleteBtn = () => {
     if (authorizedUser._id === userId) {
       return (
-        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={onHandleDeleteClick}></i>
+        <i className="fas fa-trash-can cnDetailedCardDeleteIcon" onClick={onOpenModalDelete}></i>
       );
     }
   }
 
   const onHandleDeleteClick = () => {
-    console.log({ userName, userId });
-    const result = window.confirm('Удалить пост?');
-    if (result === true) {
-      console.log(userId);
+    if (authorizedUser._id === userId) {
       api
         .deletePost(_id)
         .then((data) => {
           console.log(data);
-          alert('Пост удален!');
+          console.log('Пост удален!');
           document.location.reload();
         })
         .catch((err) => alert(err));
     } else {
-      console.log('Удаление отменено или невозможно!');
+      console.log('Удаление чужих постов невозможно!');
     }
   }
   return (
@@ -139,9 +144,16 @@ const DetailedCard = ({
         <div className="cnDetailedCardDescription">
           {text}
         </div>
-        <div className="cnDetailedCardTags">{tags.map(e => {
-          return (<span>{`${e}`}</span>)
-        })}</div>
+        <div className="cnDetailedCardTags">
+          {tags.map(e => {
+            if(e=== "" ){
+           return("");
+        } else {
+          return (<span>{`${e}`}</span>);
+         
+        }
+        })}
+        </div>
       </div>
       <div className="cnDetailedCardButtons">
         <i
@@ -205,6 +217,11 @@ const DetailedCard = ({
           createdPost={createdPost}
           _id={_id}
           author
+        />
+        <DeleteAlertModal
+          isOpen={deleteAlertModalActive}
+          onClose={onCloseModalDelete}
+          onHandleDelete={() => onHandleDeleteClick(_id)}
         />
       </div>
     </div>

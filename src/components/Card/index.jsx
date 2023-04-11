@@ -1,9 +1,12 @@
 import cn from "classnames";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import PhotoModal from "../PhotoModal";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import "./styles.css";
+import api from "../../api/sberAddRequest";
+import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
 
 const Card = ({
   userName,
@@ -26,6 +29,7 @@ const Card = ({
   author
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
 
   const handleSendCommentClick = () => {
     if (comment) {
@@ -43,6 +47,29 @@ const Card = ({
   };
   const [comment, setComment] = useState("");
 
+  const onCloseModalDelete = () => {
+    setDeleteAlertModalActive(false);
+  };
+  const onOpenModalDelete = () => {
+    setDeleteAlertModalActive(true);
+  };
+
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
+
+  const onHandleDeleteClick = () => {
+    if (authorizedUser._id === userId) {
+      api
+        .deletePost(_id)
+        .then((data) => {
+          console.log(data);
+          console.log('Пост удален!');
+          document.location.reload();
+        })
+        .catch((err) => alert(err));
+    } else {
+      console.log('Удаление чужих постов невозможно!');
+    }
+  }
   return (
     <div className={cn("cnCardRoot", className)}>
       <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl} />
@@ -61,29 +88,36 @@ const Card = ({
           onClick={() => onOpenModal()}
         />
         <span className="cnCardNumber">{comments.length}</span>
+        <i 
+        className="fa-regular fa-trash-can cnCardIcon cnCardIconDelete" onClick={onOpenModalDelete}/>
       </div>
       <PhotoModal
-       userName={userName}
-       avatarUrl={avatarUrl}
-       aboutUser={aboutUser} 
-       userId={userId}
-       timeConverter={timeConverter}
-       isOpen={isModalVisible}
-       onClose={onCloseModal}
-       comments={comments}
-       commentValue={comment}
-       setCommentValue={setComment}
-       onCommentSubmit={handleSendCommentClick}
-       isCommentLoading={mutateLoading}
-       imgUrl={imgUrl}
-       isLikedByYou={isLikedByYou}
-       onLikeClick={() => onLikeClick(_id)}
-       text={text}
-       tags={tags}
-       title={title}
-       createdPost={createdPost}
-       _id={_id}
-       author
+        userName={userName}
+        avatarUrl={avatarUrl}
+        aboutUser={aboutUser}
+        userId={userId}
+        timeConverter={timeConverter}
+        isOpen={isModalVisible}
+        onClose={onCloseModal}
+        comments={comments}
+        commentValue={comment}
+        setCommentValue={setComment}
+        onCommentSubmit={handleSendCommentClick}
+        isCommentLoading={mutateLoading}
+        imgUrl={imgUrl}
+        isLikedByYou={isLikedByYou}
+        onLikeClick={() => onLikeClick(_id)}
+        text={text}
+        tags={tags}
+        title={title}
+        createdPost={createdPost}
+        _id={_id}
+        author
+      />
+      <DeleteAlertModal
+          isOpen={deleteAlertModalActive}
+          onClose={onCloseModalDelete}
+          onHandleDelete={() => onHandleDeleteClick(_id)}
       />
     </div>
   );

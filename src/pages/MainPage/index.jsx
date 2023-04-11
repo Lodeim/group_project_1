@@ -77,7 +77,8 @@ const MainPage = () => {
                 onCommentSendClick={onCommentSendClick}
                 mutateLoading={mutateLoading}
               />
-            ))}
+             
+            ))} 
           </InfiniteScroll>
         )}
       </div>

@@ -9,3 +9,7 @@
 .cnFormTextAreaWithError {
   border: 1px solid tomato;
 }
+
+.cnFormTextAreaRoot:focus {
+  border: 1px solid palevioletred;
+}

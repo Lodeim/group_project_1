@@ -1,68 +1,49 @@
 import { useSelector } from "react-redux";
 import Layout from "../../components/Layout";
-import UserBio from "../../components/UserBio";
-import { mutateUser, getUser } from "../../redux/actions/users";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import CardsInfoUsers from "../../components/CardsInfoUsers";
-import { getUsersInfo } from "../../api/users";
 import { Bars } from "react-loader-spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./styles.css";
+import { getUsersInfo } from "../../redux/actions/usersInfo";
 
 const UsersCards = () => {
     const authorizedUser = useSelector((state) => state.users.authorizedUser);
-    const user = useSelector((state) => state.users.user);
     const dispatch = useDispatch();
-    const isUserLoading = useSelector((state) => state.users.isUserLoading);
-    const isUserMutateLoading = useSelector((state) => state.users.isMutateLoading);
 
-    const onEdit = async (data) => {
-        await dispatch(mutateUser(data, authorizedUser._id));
-      };
-      useEffect(() => {
-        dispatch(getUser(authorizedUser._id));
-      }, [authorizedUser._id, dispatch]);
 
-      const [error, setError] = useState(null);
-      const [isLoaded, setIsLoaded] = useState(true);
-      const [items, setItems] = useState([]);
+     
+      const usersInfoRender = useSelector((state) => state.usersInfo.usersInfo);
+      const isLoadingUsersInfo = useSelector((state) => state.usersInfo.isUsersInfoLoading);
+      const isUsersInfoError = useSelector((state) => state.usersInfo.isUsersInfoError)
       const [usersCardForRender, setUsersCardRender] = useState([]);
       const [page, setPage] = useState(0);
  
     
       
       useEffect(() => {
-        setIsLoaded(true);
-           Promise.all([getUsersInfo()])
-          .then(([usersData]) => {
-            setItems(usersData.data);
-            })
-            .catch(error => setError(error))
-            .finally(() => {
-              setIsLoaded(false);
-            }) 
-      }, []);  
+           dispatch(getUsersInfo());
+      }, [dispatch]);  
 
-    
- 
+
       useEffect(() => {
-        const newUsers = [...items];
+        const newUsers = [...usersInfoRender];
         const groupUsersCards = [];
         newUsers.forEach((userCard) => {
          if (userCard.group === "group-10") {
           groupUsersCards.push(userCard)
          }
+        
         })
         if (groupUsersCards.length) {
           setUsersCardRender(groupUsersCards.splice(0, 5));
         }
-      }, [items]);
+      }, [usersInfoRender]);
 
 
       const nextHandlerCards = () => {
-        const newUsers = [...items];
+        const newUsers = [...usersInfoRender];
         const groupUsersCards = [];
         newUsers.forEach((userCard) => {
           if (userCard.group === "group-10") {
@@ -72,12 +53,9 @@ const UsersCards = () => {
         const offset = 5 * (page + 1);
         setUsersCardRender([...groupUsersCards.splice(0, offset + 5)]);
         setPage(page + 1);
-        console.log(groupUsersCards)
       };
 
-      useEffect(() => {
-        localStorage.setItem('cards', JSON.stringify(items));
-      }, [items]);
+   
 
     
     return (
@@ -86,29 +64,18 @@ const UsersCards = () => {
         id={authorizedUser._id}
         avatarUrl={authorizedUser.avatar}
         > 
-        {isLoaded || isUserLoading ? (
+        {isLoadingUsersInfo ? (
         <div className="cnMainPageLoaderContainer">
-          <Bars color="#000BFF" height={80} width={80} />
+          <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (
          <div className="cnUsersCardsRoot">
-        <UserBio
-              avatarUrl={user.avatar}
-              nickname={user.name}
-              description={user.about}
-              url={user.url}
-              // сравнение id == authorizedUser.id без приведения
-              // eslint-disable-next-line
-              isMyPage={authorizedUser._id? true : false}
-              onEdit={onEdit}
-              formLoading={isUserMutateLoading}
-            />
             <div className="cnUsersCardsRootContent">
             {usersCardForRender.length ? (
               <InfiniteScroll
                 dataLength={usersCardForRender.length}
                 next={nextHandlerCards}
-                hasMore={usersCardForRender.length < items.length}
+                hasMore={usersCardForRender.length < usersInfoRender.length}
                 endMessage={
                   <p className="cnMainPageLoaderContainer">Это все пользователи</p>
                 }
@@ -125,8 +92,8 @@ const UsersCards = () => {
          ))}
          </InfiniteScroll>
          ) : (
-          !setError && (
-            <p className="cnNoUsersCards">{error}</p>
+          !isUsersInfoError && (
+            <p className="cnNoUsersCards">Пользователи не найдены</p>
           )
         )}
       </div>

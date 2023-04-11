@@ -4,7 +4,6 @@
     align-items: center;
     padding-top: 20px;
     background-color: #fafafa;
-    margin-bottom: 20px;
   }
   
   .cnUsersCardsRootContent {
@@ -13,8 +12,7 @@
     align-items: center;
     padding-top: 100px;
     padding-left: 10px;
-    width: 930px;
-    margin: inherit;
+    max-width: 930px;
   
   }
 
@@ -23,7 +21,7 @@
     flex-direction: column;
     align-items: center;
   }
-  
+ 
   .cnNoUsersCards {
     margin: auto;
     font-weight: 600;
@@ -31,25 +29,48 @@
   }
   
   .cnInput {
-    margin-bottom: 21px;
+    margin-bottom: 20px;
   }
-  
-  @media (max-width: 360px) {
+
+  .cnUsersPageLoaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    height: 100%;
+  }
+
+  @media (max-width: 780px) {
+    
     .cnUsersCardsScroll {
+      padding-top: 75px;
+      padding-left: 10px;
+      max-width: 780px;
+    }
+    
+   
+  }
+
+  @media (max-width: 375px) {
+      .cnUsersCardsScroll {
       padding-top: 100px;
       padding-left: 10px;
       max-width: 300px;
   
     }
-  }
-  
-  @media (max-width: 780px) {
-    .cnUsersCardsScroll {
-      padding-top: 100px;
+
+    .cnUsersCardsRootContent {
+      padding-top: 50px;
       padding-left: 10px;
-      max-width: 600px;
-  
+      max-width: 375px;
     }
+
+    .cnCardsInfoUsersBox {
+      display: grid;
+      grid-template-columns: 1fr;
   }
+  }
+  
+
 
  

@@ -8,12 +8,18 @@
 
 .cnUserPageRootContent {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding-top: 100px;
   padding-left: 10px;
-  width: 930px;
-  margin: inherit;
+  max-width: 930px;
+  position: relative;
+  margin-bottom: 30px;
+}
 
+.cnUserPageScroll {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cnUserPageCard {
@@ -22,10 +28,7 @@
   border-radius: 10px;
 }
 
-.cnUserPageScroll {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 .cnUserPageNoPosts {
   margin: auto;
@@ -34,13 +37,20 @@
 }
 
 .cnInput {
-  margin-bottom: 21px;
+  margin-bottom: 20px;
+}
+
+.cnAndUserPostsContainer {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }
 
 @media (max-width: 360px) {
   .cnUserPageRootContent {
-    padding-top: 100px;
-    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
     max-width: 350px;
 
   }
@@ -51,6 +61,9 @@
     padding-top: 100px;
     padding-left: 10px;
     max-width: 680px;
-
   }
+  .cnUserPageScroll {
+    justify-content: center;
+  }
+  
 }
