@@ -5,7 +5,7 @@ import { Button, TextField } from '@mui/material';
 import './styles.css'
 import { useState } from 'react';
 import { authUser } from '../../api/users';
-import Cookies from 'js-cookie';
+
 
 
 
@@ -20,7 +20,6 @@ export const AuthModal = ({
 }
 
 ) => {
-const authCookie = Cookies.get('auth')
     const { register, handleSubmit} = useForm();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

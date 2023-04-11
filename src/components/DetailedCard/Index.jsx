@@ -11,7 +11,6 @@ import { timeConverter } from "../../utils";
 import api from "../../api/sberAddRequest"
 import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
 
-
 import "./styles.css";
 
 const DetailedCard = ({

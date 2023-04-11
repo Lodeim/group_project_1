@@ -21,3 +21,9 @@ export const makeUserRequest = (config) => {
   config.headers = {'content-type': 'application/json'};
   return axios(config).catch((err) => getError(err));
 };
+
+export const makeAllUsersRequest = (config) => {
+  config.url = `${API_ENDPOINT}${config.url}`;
+  config.headers = headers;
+  return axios(config).catch((err) => getError(err));
+};
