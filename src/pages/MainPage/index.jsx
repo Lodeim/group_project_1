@@ -73,7 +73,7 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
-        <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button>
+        {/* <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button> */}
         {isLoading && <Bars color="#5f9ea0" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
@@ -108,7 +108,8 @@ const MainPage = () => {
                 onCommentSendClick={onCommentSendClick}
                 mutateLoading={mutateLoading}
               />
-            ))}
+             
+            ))} 
           </InfiniteScroll>
         )}
       </div>

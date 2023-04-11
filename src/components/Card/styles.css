@@ -2,7 +2,6 @@
   position: relative;
   width: 300px;
   height: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cnCardRoot:hover .cnCardHover {
@@ -60,6 +59,12 @@
 }
 
 .cnCardLikes {
-  margin-right: 10px;
-  padding: 20px;
+  margin-right: 20px;
+}
+
+.cnCardIconDelete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
 }

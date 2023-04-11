@@ -4,6 +4,7 @@ import "./styles.css";
 import { AuthModal } from "../AuthModal";
 import { SignupModal } from "../SignupModal";
 import { UserAddPost } from "../UserAddPost";
+import { useNavigate } from 'react-router-dom';
 import Button from "../Button";
 import Cookies from "js-cookie";
 
@@ -12,6 +13,10 @@ export const UserActionModal = ({
     onClose,
     user
 }) => {
+  const navigateUsers = useNavigate();
+  const onUsersCardsClick = () => {
+    navigateUsers(`/users`);
+  };
   const [isAddPostVisible, setIsAddPostVisible]= useState(false)
   const onCloseAddPost = (e) => {
     e.stopPropagation()
@@ -19,8 +24,7 @@ export const UserActionModal = ({
 
   };
   const onOpenAddPost = () => {
-    setIsAddPostVisible(true);
-   
+    setIsAddPostVisible(true); 
   };
 
   const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
@@ -47,8 +51,8 @@ console.log(authCookie);
       isOpen={isOpen} 
       onRequestClose={onClose} 
       ariaHideApp={false}
-      className="cnModal"
-      overlayClassName="cnModalOverlay"
+      className="cnUserActionModal"
+      overlayClassName="cnUserActionModalOverlay"
       >
         <Button onClick={onOpenAuthModal} variant="contained">Авторизоваться</Button>
         <AuthModal 
@@ -69,16 +73,18 @@ console.log(authCookie);
       isOpen={isOpen} 
       onRequestClose={onClose} 
       ariaHideApp={false}
-      className="cnModal"
-      overlayClassName="cnModalOverlay"
-      >
-        <p>{`Привет, ${user}!`}</p>
-
-        <Button onClick={onOpenAddPost}>Добавить пост</Button>
-        <Button onClick={() => {
+      className="cnUserActionModal"
+      overlayClassName="cnUserActionModalOverlay"
+      ><div className="cnUserActionModalText">
+        <div>{`Привет, ${user}!`}</div>
+        <div>Что вы хотите сделать?</div>
+        </div>
+        <button className="cnUserActionBtnLink" onClick={onOpenAddPost}>Добавить пост</button>
+        <button className="cnUserActionBtnLink" onClick={onUsersCardsClick}>Посмотреть страницу пользователей</button>
+        <button className="cnUserActionBtnLink" onClick={() => {
             Cookies.remove('auth')
             window.location.reload()
-            }}>Выйти</Button>
+            }}><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
         <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}

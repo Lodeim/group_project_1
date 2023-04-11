@@ -3,6 +3,7 @@
 }
 
 .cnInputItem {
+  margin-top: 5px;
   padding: 7px;
   outline: none;
   border-radius: 5px;
@@ -14,6 +15,10 @@
   position: absolute;
   bottom: -19px;
   left: 0;
+}
+
+.cnInputItem:focus {
+  border: 1px solid palevioletred;
 }
 
 .cnInputWithError {

@@ -80,7 +80,7 @@ const UserPage = () => {
     >
       {isPostsLoading || isUserLoading ? (
         <div className="cnMainPageLoaderContainer">
-          <Bars color="#000BFF" height={80} width={80} />
+          <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (
         <div className="cnUserPageRoot">
@@ -105,17 +105,18 @@ const UserPage = () => {
                 next={nextHandler}
                 hasMore={postsForRender.length < userPosts.length}
                 loader={
-                  <div className="cnMainPageLoaderContainer">
-                    <Bars color="#000BFF" height={15} width={15} />
+                  <div className="cnUserPageLoaderContainer">
+                    <Bars color="#5f9ea0" height={15} width={15} />
                   </div>
                 }
                 endMessage={
-                  <p className="cnMainPageLoaderContainer">Это все посты</p>
+                  <div className="cnUserPageLoaderContainer cnAndUserPostsContainer">Это все посты</div>
                 }
                 className="cnUserPageScroll"
               >
                 {postsForRender.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
-                  <Card
+                  <div>
+                    <Card
                   key={_id}
                   _id={_id}
                   userName={author.name}
@@ -135,6 +136,7 @@ const UserPage = () => {
                   onCommentSendClick={onCommentSendClick}
                   mutateLoading={mutateLoading}
                   />
+                  </div>
                 ))}
               </InfiniteScroll>
             ) : (

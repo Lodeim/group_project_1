@@ -3,7 +3,6 @@
 }
 
 .cnDeleteAlertModalOverlay {
-    z-index: 100;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
@@ -13,22 +12,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
-    height: 100vh;
 }
 
 .cnDeleteAlertModal {
-    z-index: 1000;
+    display: flex;
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
     animation: zoom 0.5s;
     -webkit-animation: zoom 0.3s;
-}
-
-.cnDeleteAlertModalRoot {
-    display: flex;
     border-radius: 10px;
+    outline: none;
 }
 
 .cnDeleteAlertModalContent {

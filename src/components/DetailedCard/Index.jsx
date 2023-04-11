@@ -96,7 +96,7 @@ const DetailedCard = ({
   const deleteBtn = () => {
     if (authorizedUser._id === userId) {
       return (
-        <i className="fas fa-trash cnDetailedCardDeleteIcon" onClick={onOpenModalDelete}></i>
+        <i className="fas fa-trash-can cnDetailedCardDeleteIcon" onClick={onOpenModalDelete}></i>
       );
     }
   }
@@ -129,9 +129,16 @@ const DetailedCard = ({
         <div className="cnDetailedCardDescription">
           {text}
         </div>
-        <div className="cnDetailedCardTags">{tags.map(e => {
-          return (<span>{`${e}`}</span>)
-        })}</div>
+        <div className="cnDetailedCardTags">
+          {tags.map(e => {
+            if(e=== "" ){
+           return("");
+        } else {
+          return (<span>{`${e}`}</span>);
+         
+        }
+        })}
+        </div>
       </div>
       <div className="cnDetailedCardButtons">
         <i
