@@ -40,21 +40,21 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
 
   const authCookie = Cookies.get('auth')
 
-  const userMenu = () => {
-    if (authCookie === undefined) {
-      return (
-      <i class="far fa-user cnUsersIcon cnUsersIconUser" onClick={onOpenUserActionModal} alt="Войти" title="Войти"></i>
-      );
-    }
-    else {
-      return (
-        <div>
-        <i class="fa-solid fa-gear cnUsersIcon" onClick={onOpenUserActionModal} alt="Меню пользователя" title="Меню пользователя"></i>
-        <i class="fa-solid fa-user-group cnUsersIcon" onClick={onUsersCardsClick}  alt="Все пользователи" title="Все пользователи"></i>
-        </div>
-      );
-    }
-  }
+  // const userMenu = () => {
+  //   if (authCookie === undefined) {
+  //     return (
+  //     <i class="far fa-user cnUsersIcon cnUsersIconUser" onClick={onOpenUserActionModal} alt="Войти" title="Войти"></i>
+  //     );
+  //   }
+  //   else {
+  //     return (
+  //       <div>
+  //       <i class="fa-solid fa-gear cnUsersIcon" onClick={onOpenUserActionModal} alt="Меню пользователя" title="Меню пользователя"></i>
+  //       <i class="fa-solid fa-user-group cnUsersIcon" onClick={onUsersCardsClick}  alt="Все пользователи" title="Все пользователи"></i>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   // const AddPostBtn = () => {
   //   if (authCookie === undefined) {
@@ -78,8 +78,8 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         <UserBadge userName={authorizedUser? authorizedUser.name: ''} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
         {authorizedUser
         ?<>
-        <i className="fa-regular fa-pen-to-square" onClick={onOpenUserActionModal}></i>
-        <i className="fa-regular fa-address-card" onClick={onUsersCardsClick}></i>
+        <i className="fa-solid fa-gear" onClick={onOpenUserActionModal} alt="Меню пользователя" title="Меню пользователя"></i>
+        <i className="fa-regular fa-address-card" onClick={onUsersCardsClick} alt="Все пользователи" title="Все пользователи"></i>
         <UserActionModal
             isOpen={isUserActionModalVisible}
             onClose={onCloseUserActionModal}
