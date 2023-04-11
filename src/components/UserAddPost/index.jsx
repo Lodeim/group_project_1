@@ -66,8 +66,8 @@ export const UserAddPost = ({ isOpen, onClose }) => {
           <TextField
             label="Теги"
             variant="outlined"
-            placeholder="Теги"
-            {...register("tags", { required: true })}
+            placeholder="Теги через запятую"
+            {...register("tags", { required: false })}
             onChange={(event) => setTags(event.target.value)}
           />
 

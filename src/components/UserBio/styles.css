@@ -26,7 +26,6 @@
 .cnUserBioButtonRow {
   display: flex;
   align-items: flex-start;
-
 }
 
 .cnUserBioRow .cnAboutUser {
@@ -47,8 +46,23 @@
 
 .cnUserBioCounter {
   margin-right: 10px;
+
 }
 
 .cnUserBioName {
   font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .cnUserBioAvatar {
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 30px;
+  }
+
+  .cnUserBioRow {
+    margin-top: 10px;
+    padding-right: 40px;
+  }
 }

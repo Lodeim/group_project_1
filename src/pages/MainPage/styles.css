@@ -15,17 +15,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
+  background-color: #fafafa;
+  height: 100vh;
 }
-
-
-
-@media (max-width: 990px) {
-  /*
-  Стили для устройств, у которых ширина viewport меньше или равно 990 пикселей,
-  но больше 770 пикселей.
-  Эти стили подойдут для некоторых мобильных устройств и планшетов
-  */
-}
-
-@media (min-width: 1400px) {}

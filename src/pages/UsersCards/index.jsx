@@ -66,7 +66,7 @@ const UsersCards = () => {
         > 
         {isLoadingUsersInfo ? (
         <div className="cnMainPageLoaderContainer">
-          <Bars color="#000BFF" height={80} width={80} />
+          <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (
          <div className="cnUsersCardsRoot">

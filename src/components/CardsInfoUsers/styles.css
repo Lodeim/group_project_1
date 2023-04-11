@@ -53,14 +53,15 @@
 }
 
 @media (max-width: 780px) {
-  .cnCardsInfoUsersRoot {
-    max-width: 320px;
+   .cnCardsInfoUsersRoot {
+    width: 475px;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) { 
   .cnCardsInfoUsersRoot {
-    max-width: 280px;
+    width: 275px;
+
   }
 }
 

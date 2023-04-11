@@ -1,4 +1,8 @@
-.cnUserActionModalOverlay {
+.cnDeleteAlertModalOverflow {
+    overflow: hidden;
+}
+
+.cnDeleteAlertModalOverlay {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
@@ -10,54 +14,61 @@
     bottom: 0;
 }
 
-.cnUserActionModal {
+.cnDeleteAlertModal {
     display: flex;
-    flex-direction: column;
-    justify-content: center; 
+    padding: 20px;
     border-radius: 10px;
     background-color: #fff;
-    animation: zoom 0.3s;
+    animation: zoom 0.5s;
     -webkit-animation: zoom 0.3s;
     border-radius: 10px;
     outline: none;
-    min-width: 400px;
-    padding: 30px 0;
 }
 
-.cnUserActionModalText {
-    margin: auto;
-    padding-bottom: 15px;   
+.cnDeleteAlertModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.cnUserActionBtnLink {
-    padding: 20px;
-    border-bottom: 1px solid #dbdbdb;
-    border-top: 1px solid #dbdbdb;
-    text-align: center;
-    margin-top: 5px;
-    border-left: none;
-    border-right: none;
+.cnDeleteModalText {
+    margin: 15px 0;
+    font-size: 18px;
+
+}
+
+.cnModalDeleteButtons {
+    margin: 10px 0;
+}
+
+
+.cnModalDeleteBtnOk {
+    margin-right: 10px;
+    background: cadetblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 20px;
     cursor: pointer;
-    background-color: #fff; 
+    font-size: 14px;
+    font-weight: 600;
+    ;
+}
+
+.cnModalDeleteBtnCancel {
+    margin-left: 10px;
+    background: rgb(114, 121, 121);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px;
+    cursor: pointer;
+    font-size: 14px;
     font-weight: 600;
 }
-
-.cnUserActionBtnLink:hover,
-.cnUserActionBtnLink:focus {
-    background-color: cadetblue;
-    outline: none;
-    color: #fff;   
-}
-
-.cnUserActionBtnLink:active {
-    background-color: rgb(70, 117, 119);
-    color: #fff;   
-}
-
-.cnUserActionBtnLink i {
-    margin-right: 10px;
-}
-
 
 /* animation */
 
@@ -152,4 +163,3 @@
         -o-transform: scale(1);
     }
 }
-
