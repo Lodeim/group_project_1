@@ -56,16 +56,16 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
     }
   }
 
-  const AddPostBtn = () => {
-    if (authCookie === undefined) {
-      return ("");
-    }
-    else {
-      return (
-        <Button alt="Добавить пост" title="Добавить пост" className="cnAddPostNavBtn" onClick={onOpenAddPost}><i class="fa-solid fa-plus fa-lg" ></i></Button>
-      );
-    }
-  }
+  // const AddPostBtn = () => {
+  //   if (authCookie === undefined) {
+  //     return ("");
+  //   }
+  //   else {
+  //     return (
+  //       <Button alt="Добавить пост" title="Добавить пост" className="cnAddPostNavBtn" onClick={onOpenAddPost}><i class="fa-solid fa-plus fa-lg" ></i></Button>
+  //     );
+  //   }
+  // }
 
   return (
     <div className="cnNavbarRoot">
@@ -73,14 +73,19 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         <a href="/" className="cnNavbarLink">
           Photo & Post
         </a>
-        <div className="cnAddPostBtnWrapper">{AddPostBtn()}</div>
+        {/* <div className="cnAddPostBtnWrapper">{AddPostBtn()}</div> */}
         <div className='cnNavbarControlsWrapper'>
         <UserBadge userName={authorizedUser? authorizedUser.name: ''} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
         {authorizedUser
         ?<>
         <i className="fa-regular fa-pen-to-square" onClick={onOpenUserActionModal}></i>
         <i className="fa-regular fa-address-card" onClick={onUsersCardsClick}></i>
-        <>{userMenu()}</>
+        <UserActionModal
+            isOpen={isUserActionModalVisible}
+            onClose={onCloseUserActionModal}
+            user={userName}
+            />
+        {/* <>{userMenu()}</> */}
         <UserAddPost
             isOpen={isAddPostVisible}
             onClose={onCloseAddPost}
@@ -88,11 +93,6 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         
         </>
         : null }
-        <UserActionModal
-            isOpen={isUserActionModalVisible}
-            onClose={onCloseUserActionModal}
-            user={userName}
-            />
         </div>
       </div>
     </div >
