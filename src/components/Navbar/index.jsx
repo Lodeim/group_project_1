@@ -4,7 +4,6 @@ import UserBadge from "../UserBadge";
 import "./styles.css";
 // import { UserAddPost } from '../UserAddPost';
 import { useState } from 'react';
-import Button from '../Button';
 import { UserActionModal } from '../UserActionModal';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -34,12 +33,13 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
           Photo & Post
         </a>
         <div className='cnNavbarControlsWrapper'>
-        <UserBadge userName={authorizedUser? authorizedUser.name: 'Авторизуйтесь'} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
-
-        <Button onClick={onUsersCardsClick}>Пользователи</Button> 
-
-
-         <Button onClick={onOpenUserActionModal}>чтотосделать</Button>
+        <UserBadge userName={authorizedUser? authorizedUser.name: ''} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
+        {authorizedUser
+        ?<>
+        <i className="fa-regular fa-pen-to-square" onClick={onOpenUserActionModal}></i>
+        <i className="fa-regular fa-address-card" onClick={onUsersCardsClick}></i>
+        </>
+        : null }
         <UserActionModal
             isOpen={isUserActionModalVisible}
             onClose={onCloseUserActionModal}

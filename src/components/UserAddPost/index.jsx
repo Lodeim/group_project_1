@@ -2,9 +2,10 @@ import Modal from "react-modal";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import api from "../../api/sberAddRequest";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { theme } from "../../theme.js";
 import { ThemeProvider } from "@mui/material/styles";
+import Button from "../Button";
 
 import "./styles.css";
 
@@ -25,7 +26,7 @@ export const UserAddPost = ({ isOpen, onClose }) => {
       trimArr.push(trim);
     });
     data.tags = trimArr;
-    api.addPost(data).then((res) => console.log(res));
+    api.addPost(data).then((res) => res.isPublished ? window.location.reload() : null);
   };
 
   return (
@@ -46,6 +47,8 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             onChange={(event) => setPostTitle(event.target.value)}
             error={postTitle === ""}
             helperText="Обязательное поле"
+            multiline
+            className="cnAddInput"
           />
           <TextField
             label="Текст"
@@ -55,6 +58,8 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             onChange={(event) => setText(event.target.value)}
             error={text === ""}
             helperText="Обязательное поле"
+            multiline
+            className="cnAddInput"
           />
           <TextField
             label="Изображение"
@@ -62,6 +67,8 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             placeholder="Изображение"
             {...register("image")}
             onChange={(event) => setPictures(event.target.value)}
+            multiline
+            className="cnAddInput"
           />
           <TextField
             label="Теги"
@@ -69,6 +76,8 @@ export const UserAddPost = ({ isOpen, onClose }) => {
             placeholder="Теги"
             {...register("tags", { required: true })}
             onChange={(event) => setTags(event.target.value)}
+            multiline
+            className="cnAddInput"
           />
 
           <Button type="submit" variant="contained">

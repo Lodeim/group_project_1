@@ -6,6 +6,8 @@ import { SignupModal } from "../SignupModal";
 import { UserAddPost } from "../UserAddPost";
 import Button from "../Button";
 import Cookies from "js-cookie";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "../../theme";
 
 export const UserActionModal = ({ 
     isOpen, 
@@ -42,7 +44,9 @@ export const UserActionModal = ({
   const authCookie = Cookies.get('auth')
   if (authCookie === undefined) {
     return (
-      <Modal 
+      <ThemeProvider theme={theme}>
+
+        <Modal 
       isOpen={isOpen} 
       onRequestClose={onClose} 
       ariaHideApp={false}
@@ -61,10 +65,13 @@ export const UserActionModal = ({
 
         />
       </Modal>
+      </ThemeProvider>
+      
     );
   } else if (user) {
     return (
-      <Modal 
+      <ThemeProvider theme={theme}>
+              <Modal 
       isOpen={isOpen} 
       onRequestClose={onClose} 
       ariaHideApp={false}
@@ -83,6 +90,8 @@ export const UserActionModal = ({
             onClose={onCloseAddPost}
             />
       </Modal>
+      </ThemeProvider>
+
     );
   }
 };
