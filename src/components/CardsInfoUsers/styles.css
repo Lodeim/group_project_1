@@ -52,3 +52,15 @@
   border-top: 1px solid rgb(180, 180, 180);
 }
 
+@media (max-width: 780px) {
+  .cnCardsInfoUsersRoot {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cnCardsInfoUsersRoot {
+    max-width: 280px;
+  }
+}
+
