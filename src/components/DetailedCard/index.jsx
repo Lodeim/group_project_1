@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import UserBadge from "../UserBadge";
 import Comment from "../Comment";
@@ -12,6 +12,8 @@ import api from "../../api/sberAddRequest"
 import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
 
 import "./styles.css";
+import { EditModal } from "../EditModal";
+import { editPost } from "../../redux/actions/photos";
 
 const DetailedCard = ({
   userName,
@@ -36,6 +38,7 @@ const DetailedCard = ({
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
   const handleSendCommentClick = () => {
     if (comment) {
@@ -43,6 +46,8 @@ const DetailedCard = ({
       setComment("");
     }
   };
+
+  
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
       const commentsCopy = [...comments];
@@ -74,6 +79,11 @@ const DetailedCard = ({
     ));
   };
 
+  const dispatch = useDispatch();
+  const onEdit = async (postId, formText, formTags, formImage, formTitle) => {
+      await dispatch(editPost(postId, formText, formTags, formImage, formTitle));
+    };
+
   const onCloseModal = () => {
     setIsModalVisible(false);
     setComment("");
@@ -81,6 +91,14 @@ const DetailedCard = ({
   const onOpenModal = () => {
     setIsModalVisible(true);
     setComment("");
+  };
+  const onCloseEditModal = () => {
+    setIsEditModalVisible(false);
+    console.log(`click`);
+  };
+  const onOpenEditModal = () => {
+    setIsEditModalVisible(true);
+    console.log(`click`);
   };
 
   const onCloseModalDelete = () => {
@@ -150,6 +168,22 @@ const DetailedCard = ({
           onClick={onOpenModal}
         />
         <>{deleteBtn()}</>
+        {authorizedUser._id === userId 
+        ? <i 
+          className="fa-regular fa-pen-to-square"
+          onClick={onOpenEditModal}
+          />
+        :""}
+         <EditModal
+              postId={_id}
+              image={imgUrl}
+              tags={tags}
+              title={title}
+              text={text}
+              isOpen={isEditModalVisible}
+              onClose={onCloseEditModal}
+              onEdit={onEdit}
+         /> 
       </div>
       <div className="cnDetailedCardLikes">{`Оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>

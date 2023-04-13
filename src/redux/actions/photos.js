@@ -85,3 +85,34 @@ export const sendComment = (author, photoId, text) => {
   };
 };
 
+
+export const editPost = (photoId, text, tags, image, title) => {
+  return async (dispatch, getState) => {
+    dispatch(mutatePhotoStarted());
+    const state = getState();
+  
+    try {
+      const response = await api.photos.mutatePhoto({
+        data: {
+          'text': text,
+          'tags': tags,
+          'image': image,
+          'title': title
+      },
+        method: "PATCH",
+        url: `/${photoId}`,
+      });
+
+      const newPhotos = getUpdatedPhotoForState(
+        state.photos.photos,
+        photoId,
+        response.data
+      );
+      dispatch(getPhotosSuccess(newPhotos));
+      dispatch(mutatePhotoSuccess());
+    } catch (error) {
+      dispatch(mutatePhotoFailed(error));
+    }
+  };
+};
+

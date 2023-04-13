@@ -9,9 +9,9 @@ const Comment = ({
   const usersInfo = useSelector((state) => state.usersInfo.usersInfo);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUsersInfo());
-}, [dispatch]);  
+//   useEffect(() => {
+//     dispatch(getUsersInfo());
+// }, [dispatch]);  
 
   const getNameUserComment = () => {
     const newusersInfo = [...usersInfo];

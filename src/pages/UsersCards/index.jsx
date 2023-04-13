@@ -37,7 +37,7 @@ const UsersCards = () => {
         
         })
         if (groupUsersCards.length) {
-          setUsersCardRender(groupUsersCards.splice(0, 5));
+          setUsersCardRender(groupUsersCards.splice(0, 10));
         }
       }, [usersInfoRender]);
 
@@ -50,8 +50,8 @@ const UsersCards = () => {
            groupUsersCards.push(userCard)
           }
          })
-        const offset = 5 * (page + 1);
-        setUsersCardRender([...groupUsersCards.splice(0, offset + 5)]);
+        const offset = 10 * (page + 1);
+        setUsersCardRender([...groupUsersCards.splice(0, offset + 10)]);
         setPage(page + 1);
       };
 
@@ -65,7 +65,7 @@ const UsersCards = () => {
         avatarUrl={authorizedUser.avatar}
         > 
         {isLoadingUsersInfo ? (
-        <div className="cnMainPageLoaderContainer">
+        <div>
           <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (

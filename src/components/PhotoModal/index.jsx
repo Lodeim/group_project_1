@@ -83,16 +83,17 @@ const PhotoModal = ({
                   <Comment key={nanoid()} {...comment} />
                 ))}
               </div>
-            </div>
-          </div>
-          <div>
-            <div className="cnModalIcons">
+              <div className="cnModalIcons">
               <i
                 onClick={onLikeClick}
                 className={`${isLikedByYou ? "fa" : "far"
                   } fa-heart cnModalLikeIcon`}
               />
             </div>
+            </div>
+          </div>
+          <div>
+           
             <TextArea
               placeholder="Введите комментарий"
               value={commentValue}

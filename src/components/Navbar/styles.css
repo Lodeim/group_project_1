@@ -5,6 +5,9 @@
   border-bottom: 1px solid #dbdbdb;
   border-radius: 0 0 10px 10px;
   background-color: #fff;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
 }
 
 .cnNavbarWrapper {
@@ -32,6 +35,12 @@
 .cnNavbarControlsWrapper {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.cnNavbarControlsWrapper i{
+  font-size: 18px;
+  color: cadetblue;
 }
 
 .cnUsersIcon {

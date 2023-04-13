@@ -3,17 +3,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafafa;
+  
+  min-height: 100vh;
 }
 
 .cnMainPageCard {
   margin-bottom: 20px;
+  background-color: #fafafa;
 }
 
 .cnMainPageLoaderContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fafafa;
-  height: 100vh;
+  background-color: #fafafa00;
 }

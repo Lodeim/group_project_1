@@ -1,0 +1,39 @@
+
+.cnNoAccsessPageWrapper{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+.cnGradientWrapper {
+    flex-grow: 1;
+    position: relative;
+}
+#gradient-canvas {
+    width:100%;
+    height:100%;
+    --gradient-color-1: #5f9ea0; 
+    --gradient-color-2: #e09eff; 
+    --gradient-color-3: #a6abf2;  
+    --gradient-color-4: #74d2c2;
+  }
+.cnNoAccButtonsWrapper{
+background-color: #ffffff;
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+margin: auto;
+display: flex;
+flex-direction: column;
+width: fit-content;
+height: fit-content;
+padding: 40px;
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.25);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.9px);
+-webkit-backdrop-filter: blur(8.9px);
+border: 1px solid rgba(255, 255, 255, 0.68);
+}
