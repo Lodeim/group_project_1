@@ -35,8 +35,6 @@ const UserPage = () => {
   const { _id } = useParams();
   const [postsForRender, setPostsForRender] = useState([]);
   const [page, setPage] = useState(0);
-  console.log(_id);
-
 
   useEffect(() => {
     const filteredPosts = posts.filter(e => e.author._id === user._id)
