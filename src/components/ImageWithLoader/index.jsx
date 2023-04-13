@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import "./styles.css";
 
-const ImageWithLoader = ({ src, alt, className }) => {
+const ImageWithLoader = ({ src, alt, className, onClick }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isImageErr, setIsImageErr] = useState(false);
   const onError = () => {
@@ -29,6 +29,7 @@ const ImageWithLoader = ({ src, alt, className }) => {
       <img
         src={src}
         alt={alt}
+        onClick = {onClick}
         className={cn(
           "cnImageWithLoaderImg",
           isImageLoaded && "cnImageWithLoaderImgLoaded"

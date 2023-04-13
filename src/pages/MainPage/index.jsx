@@ -5,9 +5,9 @@ import { getPhotos, sendComment, toggleLike } from "../../redux/actions/photos";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Bars } from "react-loader-spinner";
-
-import "./styles.css";
 import { getUsersInfo } from "../../redux/actions/usersInfo.js";
+import "./styles.css";
+
 
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
@@ -38,6 +38,7 @@ const MainPage = () => {
   const onCommentSendClick = (photoId, comment) => {
     dispatch(sendComment(authorizedUser.name, photoId, comment));
   };
+
 
 
   return (
