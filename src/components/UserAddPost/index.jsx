@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import api from "../../api/sberAddRequest";
+import sapi from "../../api/sberAddRequest";
 import { TextField } from "@mui/material";
 import { theme } from "../../theme.js";
 import { ThemeProvider } from "@mui/material/styles";
@@ -26,7 +26,7 @@ export const UserAddPost = ({ isOpen, onClose }) => {
       trimArr.push(trim);
     });
     data.tags = trimArr;
-    api.addPost(data).then((res) => res.isPublished ? window.location.reload() : null);
+    sapi.addPost(data).then((res) => res.isPublished ? window.location.reload() : null);
   };
 
   return (
