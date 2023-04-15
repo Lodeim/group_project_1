@@ -46,6 +46,9 @@
   margin-top: 10px;
 }
 
+.cnUserPageLoaderContainer {
+  margin: auto;
+}
 
 @media (max-width: 980px) {
   .cnUserPageRootContent {

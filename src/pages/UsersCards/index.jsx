@@ -65,7 +65,7 @@ const UsersCards = () => {
         avatarUrl={authorizedUser.avatar}
         > 
         {isLoadingUsersInfo ? (
-        <div>
+        <div className="cnUsersPageLoaderContainer">
           <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (
@@ -77,7 +77,7 @@ const UsersCards = () => {
                 next={nextHandlerCards}
                 hasMore={usersCardForRender.length < usersInfoRender.length}
                 endMessage={
-                  <p className="cnMainPageLoaderContainer">Это все пользователи</p>
+                  <p className="cnUsersPageLoaderContainer">Это все пользователи</p>
                 }
                 className="cnUsersCardsScroll"
               >
