@@ -31,6 +31,7 @@ const PhotoModal = ({
   _id,
   author,
 }) => {
+   
   useEffect(() => {
     const body = document.querySelector("body");
     if (isOpen) {
@@ -39,6 +40,7 @@ const PhotoModal = ({
       body.classList.remove("cnBodyOverflow");
     }
   }, [isOpen]);
+  
   return (
     <Modal
       isOpen={isOpen}

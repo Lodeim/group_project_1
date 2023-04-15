@@ -56,7 +56,7 @@
 }
 
 .cnModalInfoWrapper {
-  max-height: 800px;
+  max-height: 600px;
   background: #fff;
   overflow-y: scroll;
   padding: 10px;
@@ -153,6 +153,7 @@
   }
   
   .cnModalRoot {
+    padding-top: 10px;
     display: flex;
     border-radius: 10px;
     flex-direction: column;
@@ -160,15 +161,15 @@
   }
   
   .cnModalImgWrapper {
-    max-width: 300px;
-    min-height: 300px;
     margin: 0 auto;
+    padding: 10px ;
   }
-  
+
   .cnModalImg {
-    max-width: 275px;
-    max-height: 275px;
+    max-width: 220px;
+    max-height: 220px;
     margin: 0 auto;
+    overflow: hidden;
   }
   
   .cnModalHeader {
@@ -199,10 +200,17 @@
 
 }
 @media (max-width: 375px) {
-  
+
+  .cnModalImgWrapper {
+    max-width: 210px;
+    max-height: 210px;
+    margin: 0 auto;
+    padding: 10px ;
+  }
   .cnModalInfoWrapper {
     max-height: 125px;
   }
-  
+
+
 
 }
