@@ -29,6 +29,7 @@
 .cnModalRoot {
   display: flex;
   border-radius: 10px;
+  
 }
 
 .cnModalImgWrapper {
@@ -38,7 +39,6 @@
   background: #000;
   border-radius: 10px;
   margin-right: 10px;
-  margin-top: 10px;
 }
 
 .cnModalImg {
@@ -59,6 +59,7 @@
   max-height: 800px;
   background: #fff;
   overflow-y: scroll;
+  padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -122,7 +123,6 @@
 
 .cnModalIcons {
   display: flex;
-  padding-left: 10px;
 }
 
 .cnModalLikeIcon {
@@ -131,34 +131,44 @@
   margin-bottom: 10px;
 }
 
-
-
-@media (max-width: 780px) {
+@media (max-width: 1400px) {
   .cnBodyOverflow {
     overflow: hidden;
   }
   
   .cnModal {
-    max-width: 350px;
+    max-width: 800px;
+  }
+
+  .cnModalInfoWrapper {
+    max-height: 500px;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 780px) {
+
+  .cnModal {
+    max-width: 300px;
   }
   
   .cnModalRoot {
     display: flex;
     border-radius: 10px;
     flex-direction: column;
-    max-width: 350px;
-    align-items: center;
+    max-width: 300px;
   }
   
   .cnModalImgWrapper {
-    max-width: 360px;
-    min-height: 360px;
-    margin-right: 0px;
+    max-width: 300px;
+    min-height: 300px;
+    margin: 0 auto;
   }
   
   .cnModalImg {
-    max-width: 280px;
-    max-height: 280px;
+    max-width: 275px;
+    max-height: 275px;
+    margin: 0 auto;
   }
   
   .cnModalHeader {
@@ -172,12 +182,7 @@
   
   .cnModalInfoWrapper {
     max-height: 300px;
-    background: #fff;
-    overflow-y: scroll;
-    border-radius: 10px;
-    margin-bottom: 10px;
     max-width: 300px;
-    padding: 10px;
   }
   
   .cnModalCommentsBlock {
@@ -191,7 +196,13 @@
     height: 500px;
     border-radius: 10px;
   }
-  
+
 }
+@media (max-width: 375px) {
+  
+  .cnModalInfoWrapper {
+    max-height: 125px;
+  }
+  
 
-
+}

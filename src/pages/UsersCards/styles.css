@@ -45,17 +45,6 @@
       padding-left: 10px;
       max-width: 780px;
     }
-    
-   
-  }
-
-  @media (max-width: 375px) {
-      .cnUsersCardsScroll {
-      padding-top: 100px;
-      padding-left: 10px;
-      max-width: 300px;
-  
-    }
 
     .cnUsersCardsRootContent {
       padding-top: 50px;
@@ -66,6 +55,33 @@
     .cnCardsInfoUsersBox {
       display: grid;
       grid-template-columns: 1fr;
+  }
+
+  .cnCardsInfoUsersRoot {
+    width: 275px;
+    
+}
+    
+  }
+
+  @media (max-width: 375px) {
+      .cnUsersCardsScroll {
+      padding-top: 100px;
+      padding-left: 10px;
+      max-width: 300px;
+  
+    }
+    
+    .cnUsersCardsRootContent {
+      padding-top: 50px;
+      padding-left: 10px;
+      max-width: 375px;
+    }
+
+    .cnCardsInfoUsersBox {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 200px;
   }
   }
   
