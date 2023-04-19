@@ -29,7 +29,7 @@
   bottom: 0;
   right: 0;
   display: none;
-  background-color: #000;
+  background-color: cadetblue;
   opacity: 0.4;
   border-radius: 10px;
 }
@@ -67,4 +67,6 @@
   top: 0;
   right: 0;
   margin: 20px;
+  display: flex;
+  gap: 10px;
 }

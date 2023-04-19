@@ -7,13 +7,13 @@ import cn from "classnames";
 import PhotoModal from "../PhotoModal";
 import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
-import { timeConverter } from "../../utils";
-import api from "../../api/sberAddRequest"
+import { getUpdatedPhotoForState, timeConverter } from "../../utils";
+import sapi from "../../api/sberAddRequest"
 import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
 
 import "./styles.css";
 import { EditModal } from "../EditModal";
-import { editPost } from "../../redux/actions/photos";
+import { deleteComment, editPost } from "../../redux/actions/photos";
 
 const DetailedCard = ({
   userName,
@@ -40,6 +40,7 @@ const DetailedCard = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
+  const dispatch = useDispatch();
   const handleSendCommentClick = () => {
     if (comment) {
       onCommentSendClick(_id, comment);
@@ -47,7 +48,11 @@ const DetailedCard = ({
     }
   };
 
-  
+  const onCommentDelete = async (post, id) => {
+    await dispatch(deleteComment(post, id))
+  }
+
+
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
       const commentsCopy = [...comments];
@@ -60,8 +65,17 @@ const DetailedCard = ({
             onClick={() => setIsCommentsShown(true)}
           >{`Показать скрытые комментарии ${comments.length - commentsForRender.length
             }`}</span>
-          {commentsForRender.map((comment) => (
-            <Comment {...comment} key={nanoid()} />
+          {commentsForRender.map(({ author, text, created_at, _id, post, update_at }) => (
+            <Comment 
+            key={nanoid()}
+            author={author}
+            text={text}
+            createdAt={created_at}
+            updateAt={update_at}
+            id={_id}
+            post={post}
+            onCommentDelete={onCommentDelete}
+            />
           ))}
         </>
       );
@@ -75,11 +89,12 @@ const DetailedCard = ({
         updateAt={update_at}
         id={_id}
         post={post}
+        onCommentDelete={onCommentDelete}
       />
     ));
   };
 
-  const dispatch = useDispatch();
+  
   const onEdit = async (postId, formText, formTags, formImage, formTitle) => {
       await dispatch(editPost(postId, formText, formTags, formImage, formTitle));
     };
@@ -94,11 +109,9 @@ const DetailedCard = ({
   };
   const onCloseEditModal = () => {
     setIsEditModalVisible(false);
-    console.log(`click`);
   };
   const onOpenEditModal = () => {
     setIsEditModalVisible(true);
-    console.log(`click`);
   };
 
   const onCloseModalDelete = () => {
@@ -120,7 +133,7 @@ const DetailedCard = ({
 
   const onHandleDeleteClick = () => {
     if (authorizedUser._id === userId) {
-      api
+      sapi
         .deletePost(_id)
         .then((data) => {
           console.log(data);

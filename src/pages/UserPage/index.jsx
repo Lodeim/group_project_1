@@ -11,7 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Bars } from "react-loader-spinner";
-import { getUser, mutateUser } from "../../redux/actions/users";
+import { getUser, mutateUser, mutateUserAvatar } from "../../redux/actions/users";
 
 import "./styles.css";
 
@@ -70,6 +70,10 @@ const UserPage = () => {
   const onEdit = async (data) => {
     await dispatch(mutateUser(data));
   };
+  const onEditAvatar = async (data) => {
+    await dispatch(mutateUserAvatar(data));
+  };
+
   return (
     <Layout
       userName={authorizedUser.name}
@@ -92,6 +96,7 @@ const UserPage = () => {
               // eslint-disable-next-line
               isMyPage={user._id == authorizedUser._id}
               onEdit={onEdit}
+              onEditAvatar={onEditAvatar}
               formLoading={isUserMutateLoading}
               count={userPosts.length}
             />

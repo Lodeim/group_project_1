@@ -1,12 +1,14 @@
 import cn from "classnames";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PhotoModal from "../PhotoModal";
 import ImageWithLoader from "../ImageWithLoader";
 import { timeConverter } from "../../utils";
 import "./styles.css";
-import api from "../../api/sberAddRequest";
+import sapi from "../../api/sberAddRequest";
 import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
+import { editPost } from "../../redux/actions/photos";
+import { EditModal } from "../EditModal";
 
 const Card = ({
   userName,
@@ -30,35 +32,62 @@ const Card = ({
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
+  const dispatch = useDispatch();
+  const onEdit = async (postId, formText, formTags, formImage, formTitle) => {
+      await dispatch(editPost(postId, formText, formTags, formImage, formTitle));
+    };
   const handleSendCommentClick = () => {
     if (comment) {
       onCommentSendClick(_id, comment);
       setComment("");
     }
   };
+
+  const onCloseEditModal = (event) => {
+    setIsEditModalVisible(false);
+    event.stopPropagation(true)
+
+  };
+  const onOpenEditModal = (event) => {
+    setIsEditModalVisible(true);
+    event.stopPropagation(true)
+
+  };
+
   const onCloseModal = () => {
     setModalVisible(false);
     setComment("");
   };
-  const onOpenModal = () => {
+  const onOpenModal = (event) => {
     setModalVisible(true);
     setComment("");
   };
+
+  const handleLikeClick = (event, _id) => {
+onLikeClick(_id)
+event.stopPropagation(true)
+}
+
   const [comment, setComment] = useState("");
 
-  const onCloseModalDelete = () => {
+  const onCloseModalDelete = (event) => {
     setDeleteAlertModalActive(false);
+    event.stopPropagation(true)
+
   };
-  const onOpenModalDelete = () => {
+  const onOpenModalDelete = (event) => {
     setDeleteAlertModalActive(true);
+    event.stopPropagation(true)
+
   };
 
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
 
   const onHandleDeleteClick = () => {
     if (authorizedUser._id === userId) {
-      api
+      sapi
         .deletePost(_id)
         .then((data) => {
           console.log(data);
@@ -74,13 +103,13 @@ const Card = ({
     <div className={cn("cnCardRoot", className)}>
       <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl} />
       <div className="cnCardHover" />
-      <div className="cnCardIcons">
+      <div className="cnCardIcons" onClick={() => onOpenModal()}>
         <i
           className={cn(
             `${isLikedByYou ? "fas" : "far"} fa-heart`,
             "cnCardIcon"
           )}
-          onClick={() => onLikeClick(_id)}
+          onClick={(event) => handleLikeClick(event, _id)}
         />
         <span className="cnCardNumber cnCardLikes">{likes}</span>
         <i
@@ -88,8 +117,31 @@ const Card = ({
           onClick={() => onOpenModal()}
         />
         <span className="cnCardNumber">{comments.length}</span>
-        <i 
-        className="fa-regular fa-trash-can cnCardIcon cnCardIconDelete" onClick={onOpenModalDelete}/>
+        <div className="cnCardIcon cnCardIconDelete">
+      
+        {authorizedUser._id === userId 
+        ? <>
+         <i 
+          className="fa-regular fa-pen-to-square"
+          onClick={onOpenEditModal}
+          />
+          <i 
+          className="fa-regular fa-trash-can  " onClick={onOpenModalDelete}/>
+        </>
+        :null}
+
+        </div>
+      
+         <EditModal
+              postId={_id}
+              image={imgUrl}
+              tags={tags}
+              title={title}
+              text={text}
+              isOpen={isEditModalVisible}
+              onClose={onCloseEditModal}
+              onEdit={onEdit}
+         /> 
       </div>
       <PhotoModal
         userName={userName}
