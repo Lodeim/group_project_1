@@ -29,7 +29,7 @@
 .cnModalRoot {
   display: flex;
   border-radius: 10px;
-
+  
 }
 
 .cnModalImgWrapper {
@@ -42,8 +42,8 @@
 }
 
 .cnModalImg {
-  max-width: 1024px;
-  max-height: 1024px;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .cnModalHeader {
@@ -56,9 +56,12 @@
 }
 
 .cnModalInfoWrapper {
-  max-height: 800px;
+  max-height: 600px;
   background: #fff;
   overflow-y: scroll;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .cnModalTime {
@@ -126,4 +129,88 @@
   cursor: pointer;
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 1400px) {
+  .cnBodyOverflow {
+    overflow: hidden;
+  }
+  
+  .cnModal {
+    max-width: 800px;
+  }
+
+  .cnModalInfoWrapper {
+    max-height: 500px;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 780px) {
+
+  .cnModal {
+    max-width: 300px;
+  }
+  
+  .cnModalRoot {
+    padding-top: 10px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    max-width: 300px;
+  }
+  
+  .cnModalImgWrapper {
+    margin: 0 auto;
+    padding: 10px ;
+  }
+
+  .cnModalImg {
+    max-width: 220px;
+    max-height: 220px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .cnModalHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px;
+    height: 30px;
+  }
+  
+  .cnModalInfoWrapper {
+    max-height: 300px;
+    max-width: 300px;
+  }
+  
+  .cnModalCommentsBlock {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .cnModalComments {
+    height: 500px;
+    border-radius: 10px;
+  }
+
+}
+@media (max-width: 375px) {
+
+  .cnModalImgWrapper {
+    max-width: 210px;
+    max-height: 210px;
+    margin: 0 auto;
+    padding: 10px ;
+  }
+  .cnModalInfoWrapper {
+    max-height: 125px;
+  }
+
+
+
 }

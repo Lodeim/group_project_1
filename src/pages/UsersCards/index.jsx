@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import CardsInfoUsers from "../../components/CardsInfoUsers";
 import { Bars } from "react-loader-spinner";
@@ -10,23 +9,18 @@ import { getUsersInfo } from "../../redux/actions/usersInfo";
 
 const UsersCards = () => {
     const authorizedUser = useSelector((state) => state.users.authorizedUser);
+    const usersInfoRender = useSelector((state) => state.usersInfo.usersInfo);
+    const isLoadingUsersInfo = useSelector((state) => state.usersInfo.isUsersInfoLoading);
+    const isUsersInfoError = useSelector((state) => state.usersInfo.isUsersInfoError)
+    const [usersCardForRender, setUsersCardRender] = useState([]);
+    const [page, setPage] = useState(0);
     const dispatch = useDispatch();
-
-
-     
-      const usersInfoRender = useSelector((state) => state.usersInfo.usersInfo);
-      const isLoadingUsersInfo = useSelector((state) => state.usersInfo.isUsersInfoLoading);
-      const isUsersInfoError = useSelector((state) => state.usersInfo.isUsersInfoError)
-      const [usersCardForRender, setUsersCardRender] = useState([]);
-      const [page, setPage] = useState(0);
  
-    
-      
-      useEffect(() => {
-           dispatch(getUsersInfo());
-      }, [dispatch]);  
 
-
+    useEffect(() => {
+      dispatch(getUsersInfo());
+  }, [dispatch]);  
+  
       useEffect(() => {
         const newUsers = [...usersInfoRender];
         const groupUsersCards = [];
@@ -55,9 +49,6 @@ const UsersCards = () => {
         setPage(page + 1);
       };
 
-   
-
-    
     return (
         <Layout
         userName={authorizedUser.name}
@@ -65,7 +56,7 @@ const UsersCards = () => {
         avatarUrl={authorizedUser.avatar}
         > 
         {isLoadingUsersInfo ? (
-        <div>
+        <div className="cnUsersPageLoaderContainer">
           <Bars color="#5f9ea0" height={80} width={80} />
         </div>
       ) : (
@@ -77,7 +68,7 @@ const UsersCards = () => {
                 next={nextHandlerCards}
                 hasMore={usersCardForRender.length < usersInfoRender.length}
                 endMessage={
-                  <p className="cnMainPageLoaderContainer">Это все пользователи</p>
+                  <p className="cnUsersPageLoaderContainer">Это все пользователи</p>
                 }
                 className="cnUsersCardsScroll"
               >

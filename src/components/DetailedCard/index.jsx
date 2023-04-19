@@ -32,8 +32,8 @@ const DetailedCard = ({
   tags,
   title,
   createdPost,
-  _id,
-  author
+  _id
+
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
@@ -150,8 +150,8 @@ const DetailedCard = ({
       <div className="cnDetailedCardHeader">
         <UserBadge userName={userName} avatarUrl={avatarUrl} _id={userId} aboutUser={aboutUser} />
       </div>
-      <div className="cnDetailedCardImgWrapper" onClick={onOpenModal}>
-        <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" />
+      <div className="cnDetailedCardImgWrapper">
+        <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" onClick={onOpenModal} />
         <div className="cnDetailedCardTime">{timeConverter(createdPost)}</div>
         <h2 className="cnDetailedCardTitle">
           {title}
