@@ -1,4 +1,5 @@
 import { api } from "../../api";
+import sapi from "../../api/sberAddRequest";
 import { getUpdatedPhotoForState, getPhotoFromState } from "../../utils";
 import {
   getPhotosFailed,
@@ -76,6 +77,29 @@ export const sendComment = (author, photoId, text) => {
         state.photos.photos,
         photoId,
         response.data
+      );
+      dispatch(getPhotosSuccess(newPhotos));
+      dispatch(mutatePhotoSuccess());
+    } catch (error) {
+      dispatch(mutatePhotoFailed(error));
+    }
+  };
+};
+
+export const deleteComment = ( photoId, commentId) => {
+  return async (dispatch, getState) => {
+    dispatch(mutatePhotoStarted());
+    const state = getState();
+   
+    const newPhoto = getPhotoFromState(state.photos.photos, photoId);
+    let index = newPhoto.comments.findIndex(e => e._id === commentId)
+    newPhoto.comments.splice(index, 1)
+    try {
+      const response = await sapi.deleteComment(photoId, commentId)
+      const newPhotos = getUpdatedPhotoForState(
+        state.photos.photos,
+        photoId,
+        response.data.data
       );
       dispatch(getPhotosSuccess(newPhotos));
       dispatch(mutatePhotoSuccess());

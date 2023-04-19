@@ -17,7 +17,7 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+    const [page, setPage] = useState(1);
 
   useEffect(() => {
         dispatch(getUsersInfo());
@@ -83,7 +83,7 @@ const MainPage = () => {
                 mutateLoading={mutateLoading}
               />
              
-            ))} 
+            ))}
           </InfiniteScroll>
         )}
       </div>

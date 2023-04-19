@@ -3,9 +3,9 @@ import UserCounter from "../UserCounter";
 import Button from "../Button";
 import Input from "../Input";
 import FormTextArea from "../FormTextArea";
-
 import "./styles.css";
 import { UserAddPost } from "../UserAddPost";
+import { AvatarEditModal } from "../AvatarEditModal";
 
 const requiredText = "Поле обязательное";
 const validateText = (text, cb) => {
@@ -28,8 +28,8 @@ const UserBio = ({
   avatarUrl,
   nickname,
   description,
-  url,
   onEdit,
+  onEditAvatar,
   formLoading,
   isMyPage,
   count
@@ -94,6 +94,14 @@ const UserBio = ({
     setIsAddPostVisible(true);
   };
 
+  const [isAvatarEditVisible, setIsAvatarEditVisible] = useState(false)
+  const onOpenEditAvatar = (e) => {
+    setIsAvatarEditVisible(true)
+  }
+  const onCloseEditAvatar = (e) => {
+    setIsAvatarEditVisible(false)
+  }
+
   const fields = useMemo(() => {
     if (isEditMode) {
       return {
@@ -132,10 +140,27 @@ const UserBio = ({
   ]);
   return (
     <div className="cnUserBioRoot">
-      <div>
+      <div className="cnUserBioAvatarWrapper">
         <img className="cnUserBioAvatar" src={avatarUrl} alt="avatar" />
+        <button className="cnUserBioAvatarEditBtn" onClick={onOpenEditAvatar}><i class="fa-regular fa-image"/></button>
+        <AvatarEditModal
+            isOpen={isAvatarEditVisible}
+            onClose={onCloseEditAvatar}
+            onEditAvatar={onEditAvatar}
+        />
       </div>
       <div className="cnUserBioInfo">
+      <div className="cnUserBioRow"><label> {fields.name}</label></div>
+        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.about}</label></div>
+        <div className="cnUserBioRow">
+            <UserCounter
+            count={count}
+            text="Публикаций"
+            className="cnUserBioCounter"
+          />
+        </div>
+        <div className="cnUserBioRow">
+
         <div className={fields.firstButtonClassName}>
           {(isMyPage)
           ? <>
@@ -148,15 +173,8 @@ const UserBio = ({
             onClose={onCloseAddPost}
           />
         </div>
-        <div className="cnUserBioRow">
-          <UserCounter
-            count={count}
-            text="Публикаций"
-            className="cnUserBioCounter"
-          />
+       
         </div>
-        <div className="cnUserBioRow"><label><div>Имя пользователя</div> {fields.name}</label></div>
-        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.about}</label></div>
       </div>
     </div>
   );

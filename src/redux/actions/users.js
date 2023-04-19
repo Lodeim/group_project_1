@@ -51,3 +51,21 @@ export const mutateUser = (data) => {
     }
   };
 };
+
+export const mutateUserAvatar = (data) => {
+  return async (dispatch, getState) => {
+    dispatch(mutateUserStarted());
+    const newAvatar = { ...data };
+    console.log(newAvatar);
+    try {
+      const response = await api.users.mutateUser({
+        data: newAvatar,
+        url: `/me/avatar`,
+      });
+
+      dispatch(getUserSuccess(response.data));
+    } finally {
+      dispatch(mutateUserSuccess());
+    }
+  };
+};

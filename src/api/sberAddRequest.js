@@ -28,6 +28,12 @@ class Api {
         }).then(onResponce)
 
     }
+    deleteComment(postId, commentId) {
+        return fetch(`${this._baseUrl}/group-10/posts/comments/${postId}/${commentId}`, {
+            method: 'DELETE',
+            headers: this._headers
+        }).then(onResponce)
+    }
 }
 
 const config = {
@@ -38,6 +44,6 @@ const config = {
     }
 }
 
-const api = new Api(config);
+const sapi = new Api(config);
 
-export default api;
+export default sapi;

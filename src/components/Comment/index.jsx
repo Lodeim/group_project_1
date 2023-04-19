@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "./styles.css";
 import { useEffect } from "react";
 import { getUsersInfo } from "../../redux/actions/usersInfo";
+import sapi from "../../api/sberAddRequest";
+import { getUpdatedPhotoForState } from "../../utils";
 const Comment = ({
   author, 
   text,
+  id, 
+  post,
+  onCommentDelete
 }) => {
   const usersInfo = useSelector((state) => state.usersInfo.usersInfo);
-  const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(getUsersInfo());
-// }, [dispatch]);  
 
   const getNameUserComment = () => {
     const newusersInfo = [...usersInfo];
@@ -24,7 +24,7 @@ const Comment = ({
   return (
     <div className="cnCommentRoot">
       <span className="cnCommentName">{getNameUserComment()}{author}:</span>
-      <span>{text}</span>
+      <span onClick={() => onCommentDelete(post, id)}>{text}</span>
     </div>
   );
 };
