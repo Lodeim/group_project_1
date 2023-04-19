@@ -8,7 +8,6 @@
   position: fixed;
   z-index: 999;
   width: 100%;
-
 }
 
 .cnNavbarWrapper {
@@ -42,7 +41,7 @@
 .cnNavbarControlsWrapper i{
   font-size: 18px;
   color: cadetblue;
-  cursor: pointer;;
+  cursor: pointer;
 }
 
 .cnUsersIcon {
