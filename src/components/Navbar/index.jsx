@@ -78,8 +78,8 @@ const Navbar = ({ userName, avatarUrl, _id }) => {
         <UserBadge userName={authorizedUser? authorizedUser.name: ''} avatarUrl={authorizedUser? authorizedUser.avatar: avatarUrl} _id={authorizedUser? authorizedUser._id : _id} />
         {authorizedUser
         ?<>
-        <i className="fa-solid fa-gear" onClick={onOpenUserActionModal} alt="Меню пользователя" title="Меню пользователя"></i>
-        <i className="fa-regular fa-address-card" onClick={onUsersCardsClick} alt="Все пользователи" title="Все пользователи"></i>
+        <i className="fa-solid fa-gear cnActivateBtn" onClick={onOpenUserActionModal} alt="Меню пользователя" title="Меню пользователя"></i>
+        <i className="fa-regular fa-address-card cnActivateBtn" onClick={onUsersCardsClick} alt="Все пользователи" title="Все пользователи"></i>
         <UserActionModal
             isOpen={isUserActionModalVisible}
             onClose={onCloseUserActionModal}

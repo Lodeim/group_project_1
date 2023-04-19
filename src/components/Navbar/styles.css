@@ -63,6 +63,10 @@
   background: #808080;
 }
 
+.cnActivateBtn {
+  cursor: pointer;
+}
+
 
 @media (
   max-width: 960px) {

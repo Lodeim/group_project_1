@@ -23,7 +23,7 @@ export const makeUserRequest = (config) => {
 };
 
 export const makeAllUsersRequest = (config) => {
-  config.url = `${API_ENDPOINT}${config.url}`;
+  config.url = `${API_ENDPOINT}${groupId}${config.url}`;
   config.headers = headers;
   return axios(config).catch((err) => getError(err));
 };

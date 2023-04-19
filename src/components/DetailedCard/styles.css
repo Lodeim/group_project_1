@@ -20,6 +20,7 @@
   height: 100%;
   width: 100%;
   background-color: #fafafa;
+  cursor: pointer;
 }
 
 .cnDetailedCardTime {
@@ -85,7 +86,6 @@
 .cnDetailedCardCommentTitle {
   font-size: 14px;
   color: #b3b2b2;
-  cursor: pointer;
 }
 
 
