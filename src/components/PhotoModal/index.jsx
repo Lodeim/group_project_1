@@ -31,6 +31,7 @@ const PhotoModal = ({
   _id,
   author,
 }) => {
+   
   useEffect(() => {
     const body = document.querySelector("body");
     if (isOpen) {
@@ -39,6 +40,7 @@ const PhotoModal = ({
       body.classList.remove("cnBodyOverflow");
     }
   }, [isOpen]);
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -83,16 +85,17 @@ const PhotoModal = ({
                   <Comment key={nanoid()} {...comment} />
                 ))}
               </div>
-            </div>
-          </div>
-          <div>
-            <div className="cnModalIcons">
+              <div className="cnModalIcons">
               <i
                 onClick={onLikeClick}
                 className={`${isLikedByYou ? "fa" : "far"
                   } fa-heart cnModalLikeIcon`}
               />
             </div>
+            </div>
+          </div>
+          <div>
+           
             <TextArea
               placeholder="Введите комментарий"
               value={commentValue}
