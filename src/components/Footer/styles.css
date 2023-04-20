@@ -1,44 +1,41 @@
 .cnFooterRoot {
-    height: 80px;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-    background-color: cadetblue;
-    flex: 0 0 auto;
-    position: relative;
-    z-index: 999;
+  height: 80px;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: cadetblue;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 999;
 }
 
 .cnFooterWrapper {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1080px;
-    margin: 0 auto ;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .cnFooterLink {
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    padding: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  padding: 10px;
 }
 
 .cnFooterLink:hover {
-    color: orange;
+  color: orange;
 }
 
-
-@media (max-width: 780px) {  
-    .cnFooterWrapper {
-        max-width: 780px;
-    }
+@media (max-width: 780px) {
+  .cnFooterWrapper {
+    max-width: 780px;
   }
-  
-  @media (max-width: 360px) {
-    .cnFooterWrapper {
-        max-width: 360px;
-    }
+}
+
+@media (max-width: 360px) {
+  .cnFooterWrapper {
+    max-width: 360px;
   }
-
-
+}

@@ -8,7 +8,6 @@ import { Bars } from "react-loader-spinner";
 import { getUsersInfo } from "../../redux/actions/usersInfo.js";
 import "./styles.css";
 
-
 const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
   const isLoading = useSelector((state) => state.photos.isPhotosLoading);
@@ -17,14 +16,13 @@ const MainPage = () => {
   const total = useSelector((state) => state.photos.totalPhotos);
   const mutateLoading = useSelector((state) => state.photos.isMutateLoading);
   const dispatch = useDispatch();
-    const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    dispatch(getUsersInfo());
+  }, [dispatch]);
 
   useEffect(() => {
-        dispatch(getUsersInfo());
-    }, [dispatch]);  
-    
-  useEffect(() => {
-    dispatch(getPhotos(page))
+    dispatch(getPhotos(page));
   }, [page, dispatch]);
 
   const nextHandler = () => {
@@ -39,8 +37,6 @@ const MainPage = () => {
     dispatch(sendComment(authorizedUser.name, photoId, comment));
   };
 
-
-
   return (
     <Layout
       userName={authorizedUser.name}
@@ -48,7 +44,6 @@ const MainPage = () => {
       avatarUrl={authorizedUser.avatar}
     >
       <div className="cnMainPageRoot">
-        {/* <button onClick={onUpClick}>up</button><button onClick={onDownClick}>down</button> */}
         {isLoading && <Bars color="#5f9ea0" height={15} width={15} />}
         {!isError && !isLoading && (
           <InfiniteScroll
@@ -60,31 +55,45 @@ const MainPage = () => {
                 <Bars color="#5f9ea0" height={15} width={15} />
               </div>
             }
-            endMessage={<p className="cnMainPageLoaderContainer">Все прочитано!</p>}
+            endMessage={
+              <p className="cnMainPageLoaderContainer">Все прочитано!</p>
+            }
           >
-            {photos.map(({ author, image, _id, likes, comments, text, title, created_at, tags, comment }) => (
-              <DetailedCard
-                key={_id}
-                _id={_id}
-                userName={author.name}
-                avatarUrl={author.avatar}
-                aboutUser={author.about}
-                userId={author._id}
-                imgUrl={image}
-                text={text}
-                tags={tags}
-                likes={likes.length}
-                isLikedByYou={likes.includes(authorizedUser._id)}
-                comments={comments}
-                title={title}
-                createdPost={created_at}
-                className="cnMainPageCard"
-                onLikeClick={onLikeClick}
-                onCommentSendClick={onCommentSendClick}
-                mutateLoading={mutateLoading}
-              />
-             
-            ))}
+            {photos.map(
+              ({
+                author,
+                image,
+                _id,
+                likes,
+                comments,
+                text,
+                title,
+                created_at,
+                tags,
+                comment,
+              }) => (
+                <DetailedCard
+                  key={_id}
+                  _id={_id}
+                  userName={author.name}
+                  avatarUrl={author.avatar}
+                  aboutUser={author.about}
+                  userId={author._id}
+                  imgUrl={image}
+                  text={text}
+                  tags={tags}
+                  likes={likes.length}
+                  isLikedByYou={likes.includes(authorizedUser._id)}
+                  comments={comments}
+                  title={title}
+                  createdPost={created_at}
+                  className="cnMainPageCard"
+                  onLikeClick={onLikeClick}
+                  onCommentSendClick={onCommentSendClick}
+                  mutateLoading={mutateLoading}
+                />
+              )
+            )}
           </InfiniteScroll>
         )}
       </div>

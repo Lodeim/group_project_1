@@ -1,36 +1,33 @@
 .cnAuthModal {
-    width: auto;
-    height: auto;
-    outline: none;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-      /* From https://css.glass */
+  width: auto;
+  height: auto;
+  outline: none;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.9px);
   -webkit-backdrop-filter: blur(8.9px);
   border: 1px solid rgba(255, 255, 255, 0.68);
-  
-  }
+}
 
 .cnAuthModalOverlay {
-    background-color: rgba(255, 255, 255, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    z-index: 300;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .cnAuthModalForm{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-  }
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.cnAuthModalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

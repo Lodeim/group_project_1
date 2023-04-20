@@ -7,13 +7,13 @@ import cn from "classnames";
 import PhotoModal from "../PhotoModal";
 import TextArea from "../TextArea";
 import ImageWithLoader from "../ImageWithLoader";
-import { getUpdatedPhotoForState, timeConverter } from "../../utils";
-import sapi from "../../api/sberAddRequest"
+import { timeConverter } from "../../utils";
+import sapi from "../../api/sberAddRequest";
 import DeleteAlertModal from "../AlertDeleteModal/DeleteAlertModal";
-
-import "./styles.css";
 import { EditModal } from "../EditModal";
 import { deleteComment, editPost } from "../../redux/actions/photos";
+
+import "./styles.css";
 
 const DetailedCard = ({
   userName,
@@ -32,8 +32,7 @@ const DetailedCard = ({
   tags,
   title,
   createdPost,
-  _id
-
+  _id,
 }) => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [comment, setComment] = useState("");
@@ -49,9 +48,8 @@ const DetailedCard = ({
   };
 
   const onCommentDelete = async (post, id) => {
-    await dispatch(deleteComment(post, id))
-  }
-
+    await dispatch(deleteComment(post, id));
+  };
 
   const renderComments = () => {
     if (comments.length > 2 && !isCommentsShown) {
@@ -63,41 +61,45 @@ const DetailedCard = ({
           <span
             className="cnDetailedCardCommentTitle"
             onClick={() => setIsCommentsShown(true)}
-          >{`Показать скрытые комментарии ${comments.length - commentsForRender.length
-            }`}</span>
-          {commentsForRender.map(({ author, text, created_at, _id, post, update_at }) => (
-            <Comment 
-            key={nanoid()}
-            author={author}
-            text={text}
-            createdAt={created_at}
-            updateAt={update_at}
-            id={_id}
-            post={post}
-            onCommentDelete={onCommentDelete}
-            />
-          ))}
+          >{`Показать скрытые комментарии ${
+            comments.length - commentsForRender.length
+          }`}</span>
+          {commentsForRender.map(
+            ({ author, text, created_at, _id, post, update_at }) => (
+              <Comment
+                key={nanoid()}
+                author={author}
+                text={text}
+                createdAt={created_at}
+                updateAt={update_at}
+                id={_id}
+                post={post}
+                onCommentDelete={onCommentDelete}
+              />
+            )
+          )}
         </>
       );
     }
-    return comments.map(({ author, text, created_at, _id, post, update_at }) => (
-      <Comment
-        key={nanoid()}
-        author={author}
-        text={text}
-        createdAt={created_at}
-        updateAt={update_at}
-        id={_id}
-        post={post}
-        onCommentDelete={onCommentDelete}
-      />
-    ));
+    return comments.map(
+      ({ author, text, created_at, _id, post, update_at }) => (
+        <Comment
+          key={nanoid()}
+          author={author}
+          text={text}
+          createdAt={created_at}
+          updateAt={update_at}
+          id={_id}
+          post={post}
+          onCommentDelete={onCommentDelete}
+        />
+      )
+    );
   };
 
-  
   const onEdit = async (postId, formText, formTags, formImage, formTitle) => {
-      await dispatch(editPost(postId, formText, formTags, formImage, formTitle));
-    };
+    await dispatch(editPost(postId, formText, formTags, formImage, formTitle));
+  };
 
   const onCloseModal = () => {
     setIsModalVisible(false);
@@ -126,10 +128,13 @@ const DetailedCard = ({
   const deleteBtn = () => {
     if (authorizedUser._id === userId) {
       return (
-        <i className="fas fa-trash-can cnDetailedCardDeleteIcon" onClick={onOpenModalDelete}></i>
+        <i
+          className="fas fa-trash-can cnDetailedCardDeleteIcon"
+          onClick={onOpenModalDelete}
+        ></i>
       );
     }
-  }
+  };
 
   const onHandleDeleteClick = () => {
     if (authorizedUser._id === userId) {
@@ -137,66 +142,74 @@ const DetailedCard = ({
         .deletePost(_id)
         .then((data) => {
           console.log(data);
-          console.log('Пост удален!');
+          console.log("Пост удален!");
           document.location.reload();
         })
         .catch((err) => alert(err));
     } else {
-      console.log('Удаление чужих постов невозможно!');
+      console.log("Удаление чужих постов невозможно!");
     }
-  }
+  };
   return (
     <div className={cn("cnDetailedCardRoot", className)}>
       <div className="cnDetailedCardHeader">
-        <UserBadge userName={userName} avatarUrl={avatarUrl} _id={userId} aboutUser={aboutUser} />
+        <UserBadge
+          userName={userName}
+          avatarUrl={avatarUrl}
+          _id={userId}
+          aboutUser={aboutUser}
+        />
       </div>
       <div className="cnDetailedCardImgWrapper">
-        <ImageWithLoader className="cnDetailedCardImg" src={imgUrl} alt="img" onClick={onOpenModal} />
+        <ImageWithLoader
+          className="cnDetailedCardImg"
+          src={imgUrl}
+          alt="img"
+          onClick={onOpenModal}
+        />
         <div className="cnDetailedCardTime">{timeConverter(createdPost)}</div>
-        <h2 className="cnDetailedCardTitle">
-          {title}
-        </h2>
-        <div className="cnDetailedCardDescription">
-          {text}
-        </div>
+        <h2 className="cnDetailedCardTitle">{title}</h2>
+        <div className="cnDetailedCardDescription">{text}</div>
         <div className="cnDetailedCardTags">
-          {tags.map(e => {
-            if(e=== "" ){
-           return("");
-        } else {
-          return (<span>{`${e}`}</span>);
-         
-        }
-        })}
+          {tags.map((e) => {
+            if (e === "") {
+              return "";
+            } else {
+              return <span key={nanoid()}>{`${e}`}</span>;
+            }
+          })}
         </div>
       </div>
       <div className="cnDetailedCardButtons">
         <i
           onClick={() => onLikeClick(_id)}
-          className={`${isLikedByYou ? "fas" : "far"
-            } fa-heart cnDetailedCardLikeIcon`}
+          className={`${
+            isLikedByYou ? "fas" : "far"
+          } fa-heart cnDetailedCardLikeIcon`}
         />
         <i
           className="fas fa-comment cnDetailedCardLikeComment"
           onClick={onOpenModal}
         />
         <>{deleteBtn()}</>
-        {authorizedUser._id === userId 
-        ? <i 
-          className="fa-regular fa-pen-to-square"
-          onClick={onOpenEditModal}
+        {authorizedUser._id === userId ? (
+          <i
+            className="fa-regular fa-pen-to-square"
+            onClick={onOpenEditModal}
           />
-        :""}
-         <EditModal
-              postId={_id}
-              image={imgUrl}
-              tags={tags}
-              title={title}
-              text={text}
-              isOpen={isEditModalVisible}
-              onClose={onCloseEditModal}
-              onEdit={onEdit}
-         /> 
+        ) : (
+          ""
+        )}
+        <EditModal
+          postId={_id}
+          image={imgUrl}
+          tags={tags}
+          title={title}
+          text={text}
+          isOpen={isEditModalVisible}
+          onClose={onCloseEditModal}
+          onEdit={onEdit}
+        />
       </div>
       <div className="cnDetailedCardLikes">{`Оценили ${likes} человек`}</div>
       <div className="cnDetailedCardComments">{renderComments()}</div>
@@ -232,6 +245,7 @@ const DetailedCard = ({
           createdPost={createdPost}
           _id={_id}
           author
+          onCommentDelete={onCommentDelete}
         />
         <DeleteAlertModal
           isOpen={deleteAlertModalActive}

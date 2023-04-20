@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Bars } from "react-loader-spinner";
 import cn from "classnames";
 
-
 import "./styles.css";
 
 const ImageWithLoader = ({ src, alt, className, onClick }) => {
@@ -29,7 +28,7 @@ const ImageWithLoader = ({ src, alt, className, onClick }) => {
       <img
         src={src}
         alt={alt}
-        onClick = {onClick}
+        onClick={onClick}
         className={cn(
           "cnImageWithLoaderImg",
           isImageLoaded && "cnImageWithLoaderImgLoaded"

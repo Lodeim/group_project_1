@@ -29,7 +29,6 @@
 .cnModalRoot {
   display: flex;
   border-radius: 10px;
-  
 }
 
 .cnModalImgWrapper {
@@ -135,7 +134,7 @@
   .cnBodyOverflow {
     overflow: hidden;
   }
-  
+
   .cnModal {
     max-width: 800px;
   }
@@ -147,11 +146,10 @@
 }
 
 @media (max-width: 780px) {
-
   .cnModal {
     max-width: 300px;
   }
-  
+
   .cnModalRoot {
     padding-top: 10px;
     display: flex;
@@ -159,10 +157,10 @@
     flex-direction: column;
     max-width: 300px;
   }
-  
+
   .cnModalImgWrapper {
     margin: 0 auto;
-    padding: 10px ;
+    padding: 10px;
   }
 
   .cnModalImg {
@@ -171,7 +169,7 @@
     margin: 0 auto;
     overflow: hidden;
   }
-  
+
   .cnModalHeader {
     display: flex;
     flex-direction: column;
@@ -180,37 +178,32 @@
     padding: 10px;
     height: 30px;
   }
-  
+
   .cnModalInfoWrapper {
     max-height: 300px;
     max-width: 300px;
   }
-  
+
   .cnModalCommentsBlock {
     display: flex;
     width: 300px;
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .cnModalComments {
     height: 500px;
     border-radius: 10px;
   }
-
 }
 @media (max-width: 375px) {
-
   .cnModalImgWrapper {
     max-width: 210px;
     max-height: 210px;
     margin: 0 auto;
-    padding: 10px ;
+    padding: 10px;
   }
   .cnModalInfoWrapper {
     max-height: 125px;
   }
-
-
-
 }

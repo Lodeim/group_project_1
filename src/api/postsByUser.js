@@ -7,8 +7,7 @@ export const getPostsByUser = () =>
     method: "GET",
     url: URL
   })
-
-
+  
 export const mutatePosts = (config) => {
   config.url = `${URL}${config.url}`;
   return makeRequest({

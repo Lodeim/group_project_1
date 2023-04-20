@@ -1,4 +1,5 @@
 import { api } from "../../api";
+import sapi from "../../api/sberAddRequest";
 import { getPhotoFromState, getUpdatedPhotoForState, getUserPagePostData } from "../../utils";
 import {
   mutatePhotoFailed,
@@ -79,10 +80,10 @@ export const togglePostLike = (authorizedUser, photoId) => {
 export const sendCommentOnUserPage = (author, postId, postAuthorId, text) => {
   return async (dispatch, getState) => {
     dispatch(mutatePhotoStarted());
-    const posts = getState().postsByUser.posts;
-    const { postForEdit, newPosts } = getUserPagePostData(posts, postId);
-
-    postForEdit.comments.push({ author, text });
+    const state = getState()
+    const posts = state.postsByUser.posts;
+    const postForEdit = getUserPagePostData(posts, postId);
+    postForEdit.postForEdit.comments.push({ author, text });
     try {
         // eslint-disable-next-line
       const response = await api.photos.mutatePhoto({
@@ -90,7 +91,32 @@ export const sendCommentOnUserPage = (author, postId, postAuthorId, text) => {
         method: "POST",
         url: `/comments/${postId}`,
       });
-      console.log(newPosts);
+      const newPosts = getUpdatedPhotoForState(posts, postId, response.data);
+      dispatch(getPostsSuccess(newPosts));
+      dispatch(mutatePhotoSuccess());
+    } catch (error) {
+      dispatch(mutatePhotoFailed(error));
+    }
+  };
+};
+
+export const deleteCommentOnUserPage = ( photoId, commentId) => {
+  return async (dispatch, getState) => {
+    dispatch(mutatePhotoStarted());
+    const state = getState();
+    const newPhoto = getPhotoFromState(state.postsByUser.posts, photoId);
+    console.log(newPhoto.comments);
+    let index = newPhoto.comments.findIndex(e => e._id === commentId)
+    newPhoto.comments.splice(index, 1)
+    try {
+      const response = await sapi.deleteComment(photoId, commentId)
+      console.log(response);
+
+      const newPosts = getUpdatedPhotoForState(
+        state.postsByUser.posts,
+        photoId,
+        response.data.data
+      );
       dispatch(getPostsSuccess(newPosts));
       dispatch(mutatePhotoSuccess());
     } catch (error) {

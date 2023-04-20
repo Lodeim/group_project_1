@@ -90,7 +90,6 @@ export const deleteComment = ( photoId, commentId) => {
   return async (dispatch, getState) => {
     dispatch(mutatePhotoStarted());
     const state = getState();
-   
     const newPhoto = getPhotoFromState(state.photos.photos, photoId);
     let index = newPhoto.comments.findIndex(e => e._id === commentId)
     newPhoto.comments.splice(index, 1)
