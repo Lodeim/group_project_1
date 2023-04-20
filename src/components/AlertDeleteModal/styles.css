@@ -1,166 +1,159 @@
 .cnDeleteAlertModalOverflow {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .cnDeleteAlertModalOverlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    z-index: 300;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .cnDeleteAlertModal {
-    display: flex;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    animation: zoom 0.5s;
-    -webkit-animation: zoom 0.3s;
-    border-radius: 10px;
-    outline: none;
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  animation: zoom 0.5s;
+  -webkit-animation: zoom 0.3s;
+  border-radius: 10px;
+  outline: none;
 }
 
 .cnDeleteAlertModalContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .cnDeleteModalText {
-    margin: 15px 0;
-    font-size: 18px;
-
+  margin: 15px 0;
+  font-size: 18px;
 }
 
 .cnModalDeleteButtons {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
-
 .cnModalDeleteBtnOk {
-    margin-right: 10px;
-    background: cadetblue;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    margin: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    ;
+  margin-right: 10px;
+  background: cadetblue;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .cnModalDeleteBtnCancel {
-    margin-left: 10px;
-    background: rgb(114, 121, 121);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
+  margin-left: 10px;
+  background: rgb(114, 121, 121);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-/* animation */
-
 @keyframes zoom {
-    0% {
-        transform: scale(0);
-        -webkit-transform: scale(0);
-        -moz-transform: scale(0);
-        -ms-transform: scale(0);
-        -o-transform: scale(0);
-    }
+  0% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+  }
 
-    10% {
-        transform: scale(0.1);
-        -webkit-transform: scale(0.1);
-        -moz-transform: scale(0.1);
-        -ms-transform: scale(0.1);
-        -o-transform: scale(0.1);
-    }
+  10% {
+    transform: scale(0.1);
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    -o-transform: scale(0.1);
+  }
 
-    20% {
-        transform: scale(0.2);
-        -webkit-transform: scale(0.2);
-        -moz-transform: scale(0.2);
-        -ms-transform: scale(0.2);
-        -o-transform: scale(0.2);
-    }
+  20% {
+    transform: scale(0.2);
+    -webkit-transform: scale(0.2);
+    -moz-transform: scale(0.2);
+    -ms-transform: scale(0.2);
+    -o-transform: scale(0.2);
+  }
 
-    30% {
-        transform: scale(0.3);
-        -webkit-transform: scale(0.3);
-        -moz-transform: scale(0.3);
-        -ms-transform: scale(0.3);
-        -o-transform: scale(0.3);
-    }
+  30% {
+    transform: scale(0.3);
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    -o-transform: scale(0.3);
+  }
 
-    40% {
-        transform: scale(0.4);
-        -webkit-transform: scale(0.4);
-        -moz-transform: scale(0.4);
-        -ms-transform: scale(0.4);
-        -o-transform: scale(0.4);
-    }
+  40% {
+    transform: scale(0.4);
+    -webkit-transform: scale(0.4);
+    -moz-transform: scale(0.4);
+    -ms-transform: scale(0.4);
+    -o-transform: scale(0.4);
+  }
 
-    50% {
-        transform: scale(0.5);
-        -webkit-transform: scale(0.5);
-        -moz-transform: scale(0.5);
-        -ms-transform: scale(0.5);
-        -o-transform: scale(0.5);
-    }
+  50% {
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+  }
 
-    60% {
-        transform: scale(0.6);
-        -webkit-transform: scale(0.6);
-        -moz-transform: scale(0.6);
-        -ms-transform: scale(0.6);
-        -o-transform: scale(0.6);
-    }
+  60% {
+    transform: scale(0.6);
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    -o-transform: scale(0.6);
+  }
 
-    70% {
-        transform: scale(0.7);
-        -webkit-transform: scale(0.7);
-        -moz-transform: scale(0.7);
-        -ms-transform: scale(0.7);
-        -o-transform: scale(0.7);
-    }
+  70% {
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
+  }
 
-    80% {
-        transform: scale(0.8);
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        -o-transform: scale(0.8);
-    }
+  80% {
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+  }
 
+  90% {
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+  }
 
-
-    90% {
-        transform: scale(0.9);
-        -webkit-transform: scale(0.9);
-        -moz-transform: scale(0.9);
-        -ms-transform: scale(0.9);
-        -o-transform: scale(0.9);
-    }
-
-    100% {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+  }
 }

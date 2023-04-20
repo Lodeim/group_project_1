@@ -3,17 +3,19 @@ import { Bars } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import MainPage from "../../pages/MainPage";
-import NoAccessPage from "../../pages/NoAccessPage/Index";
+import NoAccessPage from "../../pages/NoAccessPage/index";
 import UserPage from "../../pages/UserPage";
 import UsersCards from "../../pages/UsersCards";
 import { getAuthorizedUser } from "../../redux/actions/users";
 
 import "./styles.css";
+import NotFoundPage from "../../pages/NotFoundPage";
 
 const authorizedRoutes = [
   { path: "/", element: <MainPage />, exact: true },
   { path: "/:_id", element: <UserPage /> },
-  { path: "/users", element: <UsersCards />},
+  { path: "/users", element: <UsersCards /> },
+  { path: "*", element: <NotFoundPage/>}
 ];
 
 const PageRoutes = () => {

@@ -1,29 +1,22 @@
 import { useSelector } from "react-redux";
 import "./styles.css";
-import { useEffect } from "react";
-import { getUsersInfo } from "../../redux/actions/usersInfo";
-import sapi from "../../api/sberAddRequest";
-import { getUpdatedPhotoForState } from "../../utils";
-const Comment = ({
-  author, 
-  text,
-  id, 
-  post,
-  onCommentDelete
-}) => {
-  const usersInfo = useSelector((state) => state.usersInfo.usersInfo);
-  const getNameUserComment = () => {
-    const newusersInfo = [...usersInfo];
-    newusersInfo.forEach((userName) => {
-      if (userName._id === author) {
-        author = userName.name
-      }
-    }) 
-}  
+
+const Comment = ({ author, text, id, post, onCommentDelete }) => {
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
   return (
     <div className="cnCommentRoot">
-      <span className="cnCommentName">{getNameUserComment()}{author}:</span>
-      <span onClick={() => onCommentDelete(post, id)}>{text}</span>
+      <div>
+        <span className="cnCommentName">
+          {author.name ? author.name : author}:
+        </span>
+        <span>{text}</span>
+      </div>
+      {author._id === authorizedUser._id ? (
+        <i
+          className="fa-regular fa-square-minus"
+          onClick={() => onCommentDelete(post, id)}
+        />
+      ) : null}
     </div>
   );
 };

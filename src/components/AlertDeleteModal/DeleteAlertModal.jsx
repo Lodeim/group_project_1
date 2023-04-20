@@ -1,16 +1,10 @@
-import * as React from 'react';
-import { useEffect } from 'react';
+import * as React from "react";
+import { useEffect } from "react";
 import Modal from "react-modal";
-import "./styles.css";
 
 import "./styles.css";
 
-
-const DeleteAlertModal = ({
-  isOpen,
-  onClose,
-  onHandleDelete,
-}) => {
+const DeleteAlertModal = ({ isOpen, onClose, onHandleDelete }) => {
   useEffect(() => {
     const delModal = document.querySelector("body");
     if (isOpen) {
@@ -33,8 +27,12 @@ const DeleteAlertModal = ({
             <span>Вы действительно хотите удалить пост?</span>
           </div>
           <div className="cnModalDeleteButtons">
-            <button className="cnModalDeleteBtnOk" onClick={onHandleDelete}>Ок</button>
-            <button className="cnModalDeleteBtnCancel" onClick={onClose}>Отмена</button>
+            <button className="cnModalDeleteBtnOk" onClick={onHandleDelete}>
+              Ок
+            </button>
+            <button className="cnModalDeleteBtnCancel" onClick={onClose}>
+              Отмена
+            </button>
           </div>
         </div>
       </div>
@@ -43,4 +41,3 @@ const DeleteAlertModal = ({
 };
 
 export default DeleteAlertModal;
-

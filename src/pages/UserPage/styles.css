@@ -28,8 +28,6 @@
   border-radius: 10px;
 }
 
-
-
 .cnUserPageNoPosts {
   margin: auto;
   font-weight: 600;
@@ -66,15 +64,13 @@
   }
   .cnUserPageScroll {
     justify-content: center;
-  } 
-  
-  @media (max-width: 375px) {
-  .cnUserPageRoot {
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-
   }
-}
- 
+
+  @media (max-width: 375px) {
+    .cnUserPageRoot {
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
+  }
 }

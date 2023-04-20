@@ -17,10 +17,6 @@ const validateText = (text, cb) => {
     cb("Слишком короткий текст");
     return true;
   }
-  if (/\s/g.test(text)) {
-    cb("Не должно быть пробелов");
-    return true;
-  }
   return false;
 };
 
@@ -32,7 +28,7 @@ const UserBio = ({
   onEditAvatar,
   formLoading,
   isMyPage,
-  count
+  count,
 }) => {
   const [btnProps, setBtnProps] = useState({
     onClick: () => false,
@@ -47,9 +43,7 @@ const UserBio = ({
 
   const onSaveEditForm = useCallback(async () => {
     const isUserNameError = validateText(formUserName, setUserNameError);
-    let isErrors =
-
-      isUserNameError;
+    let isErrors = isUserNameError;
 
     if (!formDescription) {
       isErrors = true;
@@ -60,15 +54,14 @@ const UserBio = ({
     }
     await onEdit({
       name: formUserName,
-      about: formDescription
+      about: formDescription,
     });
 
     setIsEditMode(false);
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [formUserName, formDescription]);
 
   useEffect(() => {
-
     if (isEditMode) {
       setBtnProps({
         onClick: () => onSaveEditForm(),
@@ -84,23 +77,22 @@ const UserBio = ({
     }
   }, [isEditMode, formLoading, onSaveEditForm]);
 
-  const [isAddPostVisible, setIsAddPostVisible] = useState(false)
+  const [isAddPostVisible, setIsAddPostVisible] = useState(false);
   const onCloseAddPost = (e) => {
-    e.stopPropagation()
+    e.stopPropagation();
     setIsAddPostVisible(false);
-
   };
   const onOpenAddPost = () => {
     setIsAddPostVisible(true);
   };
 
-  const [isAvatarEditVisible, setIsAvatarEditVisible] = useState(false)
+  const [isAvatarEditVisible, setIsAvatarEditVisible] = useState(false);
   const onOpenEditAvatar = (e) => {
-    setIsAvatarEditVisible(true)
-  }
+    setIsAvatarEditVisible(true);
+  };
   const onCloseEditAvatar = (e) => {
-    setIsAvatarEditVisible(false)
-  }
+    setIsAvatarEditVisible(false);
+  };
 
   const fields = useMemo(() => {
     if (isEditMode) {
@@ -142,38 +134,44 @@ const UserBio = ({
     <div className="cnUserBioRoot">
       <div className="cnUserBioAvatarWrapper">
         <img className="cnUserBioAvatar" src={avatarUrl} alt="avatar" />
-        <button className="cnUserBioAvatarEditBtn" onClick={onOpenEditAvatar}><i class="fa-regular fa-image"/></button>
+        <button className="cnUserBioAvatarEditBtn" onClick={onOpenEditAvatar}>
+          <i className="fa-regular fa-image" />
+        </button>
         <AvatarEditModal
-            isOpen={isAvatarEditVisible}
-            onClose={onCloseEditAvatar}
-            onEditAvatar={onEditAvatar}
+          isOpen={isAvatarEditVisible}
+          onClose={onCloseEditAvatar}
+          onEditAvatar={onEditAvatar}
         />
       </div>
       <div className="cnUserBioInfo">
-      <div className="cnUserBioRow"><label> {fields.name}</label></div>
-        <div className="cnUserBioRow"><label htmlFor=""><div>О себе</div>{fields.about}</label></div>
         <div className="cnUserBioRow">
-            <UserCounter
+          <label> {fields.name}</label>
+        </div>
+        <div className="cnUserBioRow">
+          <label htmlFor="">
+            <div>О себе</div>
+            {fields.about}
+          </label>
+        </div>
+        <div className="cnUserBioRow">
+          <UserCounter
             count={count}
             text="Публикаций"
             className="cnUserBioCounter"
           />
         </div>
         <div className="cnUserBioRow">
-
-        <div className={fields.firstButtonClassName}>
-          {(isMyPage)
-          ? <>
-          <Button {...btnProps} />
-          <Button onClick={onOpenAddPost}>Добавить пост</Button>
-          </>
-          : ''}
-          <UserAddPost
-            isOpen={isAddPostVisible}
-            onClose={onCloseAddPost}
-          />
-        </div>
-       
+          <div className={fields.firstButtonClassName}>
+            {isMyPage ? (
+              <>
+                <Button {...btnProps} />
+                <Button onClick={onOpenAddPost}>Добавить пост</Button>
+              </>
+            ) : (
+              ""
+            )}
+            <UserAddPost isOpen={isAddPostVisible} onClose={onCloseAddPost} />
+          </div>
         </div>
       </div>
     </div>

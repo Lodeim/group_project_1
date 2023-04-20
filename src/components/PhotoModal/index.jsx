@@ -30,8 +30,8 @@ const PhotoModal = ({
   createdPost,
   _id,
   author,
+  onCommentDelete
 }) => {
-   
   useEffect(() => {
     const body = document.querySelector("body");
     if (isOpen) {
@@ -40,7 +40,6 @@ const PhotoModal = ({
       body.classList.remove("cnBodyOverflow");
     }
   }, [isOpen]);
-  
   return (
     <Modal
       isOpen={isOpen}
@@ -65,37 +64,46 @@ const PhotoModal = ({
             </div>
             <div className="cnModalInfoWrapper">
               <div className="cnModalTime">{timeConverter(createdPost)}</div>
-              <h2 className="cnModalTitle">
-                {title}
-              </h2>
+              <h2 className="cnModalTitle">{title}</h2>
               <div className="cnModalDescription">
                 <p>{text}</p>
               </div>
-              <div className="cnModalTags">{tags.map(e => {
-            if(e=== "" ){
-           return("");
-        } else {
-          return (<span>{`${e}`}</span>);
-         
-        }
-        })}</div>
+              <div className="cnModalTags">
+                {tags.map((e) => {
+                  if (e === "") {
+                    return "";
+                  } else {
+                    return <span key={nanoid()}>{`${e}`}</span>;
+                  }
+                })}
+              </div>
               <div className="cnModalComments">
                 <div className="cnModalCommentsTitle">Комментарии</div>
-                {comments.map((comment) => (
-                  <Comment key={nanoid()} {...comment} />
-                ))}
+                {comments.map(({ author, text, created_at, _id, post, update_at }) => (
+              <Comment
+                key={nanoid()}
+                author={author}
+                text={text}
+                createdAt={created_at}
+                updateAt={update_at}
+                id={_id}
+                post={post}
+                onCommentDelete={onCommentDelete}
+              />
+            )
+                )}
               </div>
               <div className="cnModalIcons">
-              <i
-                onClick={onLikeClick}
-                className={`${isLikedByYou ? "fa" : "far"
+                <i
+                  onClick={onLikeClick}
+                  className={`${
+                    isLikedByYou ? "fa" : "far"
                   } fa-heart cnModalLikeIcon`}
-              />
-            </div>
+                />
+              </div>
             </div>
           </div>
           <div>
-           
             <TextArea
               placeholder="Введите комментарий"
               value={commentValue}
@@ -105,7 +113,6 @@ const PhotoModal = ({
               isLoading={isCommentLoading}
             />
           </div>
-
         </div>
       </div>
     </Modal>

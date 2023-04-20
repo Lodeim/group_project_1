@@ -9,7 +9,6 @@ import Button from "../Button";
 
 import "./styles.css";
 
-
 export const UserAddPost = ({ isOpen, onClose }) => {
   // eslint-disable-next-line
   const [pictures, setPictures] = useState(null);
@@ -26,7 +25,9 @@ export const UserAddPost = ({ isOpen, onClose }) => {
       trimArr.push(trim);
     });
     data.tags = trimArr;
-    sapi.addPost(data).then((res) => res.isPublished ? window.location.reload() : null);
+    sapi
+      .addPost(data)
+      .then((res) => (res.isPublished ? window.location.reload() : null));
   };
 
   return (

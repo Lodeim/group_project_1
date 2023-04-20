@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
 }
-.cnUserBioAvatarWrapper{
+.cnUserBioAvatarWrapper {
   position: relative;
 }
 .cnUserBioAvatar {
@@ -11,9 +11,8 @@
   width: 150px;
   border-radius: 50%;
   margin-right: 40px;
-
 }
-.cnUserBioAvatarEditBtn{
+.cnUserBioAvatarEditBtn {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -36,10 +35,6 @@
   background: #e3f2fd;
 }
 
-
-
-
-
 .cnUserBioInfo {
   display: flex;
   flex-direction: column;
@@ -50,7 +45,6 @@
   align-items: center;
   margin-top: 10px;
 }
-
 
 .cnUserBioButtonRow {
   display: flex;
@@ -75,7 +69,6 @@
 
 .cnUserBioCounter {
   margin-right: 10px;
-
 }
 
 .cnUserBioName {

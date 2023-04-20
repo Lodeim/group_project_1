@@ -18,8 +18,8 @@ export const mutatePhoto = (config) => {
 };
 
 
-export const getComments = (postId) =>
-  makeRequest({
-    method: "GET",
-    url: `${URL}/comments/${postId}`
-  })
+// export const getComments = (postId) =>
+//   makeRequest({
+//     method: "GET",
+//     url: `${URL}/comments/${postId}`
+//   })
