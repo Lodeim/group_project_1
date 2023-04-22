@@ -18,6 +18,7 @@ import {
 } from "../../redux/actions/users";
 
 import "./styles.css";
+import { nanoid } from "nanoid";
 
 const UserPage = () => {
   const authorizedUser = useSelector((state) => state.users.authorizedUser);
@@ -132,7 +133,7 @@ const UserPage = () => {
                     created_at,
                     tags
                   }) => (
-                    <div>
+                    <div key={nanoid()}>
                       <Card
                         key={_id}
                         _id={_id}

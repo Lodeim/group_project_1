@@ -30,7 +30,6 @@ const Card = ({
   createdPost,
   _id,
 }) => {
-  console.log(comments);
   const [isModalVisible, setModalVisible] = useState(false);
   const [deleteAlertModalActive, setDeleteAlertModalActive] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);

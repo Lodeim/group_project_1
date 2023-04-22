@@ -120,7 +120,7 @@ export const EditModal = ({
             variant="outlined"
             value={formTags.join(", ")}
             multiline
-            onChange={({ target: { value } }) => setFormTags(value)}
+            onChange={({ target: { value } }) => tagSplitSet(value)}
             error={formTags === ""}
             helperText={tagsError}
             className="cnEditInput"
